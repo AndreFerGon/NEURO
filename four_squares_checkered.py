@@ -49,18 +49,15 @@ class CheckerboardSquare:
                                         cell_height)
                 pygame.draw.rect(screen, self.colors[row][col], cell_rect)
 
-class Square():
-    def __init__(self, color, rect):
-        self.color = color
-        self.rect = rect
-        self.show = True
+def display_stopwatch(screen, font, elapsed_time):
+    # Calculate seconds and milliseconds
+    seconds = elapsed_time // 1000
+    milliseconds = elapsed_time % 1000
 
-    def draw(self, screen):
-        if self.show:
-            pygame.draw.rect(screen, self.color, self.rect)
+    stopwatch_text = f"Elapsed Time: {seconds}.{milliseconds:03d} seconds"
+    text_surface = font.render(stopwatch_text, True, BLACK)
+    screen.blit(text_surface, (10, 10))
 
-
-# Main Function
 def main():
     pygame.init()
 
@@ -73,9 +70,13 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
 
-    delay_duration = 5000  
-    start_time = pygame.time.get_ticks()
-    delay_complete = False
+    delay_duration = 5000
+    start_time = pygame.time.get_ticks()  # Start time at initialization
+    elapsed_time = 0  # Initialize elapsed time
+    delay_complete = False  # Flag to track completion of delay
+
+    # Load font for displaying stopwatch
+    font = pygame.font.Font(None, 36)
 
     frequency1 = 10
     frequency2 = 20
@@ -95,8 +96,6 @@ def main():
         {"rect": pygame.Rect(1050, 600, 300, 300), "num_rows": 4, "num_cols": 4, "toggle_interval": delay4}
     ]
 
-    rect_center = Square(WHITE, pygame.Rect(10, 890, 100, 100))
-
     squares = []
     for info in squares_info:
         checkerboard = CheckerboardSquare(info["rect"], info["num_rows"], info["num_cols"], info["toggle_interval"])
@@ -105,32 +104,28 @@ def main():
     running = True
     while running:
         current_time = pygame.time.get_ticks()
-
-        # Check if delay duration has passed
-        if not delay_complete and current_time - start_time >= delay_duration:
-            delay_complete = True  # Delay completed, start displaying checkerboards
+        elapsed_time = current_time - start_time
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Update all checkerboards only after delay is complete
+        # Check if delay duration has passed
+        if not delay_complete and elapsed_time >= delay_duration:
+            delay_complete = True
+
+        screen.fill(GREY)
+
+        # Display stopwatch during delay and after
+        display_stopwatch(screen, font, elapsed_time)
+
+        # Draw squares only after delay completion
         if delay_complete:
             for square in squares:
                 square.update()
-
-        # Fill the screen with grey
-        screen.fill(GREY)
-
-        # Draw all checkerboards only after delay is complete
-        if delay_complete:
-            for square in squares:
                 square.draw(screen)
-                rect_center.draw(screen)
 
-        # Update the display
         pygame.display.flip()
-
         clock.tick(fps)
 
     pygame.quit()
