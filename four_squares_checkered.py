@@ -70,7 +70,7 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
 
-    delay_duration = 5000  # In milliseconds
+    delay_duration = 10000  # In milliseconds
     start_time = pygame.time.get_ticks()  # Start time at initialization
     elapsed_time = 0  # Initialize elapsed time
     delay_complete = False  # Flag to track completion of delay

@@ -15,6 +15,7 @@ class CheckerboardSquare:
         self.colors = self.create_initial_colors()
         self.toggle_interval = toggle_interval
         self.last_toggle_time = 0
+        self.showing = False
 
     def create_initial_colors(self):
         colors = []
@@ -31,13 +32,13 @@ class CheckerboardSquare:
     def update(self):
         current_time = pygame.time.get_ticks()
         if current_time - self.last_toggle_time >= self.toggle_interval:
-            # Toggle colors (switch between black and white)
-            for row in range(self.num_rows):
-                for col in range(self.num_cols):
-                    self.colors[row][col] = WHITE if self.colors[row][col] == BLACK else BLACK
+            self.showing = not self.showing
             self.last_toggle_time = current_time
 
     def draw(self, screen):
+        if not self.showing:
+            return
+        
         cell_width = self.rect.width // self.num_cols
         cell_height = self.rect.height // self.num_rows
 
@@ -78,14 +79,13 @@ def main():
     # Load font for displaying stopwatch
     font = pygame.font.Font(None, 36)
 
-    frequency1 = 10
+    frequency1 = 2
 
     delay1 = 1000 / frequency1
 
     # Create multiple checkerboard squares with different toggle intervals
     squares_info = [
         {"rect": pygame.Rect(500, 200, 600, 600), "num_rows": 8, "num_cols": 8, "toggle_interval": delay1},
-        
     ]
 
     squares = []
@@ -103,8 +103,9 @@ def main():
                 running = False
 
         # Check if delay duration has passed
-        if not delay_complete and elapsed_time >= delay_duration:
-            delay_complete = True
+        if elapsed_time >= delay_duration:
+            delay_complete = not delay_complete
+            start_time = pygame.time.get_ticks()
 
         screen.fill(GREY)
 
