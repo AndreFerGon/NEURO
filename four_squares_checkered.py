@@ -62,7 +62,7 @@ def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 1600
+    screen_width = 1620
     screen_height = 1000
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Checkerboards with Different Intervals")
@@ -70,7 +70,7 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
 
-    delay_duration = 5000
+    delay_duration = 5000  # In milliseconds
     start_time = pygame.time.get_ticks()  # Start time at initialization
     elapsed_time = 0  # Initialize elapsed time
     delay_complete = False  # Flag to track completion of delay
@@ -90,10 +90,10 @@ def main():
 
     # Create multiple checkerboard squares with different toggle intervals
     squares_info = [
-        {"rect": pygame.Rect(250, 100, 300, 300), "num_rows": 4, "num_cols": 4, "toggle_interval": delay1},
-        {"rect": pygame.Rect(250, 600, 300, 300), "num_rows": 4, "num_cols": 4, "toggle_interval": delay2},
-        {"rect": pygame.Rect(1050, 100, 300, 300), "num_rows": 4, "num_cols": 4, "toggle_interval": delay3},
-        {"rect": pygame.Rect(1050, 600, 300, 300), "num_rows": 4, "num_cols": 4, "toggle_interval": delay4}
+        {"rect": pygame.Rect(250, 100, 300, 300), "num_rows": 16, "num_cols": 16, "toggle_interval": delay1},
+        {"rect": pygame.Rect(250, 600, 300, 300), "num_rows": 16, "num_cols": 16, "toggle_interval": delay2},
+        {"rect": pygame.Rect(1050, 100, 300, 300), "num_rows": 16, "num_cols": 16, "toggle_interval": delay3},
+        {"rect": pygame.Rect(1050, 600, 300, 300), "num_rows": 16, "num_cols": 16, "toggle_interval": delay4}
     ]
 
     squares = []
