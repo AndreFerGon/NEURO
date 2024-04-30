@@ -38,7 +38,7 @@ def main():
     current_time = pygame.time.get_ticks()
 
     # Frequency of square show/hide (seconds)
-    frequency1 =  36
+    frequency1 =  40
    
     delay1 = 1000 // frequency1
     
