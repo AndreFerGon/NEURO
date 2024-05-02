@@ -70,7 +70,8 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
 
-    delay_duration = 5000  # In milliseconds
+    delay_duration = 2000  # In milliseconds
+    stimuli_duration = 5000
     start_time = pygame.time.get_ticks()  # Start time at initialization
     elapsed_time = 0  # Initialize elapsed time
     delay_complete = False  # Flag to track completion of delay
@@ -102,23 +103,27 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Check if delay duration has passed
-        if not delay_complete and elapsed_time >= delay_duration:
-            delay_complete = True
-
         screen.fill(GREY)
-
-        # Display stopwatch during delay and after
         display_stopwatch(screen, font, elapsed_time)
 
-        # Draw squares only after delay completion
-        if delay_complete:
-            for square in squares:
-                square.update()
-                square.draw(screen)
+        if not delay_complete and elapsed_time >= delay_duration:
+            delay_complete = True
+            start_time = current_time  # Reset start time after delay complete
+            elapsed_time = current_time - start_time
 
+        if delay_complete:
+            # Draw squares for a limited time after delay completion
+            if elapsed_time <= stimuli_duration:  # Adjust this duration as needed
+                for square in squares:
+                    square.update()
+                    square.draw(screen)
+            else:
+                # Reset delay state and start time
+                delay_complete = False
+                start_time = current_time
         pygame.display.flip()
         clock.tick(fps)
+
 
     pygame.quit()
     sys.exit()
