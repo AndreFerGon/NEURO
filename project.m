@@ -7,18 +7,21 @@ data16Hz = data16Hz(250:length(data16Hz), :);
 fs = 250;  
 band = [1 40];  
 
-order = 6; 
-[b, a] = butter(order, 60/(fs/2), 'low');
+% Low-pass 60 Hz
+order = 8; 
+[b, a] = butter(order, 40/(fs/2), 'low');
 figure
 freqz(b,a);
 filtered_signal = filter(b, a, data16Hz, [], 1);
 
+% High-pass 1 Hz
 order = 2; 
 [b, a] = butter(order, 1/(fs/2), 'high');
 figure
 freqz(b,a);
 filtered_signal = filter(b, a, filtered_signal, [], 1);
 
+% Notch-filter 50 Hz
 order = 2; 
 [b, a] = butter(order, [48 52]/(fs/2), 'stop');
 figure
@@ -46,17 +49,36 @@ filtered_signal = filter(b, a, filtered_signal, [], 1);
 % 
 % end
 
+%% 8-channel analysis
+close all
+
+
+
+figure
+for channel = 1:8
+    signal=data16Hz(220:end,channel);
+    filt_signal=filtered_signal(220:end, channel);
+    
+    [p, f] = pwelch(signal, [], [], 2^12, fs);
+    [filt_p, filt_f] = pwelch(filt_signal, [], [], 2^12, fs);
+    if (channel == 5)
+        figure
+    end
+
+    subplot(4,1,rem(channel,4) +1)
+    plot(filt_f, filt_p)
+    title(['Channel ', num2str(channel), ': Filtered Signal FFT Power in dB'])
+    xlabel('Frequency')
+    ylabel('Amplitude')
+    xlim([4 20])
+
+end
+
+
 %% Single channel visualization
 close all, clc
 
-channel = 1;
-
-signal=data16Hz(220:end,channel);
-filt_signal=filtered_signal(220:end, channel);
-
-[p, f] = pwelch(signal, [], [], 2^12, fs);
-[filt_p, filt_f] = pwelch(filt_signal, [], [], 2^12, fs);
-
+channel = 3;
 
 subplot(2,2,1)
 plot(signal)
@@ -88,9 +110,10 @@ plot(filt_f, filt_p)
 title(['Channel ', num2str(channel), ': Filtered Signal FFT Power'])
 xlabel('Frequency')
 ylabel('Amplitude')
-xlim([0 35])
+xlim([0 60])
 
 %% pre-stim vs stim
+close all
 
 pre_stim = filt_signal(1:4700);
 stim = filt_signal(4701:end);
@@ -105,21 +128,22 @@ plot(pre_f, 10*log10(pre_p))
 title(['Channel ', num2str(channel), ': Filtered Signal FFT Power (Pre-Stimulus)'])
 xlabel('Frequency')
 ylabel('Amplitude')
-%xlim([0 35])
+xlim([0 35])
 
 subplot(2,1,2)
 plot(stim_f, 10*log10(stim_p))
 title(['Channel ', num2str(channel), ': Filtered Signal FFT Power (During Stimulus)'])
 xlabel('Frequency')
 ylabel('Amplitude')
-%xlim([0 35])
-ylim([0 200])
+xlim([0 35])
+%ylim([0 200])
 
 %% Stim split and averaging
+close all 
 
 n=length(stim)
 resto = rem(n, 8)
-cropstim=stim(1:end-4);
+cropstim=stim(1:end-resto);
 n=length(cropstim)
 resto = rem(n, 8)
 
@@ -127,9 +151,34 @@ split = reshape(cropstim, [n/8, 8]);
 avg_stim = mean(split, 2);
 [avg_p, avg_f] = pwelch(avg_stim, [], [], 2^12, fs);
 
+figure
 plot(avg_f, avg_p)
 title(['Channel ', num2str(channel), ': Average Signal FFT Power (During Stimulus)'])
 xlabel('Frequency')
 ylabel('Amplitude')
 % xlim([0 35])
 % ylim([0 200])
+
+%% Average of 8 channels
+
+avg_signal = mean(filtered_signal(500:end, :), 2);
+%plot(filtered_signal(500:end, :))
+
+[avg_p, avg_f] = pwelch(avg_signal, [], [], 2^12, fs);
+plot(avg_f, 10*log10(avg_p))
+
+%% Single frequency power during time
+
+target_f = 16;
+
+n = length(filt_signal);
+spectrogram(filt_signal, fix(n/20), fix(n/40), 2^14, fs);
+xlim([4 20])
+
+[s, f, t, ps]=spectrogram(filt_signal, fix(n/20), fix(n/40), 2^14, fs);
+
+target_f_vector = find(f > target_f-0.01 & f<target_f+0.01);
+target_ps = sum(ps(target_f_vector, :), 1);
+
+figure
+plot(t, target_ps)
