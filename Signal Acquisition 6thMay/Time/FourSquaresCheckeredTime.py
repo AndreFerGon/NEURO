@@ -70,23 +70,36 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
 
-    delay_duration = 2000  # In milliseconds
-    stimuli_duration = 5000
+    delay_duration = 3000  # In milliseconds
+    stimuli_duration = 7000
     start_time = pygame.time.get_ticks()  # Start time at initialization
+    start_time_beginning = pygame.time.get_ticks()  # Start time at initialization
     elapsed_time = 0  # Initialize elapsed time
     delay_complete = False  # Flag to track completion of delay
 
     # Load font for displaying stopwatch
-    font = pygame.font.Font(None, 36)
+    font = pygame.font.Font(None, 20)
 
-    frequency1 = 10
+    #frequency = 30
+    #frequency = 20
+    frequency4 = 15
+    frequency3 = 12
+    frequency2 = 10
+    #frequency = 60/7
+    frequency1 = 7.5
 
+   
     delay1 = 1000 / frequency1
+    delay2 = 1000 / frequency2
+    delay3 = 1000 / frequency3
+    delay4 = 1000 / frequency4
 
     # Create multiple checkerboard squares with different toggle intervals
     squares_info = [
-        {"rect": pygame.Rect(500, 200, 600, 600), "num_rows": 8, "num_cols": 8, "toggle_interval": delay1},
-        
+        {"rect": pygame.Rect(250, 100, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay1},
+        {"rect": pygame.Rect(250, 600, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay2},
+        {"rect": pygame.Rect(1050, 100, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay3},
+        {"rect": pygame.Rect(1050, 600, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay4}
     ]
 
     squares = []
@@ -98,13 +111,14 @@ def main():
     while running:
         current_time = pygame.time.get_ticks()
         elapsed_time = current_time - start_time
+        elapsed_time_beginning = current_time - start_time_beginning
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
         screen.fill(GREY)
-        display_stopwatch(screen, font, elapsed_time)
+        display_stopwatch(screen, font, elapsed_time_beginning)
 
         if not delay_complete and elapsed_time >= delay_duration:
             delay_complete = True
@@ -123,7 +137,6 @@ def main():
                 start_time = current_time
         pygame.display.flip()
         clock.tick(fps)
-
 
     pygame.quit()
     sys.exit()
