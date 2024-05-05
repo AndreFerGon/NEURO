@@ -46,12 +46,21 @@ class CheckerboardSquare:
                                         cell_height)
                 pygame.draw.rect(screen, self.colors[row][col], cell_rect)
 
-def display_frame(screen, font, frames_counted):
+def display_frame(screen, font, frames_counted, frames_counted_stimuli, elapsed_time):
     # Calculate seconds and milliseconds    
+    seconds = elapsed_time // 1000
+    milliseconds = elapsed_time % 1000
 
-    frames_text = f"Frame Counter: {frames_counted}"
-    text_surface = font.render(frames_text, True, BLACK)
+    frames_text_1 = f"Frame Counter: {frames_counted}; " 
+    frames_text_2 = f"Stimuli Frame: {frames_counted_stimuli}; " 
+    frames_text_3 = f"Elapsed Time: {seconds}.{milliseconds:03d} seconds"
+
+    text_surface = font.render(frames_text_1, True, BLACK)
     screen.blit(text_surface, (10, 10))
+    text_surface = font.render(frames_text_2, True, BLACK)
+    screen.blit(text_surface, (10, 25))
+    text_surface = font.render(frames_text_3, True, BLACK)
+    screen.blit(text_surface, (10, 40))
 
 def main():
     pygame.init()
@@ -63,50 +72,69 @@ def main():
     pygame.display.set_caption("Checkerboards with Different Intervals")
 
     clock = pygame.time.Clock()
-    fps = 60
-
+    fps = 60   
    
-    toggle_frame_interval = 1  # Toggles colors every 10 frames
+    toggle_frame_interval = 2 #30Hz
+    #toggle_frame_interval = 3 #20Hz
+    #toggle_frame_interval = 4 #15Hz
+    #toggle_frame_interval = 5 #12Hz
+    #toggle_frame_interval = 6 #10Hz
+    #toggle_frame_interval = 7 #8.57Hz
+    #toggle_frame_interval = 8 #7.5Hz
 
-    delay_duration = 5 #in seconds
+    delay_duration = 3 #in seconds
     delay_frames = delay_duration * 60
     delay_complete = False
 
-    # Load font for displaying stopwatch
-    font = pygame.font.Font(None, 36)
+    stimuli_duration = 7 #in seconds
+    stimuli_frames = stimuli_duration * 60
 
-    # Create checkerboard square
-    checkerboard_rect = pygame.Rect(500, 200, 600, 600)
-    checkerboard_square = CheckerboardSquare(checkerboard_rect, 8, 8, toggle_frame_interval)
+    start_time = pygame.time.get_ticks()  # Start time at initialization
+    elapsed_time = 0  # Initialize elapsed time
+
+    # Load font for displaying stopwatch
+    font = pygame.font.Font(None, 20)
+
+    squares_info = [
+        {"rect": pygame.Rect(500, 200, 600, 600), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval},
+        
+    ]
+
+    squares = []
+    for info in squares_info:
+        checkerboard = CheckerboardSquare(info["rect"], info["num_rows"], info["num_cols"], info["toggle_interval"])
+        squares.append(checkerboard)
 
     running = True
+    frame_count_stimuli = 0
     frame_count = 0
 
     while running:
+
+        elapsed_time = pygame.time.get_ticks() - start_time
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
         screen.fill(GREY)
-        display_frame(screen,font,frame_count)
+        display_frame(screen, font, frame_count , frame_count_stimuli, elapsed_time)
 
-        if not delay_complete and delay_frames==frame_count:
+        if not delay_complete and frame_count_stimuli >= delay_frames:
             delay_complete = True
-
-        # Update and draw the checkerboard square
-        
+            frame_count_stimuli = 0  # Reset frame count after delay is complete
 
         if delay_complete:
-            checkerboard_square.update()
-            checkerboard_square.draw(screen)           
-        else:
-            delay_complete = False
-                
-       
-        # Increment frame count
+            if frame_count_stimuli <= stimuli_frames:
+                checkerboard.update(frame_count_stimuli)
+                checkerboard.draw(screen)
+            else:
+                delay_complete = False
+                frame_count_stimuli = 0
+
+        frame_count_stimuli += 1
         frame_count += 1
         clock.tick(fps)
-
         pygame.display.flip()
         
 
