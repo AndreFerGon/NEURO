@@ -288,4 +288,4 @@ target_ps = sum(ps(target_f_vector, :), 1);
 
 figure
 plot(t, target_ps)
-
+title(['peta'])
