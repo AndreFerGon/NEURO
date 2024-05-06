@@ -298,6 +298,7 @@ target_ps = sum(ps(target_f_vector, :), 1);
 percentage = (target_ps ./ total_ps) * 100;
 
 figure
+
 plot(t, percentage)
 title(['Channel ', num2str(channel), ': Target Frequency Power Percentage'])
 xlabel('Time')
