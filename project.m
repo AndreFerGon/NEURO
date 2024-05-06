@@ -1,7 +1,7 @@
 %%  data import and visualization
 close all, clear, clc
 
-flick_f = 24;
+flick_f = 36;
 data = table2array(readtable(['Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
 data = data(250:end, :);
 
@@ -156,7 +156,7 @@ end
 %% Single channel visualization
 close all, clc
 
-channel = 1;
+channel = 3;
 signal=data(220:end, channel);
 filt_signal=filtered_signal(220:end, channel);
 [p, f] = pwelch(signal, [], [], 2^12, fs);
@@ -226,28 +226,32 @@ xlim([0 35])
 %% Stim split and averaging
 close all 
 
-n=length(stim)
-resto = rem(n, 8)
-cropstim=stim(1:end-resto);
-n=length(cropstim)
-resto = rem(n, 8)
+n = length(stim);
+resto = rem(n, 8);
+cropstim = stim(1:end-resto);
+n = length(cropstim);
+resto = rem(n, 8);
 
 split = reshape(cropstim, [n/8, 8]);
 
-figure
-%Single trial analysis
+% Single trial analysis
 for trial = 1:8
-    signal=split(:,trial);
+    signal = split(:, trial);
     
     [p, f] = pwelch(signal, [], [], 2^12, fs);
+
+    if (trial == 8) % Save trials with 4 s long
+           trial_signal = signal(1:1000);
+           save('stim_36Hz_trial8_Oz_data.mat', 'trial_signal');
+    end
 
     if (trial == 5)
         figure
     end
 
-    subplot(4,1,rem(trial,4) +1)
+    subplot(4, 1, rem(trial, 4) + 1)
     plot(f, p)
-    title(['TRial ', num2str(trial), ': FFT Power'])
+    title(['Trial ', num2str(trial), ': FFT Power'])
     xlabel('Frequency')
     ylabel('Amplitude')
     xlim([6 40])
@@ -275,17 +279,29 @@ plot(avg_f, 10*log10(avg_p))
 
 %% Single frequency power during time
 
-target_f = flick_f;
+target_f = [flick_f/2, flick_f];
 
 n = length(filt_signal);
 spectrogram(filt_signal, fix(n/20), fix(n/40), 2^14, fs);
 xlim([4 20])
 
-[s, f, t, ps]=spectrogram(filt_signal, fix(n/20), fix(n/40), 2^14, fs);
+[s, f, t, ps] = spectrogram(filt_signal, fix(n/20), fix(n/40), 2^14, fs);
 
-target_f_vector = find(f > target_f-0.01 & f<target_f+0.01);
+target_f_vector = [];
+for i = 1:length(target_f)
+    target_f_vector = [target_f_vector; find(f > target_f(i)-0.01 & f < target_f(i)+0.01)];
+end
+
+total_ps = sum(ps, 1);
+
 target_ps = sum(ps(target_f_vector, :), 1);
+percentage = (target_ps ./ total_ps) * 100;
 
 figure
-plot(t, target_ps)
-title(['peta'])
+
+plot(t, percentage)
+title(['Channel ', num2str(channel), ': Target Frequency Power Percentage'])
+xlabel('Time')
+ylabel('Percentage')
+
+
