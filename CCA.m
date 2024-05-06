@@ -1,42 +1,72 @@
+%% Load trials
+clear, clc, close all
+
+load('stim_16Hz_trial1_Oz_data.mat');
+signal_16Hz_trial1 = trial_signal;
+
+load('stim_16Hz_trial3_Oz_data.mat');
+signal_16Hz_trial3 = trial_signal;
+
+load('stim_16Hz_trial7_Oz_data.mat');
+signal_16Hz_trial7 = trial_signal;
+       
+load('stim_24Hz_trial1_Oz_data.mat');
+signal_24Hz_trial1 = trial_signal;
+
+load('stim_24Hz_trial2_Oz_data.mat');
+signal_24Hz_trial2 = trial_signal;
+
+load('stim_24Hz_trial3_Oz_data.mat');
+signal_24Hz_trial3 = trial_signal;
+
+load('stim_24Hz_trial8_Oz_data.mat');
+signal_24Hz_trial8 = trial_signal;
+
+load('stim_36Hz_trial5_Oz_data.mat');
+signal_36Hz_trial5 = trial_signal;
+
+load('stim_36Hz_trial7_Oz_data.mat');
+signal_36Hz_trial7 = trial_signal;
+
+load('stim_36Hz_trial8_Oz_data.mat');
+signal_36Hz_trial8 = trial_signal;
+
+clear trial_signal
+
+
 %% Initializing variables for using CCA;
-refFreq = [60/5, 60/7, 60/9, 60/11];
+refFreq = [16 24 36];
 time = 4; % Seconds;
-classNum = 5; % Add one more class for "rest"
+fs= 250;
+classNum = 3; 
 trialNum = 1;
 loss = 0;
 
-t = 0:1/fs:time;
+t = 0:1/fs:(time - 1/fs);
 
 Y = cell(1, classNum);
 r = zeros(1, classNum);
 
 % Generate reference signals for each class
 for i = 1:classNum
-    if i <= classNum - 1
-        ref = 2*pi*refFreq(i)*t;
-        Y{i} = [sin(ref); cos(ref); sin(ref*2); cos(ref*2)];
-    else
-        % For the "rest" class, the reference signal can be anything, like random noise
-        Y{i} = randn(4, length(t));
-    end
+    ref = 2*pi*refFreq(i)*t;
+    Y{i} = [sin(ref); cos(ref); sin(ref*2); cos(ref*2)];
 end
 
 %% Analysing SSVEP using CCA in single trials
 for i = 1:trialNum
-    data = squeeze(smt.x(:, i, :));
+    data = signal_36Hz_trial8;
     for j = 1:classNum
         [~, ~, corr] = canoncorr(data, Y{j}');
         r(j) = max(corr);
     end
     [~, ind] = max(r);
     
-    if ind == classNum
-        fprintf('Trial %d: No control\n', i);
-    else
-        fprintf('Trial %d: Class %d\n', i, ind);
-    end
+
+    fprintf('Trial %d: SSVEP Frequency: %d Hz\n', i, refFreq(ind));
+
     
-    if ~smt.y_logic(ind, i)
-        loss = loss + 1;
-    end
+    % if ~smt.y_logic(ind, i)
+    %     loss = loss + 1;
+    % end
 end
