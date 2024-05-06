@@ -56,11 +56,11 @@ def display_frame(screen, font, frames_counted, frames_counted_stimuli, elapsed_
     frames_text_3 = f"Elapsed Time: {seconds}.{milliseconds:03d} seconds"
 
     text_surface = font.render(frames_text_1, True, BLACK)
-    screen.blit(text_surface, (10, 10))
+    screen.blit(text_surface, (720, 930))
     text_surface = font.render(frames_text_2, True, BLACK)
-    screen.blit(text_surface, (10, 25))
+    screen.blit(text_surface, (720, 955))
     text_surface = font.render(frames_text_3, True, BLACK)
-    screen.blit(text_surface, (10, 40))
+    screen.blit(text_surface, (720, 980))
 
 def main():
     pygame.init()
@@ -76,10 +76,10 @@ def main():
 
     #toggle_frame_interval = 2 #30Hz
     #toggle_frame_interval = 3 #20Hz
-    toggle_frame_interval_4 = 4 #15Hz
-    toggle_frame_interval_3 = 5 #12Hz
-    toggle_frame_interval_2 = 6 #10Hz
-    #toggle_frame_interval = 7 #8.57Hz
+    toggle_frame_interval_5 = 4 #15Hz
+    toggle_frame_interval_4 = 5 #12Hz
+    toggle_frame_interval_3 = 6 #10Hz
+    toggle_frame_interval_2 = 7 #8.57Hz
     toggle_frame_interval_1 = 8 #7.5Hz
 
     delay_duration = 3 #in seconds
@@ -96,12 +96,12 @@ def main():
     font = pygame.font.Font(None, 20)
 
     squares_info = [
-        {"rect": pygame.Rect(250, 100, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_1},
-        {"rect": pygame.Rect(250, 600, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_2},
-        {"rect": pygame.Rect(1050, 100, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_3},
-        {"rect": pygame.Rect(1050, 600, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_4}
+        {"rect": pygame.Rect(50, 50, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_1},
+        {"rect": pygame.Rect(50, 650, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_2},
+        {"rect": pygame.Rect(1250, 50, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_3},
+        {"rect": pygame.Rect(1250, 650, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_4},
+        {"rect": pygame.Rect(650, 350, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": toggle_frame_interval_5}
     ]
-
     squares = []
     for info in squares_info:
         checkerboard = CheckerboardSquare(info["rect"], info["num_rows"], info["num_cols"], info["toggle_interval"])
