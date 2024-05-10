@@ -35,7 +35,7 @@ clear trial_signal
 
 
 %% Initializing variables for using CCA;
-refFreq = [16 24 36];
+refFreq = [8 12 18];
 time = 4; % Seconds;
 fs= 250;
 classNum = 3; 
