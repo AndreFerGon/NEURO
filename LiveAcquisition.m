@@ -96,6 +96,7 @@ for i_segment = 1:total_trial
 
             for j = 1:classNum
                 [~, ~, corr] = canoncorr(chan_i_filtered, Y{j}');
+
                 r(j) = max(corr);
             end
             [~, ind] = max(r);

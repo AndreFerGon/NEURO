@@ -74,10 +74,10 @@ def main():
     clock = pygame.time.Clock()
     fps = 60;   
    
-    toggle_frame_interval = 2 #30Hz
+    #toggle_frame_interval = 2 #30Hz
     #toggle_frame_interval = 3 #20Hz
     #toggle_frame_interval = 4 #15Hz
-    #toggle_frame_interval = 5 #12Hz
+    toggle_frame_interval = 5 #12Hz
     #toggle_frame_interval = 6 #10Hz
     #toggle_frame_interval = 7 #8.57Hz
     #toggle_frame_interval = 8 #7.5Hz
@@ -86,7 +86,7 @@ def main():
     delay_frames = delay_duration * 60
     delay_complete = False
 
-    stimuli_duration = 7 #in seconds
+    stimuli_duration = 100 #in seconds
     stimuli_frames = stimuli_duration * 60
 
     start_time = pygame.time.get_ticks()  # Start time at initialization
