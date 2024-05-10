@@ -1,10 +1,12 @@
 %%  data import and visualization
 close all, clear, clc
 
-flick_f = 36;
+flick_f = 16;
 data = table2array(readtable(['Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
-data = data(250:end, :);
+data = data(250:250*6, :);
 
+% data = table2array(readtable(['S202007965_21_Protocol#2_1SFT_7.5Hz_Trials3_7.csv']));
+% data = data(50:end, :);
 
 channel_labels = {'P7','O1','Oz','O2','P8','P3','Pz','P4'};
 
@@ -12,7 +14,7 @@ channel_labels = {'P7','O1','Oz','O2','P8','P3','Pz','P4'};
 fs = 250;
 t = 0:1/fs:(length(data)-1)/fs;
 
-channel = 1;
+channel = 3;
 
 figure
 
@@ -23,14 +25,17 @@ xlabel('Time (s)')
 ylabel('Amplitude (μV)')
 
 signal=data(:, channel);
-window=1024;
-noverlap=window/2;
-[p, f] = pwelch(signal, window, noverlap, 2^14, fs);
+
+n = length(signal);
+f = (0:n-1)*(fs/n); % Frequency range
+s= fft(signal);
+p = abs(s.^2);
 
 subplot(2,1,2)
 plot(f, 10*log10(p))
 title(['Channel ', channel_labels{channel}, ': Raw Signal FFT in dB'])
 xlabel('Frequency (Hz)')
+xlim([0 fs/2])
 ylabel('Power (dB)')
 
 %% pre-processing (filter design)
@@ -70,57 +75,59 @@ close all
 
 % Low-pass 60 Hz
 order = 8; 
-[b, a] = butter(order, 40/(fs/2), 'low');
-figure
-freqz(b,a)
-title('Frequency Response of Low-pass Filter (Butterworth, 40 Hz)')
-ylim([-100 5])
+[low_b, low_a] = butter(order, 40/(fs/2), 'low');
+% figure
+% freqz(b,a)
+% title('Frequency Response of Low-pass Filter (Butterworth, 40 Hz)')
+% ylim([-100 5])
 
-filtered_signal = filter(b, a, data, [], 1);
+% filtered_signal = filter(b, a, data, [], 1);
 
 % High-pass 1 Hz
 order = 2; 
-[b, a] = butter(order, 1/(fs/2), 'high');
-figure
-freqz(b,a)
-title('Frequency Response of High-pass Filter (Butterworth, 1 Hz)')
-ylim([-25 2])
+[high_b, high_a] = butter(order, 1/(fs/2), 'high');
+% figure
+% freqz(b,a)
+% title('Frequency Response of High-pass Filter (Butterworth, 1 Hz)')
+% ylim([-25 2])
 
-filtered_signal = filter(b, a, filtered_signal, [], 1);
+% filtered_signal = filter(b, a, filtered_signal, [], 1);
 
 % Notch-filter 50 Hz
 order = 2; 
-[b, a] = butter(order, [48 52]/(fs/2), 'stop');
-figure
-freqz(b,a)
-title('Frequency Response of Notch Filter (Butterworth, 50 Hz)')
-ylim([-60 5])
-
-filtered_signal = filter(b, a, filtered_signal, [], 1);
-
-
-
-
+[notch_b, notch_a] = butter(order, [48 52]/(fs/2), 'stop');
 % figure
-% for i=1:8
-% 
-% signal=data16Hz(1:end,i);
-% subplot(8,2,2*i-1)
-% plot(signal)
-% title(['Channel ', num2str(i), ': Original Signal'])
-% xlabel('Time')
-% ylabel('Amplitude')
-% %axis([0 length(data16Hz) 2.75e4 3.25e4])
-% 
-% subplot(8,2,2*i)
-% plot(filtered_signal(6000:6250,i))
-% title(['Channel ', num2str(i), ': Filtered Signal with Bandpass 1-40 Hz'])
-% xlabel('Time')
-% ylabel('Amplitude')
-% 
-% end
+% freqz(b,a)
+% title('Frequency Response of Notch Filter (Butterworth, 50 Hz)')
+% ylim([-60 5])
 
-%% 8-channel analysis
+% filtered_signal = filter(b, a, filtered_signal, [], 1);
+
+
+filtered_signal = signal;
+
+figure
+for i=1:8
+    filtered_signal(:,i) = filtfilt(low_b, low_a, data(:,i));
+    filtered_signal(:,i) = filtfilt(high_b, high_a, data(:,i));
+    filtered_signal(:,i) = filtfilt(notch_b, notch_a, data(:,i));
+
+    subplot(8,2,2*i-1)
+    plot(t, data(:,i))
+    title(['Channel ', channel_labels{i}, ': Original Signal'])
+    xlabel('Time (s)')
+    ylabel('Amplitude (μV)')
+    grid on
+
+    subplot(8,2,2*i)
+    plot(t, filtered_signal(:,i))
+    title(['Channel ', channel_labels{i}, ': Filtered Signal with Bandpass 1-40 Hz'])
+    xlabel('Time (s)')
+    ylabel('Amplitude (μV)')
+    grid on
+end
+
+%% 8-channel FFT analysis
 close all
 
 
@@ -128,8 +135,8 @@ close all
 
 figure
 for channel = 1:8
-    signal=data(220:end,channel);
-    filt_signal=filtered_signal(220:end, channel);
+    signal=data(1:end,channel);
+    filt_signal=filtered_signal(1:end, channel);
     
     [p, f] = pwelch(signal, [], [], 2^12, fs);
     [filt_p, filt_f] = pwelch(filt_signal, [], [], 2^12, fs);
@@ -148,7 +155,7 @@ for channel = 1:8
     title(['Channel ', channel_labels{channel}, ': Filtered Signal FFT Power in dB (Flickering f: ', num2str(flick_f), ' Hz)'])
     xlabel('Frequency (Hz)')
     ylabel('Amplitude (dB)')
-    xlim([8 40])
+    xlim([5 40])
 end
 
 
@@ -194,7 +201,7 @@ plot(filt_f, filt_p)
 title(['Channel ', channel_labels{channel}, ': Filtered Signal FFT Power'])
 xlabel('Frequency')
 ylabel('Amplitude')
-xlim([8 40])
+xlim([5 40])
 
 %% pre-stim vs stim
 close all
