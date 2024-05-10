@@ -1,8 +1,9 @@
+clear, clc, close all
 %% Brainflow Setup
 
-openBCI_serial_port = 'COM3'; % For Windows Operating System | Change the serial port accordingly
+openBCI_serial_port = 'COM5'; % For Windows Operating System | Change the serial port accordingly
 file_name = 'data/raw_data.csv';
-fs = 256;
+fs = 250;
 data_save = [];
 window_size = 2; % in seconds
 total_trial = 30;
@@ -54,6 +55,8 @@ for i_segment = 1:total_trial
         data = board_shim.get_board_data(board_shim.get_board_data_count(preset), preset);
         data_save = [data_save data];
 
+        data_filtered = [];
+
         % 2: Filtering
 
         for chan_i = 1:size(data,1)
@@ -92,7 +95,8 @@ for i_segment = 1:total_trial
             % CCA implementation
 
             for j = 1:classNum
-                [~, ~, corr] = canoncorr(data_filtered, Y{j}');
+                [~, ~, corr] = canoncorr(chan_i_filtered, Y{j}');
+
                 r(j) = max(corr);
             end
             [~, ind] = max(r);
