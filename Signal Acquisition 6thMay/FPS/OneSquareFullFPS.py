@@ -86,7 +86,7 @@ def main():
     delay_frames = delay_duration * 60
     delay_complete = False
 
-    stimuli_duration = 7 #in seconds
+    stimuli_duration = 100 #in seconds
     stimuli_frames = stimuli_duration * 60
 
     start_time = pygame.time.get_ticks()  # Start time at initialization
