@@ -3,7 +3,7 @@
 
 import sys
 import numpy as np
-import sounddevice as sd
+# import sounddevice as sd
 import soundfile as sf
 import time
 import pygame
