@@ -1,4 +1,4 @@
-# receive numeric class label (4 classes, 1-4) from matlab signal processing
+# receive numeric class classLabel (4 classes, 1-4) from matlab signal processing
 # and output a sound based on a modifier 5th class (0)
 
 import sys
@@ -15,58 +15,51 @@ import pygame
 # 1 - drums, 2 - bass, 3 - guitar, 4 - vocals
 # 0 - no sound (modifier class)
 
-# dictionary with class labels as keys and imported sound samples as values
+# dictionary with class classLabels as keys and imported sound samples as values
 audioDict = {1: [], 2: [], 3: [], 4: []}
-midiDict = {1: [], 2: [], 3: [], 4: []}
+# midiDict = {1: [], 2: [], 3: [], 4: []}
 
-# for i in range(1, 5):
-    # audioDict[i].append(sf.read(r'sounds/audio/' + str(i) + '.wav'))
-# for i in range(1, 5):
-    # midiDict[i].append(sf.read(r'sounds/midi/' + str(i) + '.mid'))
-audioDict[1].append(r'sounds/audio/1/audio11.wav')
-audioDict[1].append(r'sounds/audio/1/audio12.wav')
-audioDict[1].append(r'sounds/audio/1/audio13.wav')
-audioDict[1].append(r'sounds/audio/1/audio14.wav')
-audioDict[2].append(r'sounds/audio/2/audio21.wav')
-audioDict[2].append(r'sounds/audio/2/audio22.wav')
-audioDict[2].append(r'sounds/audio/2/audio23.wav')
-audioDict[2].append(r'sounds/audio/2/audio24.wav')
+for i in ['drums', 'bass', 'guitar', 'vocals']:
+    try:
+        audioDict[i].append((sf.read(r'sounds/' + i + f"/{i}{str(n)}{letter}" + '.wav') for n in range(1, 5) for letter in ['', 'a', 'b', 'c', 'd']))
+    except:
+        continue
 
 
-# Dictionary to keep track of currently playing sounds
+# Set to keep track of currently playing sounds
 playingSounds = {}
 
-def chooseMode(label, modifier):  # choose between instrument and sample choice mode
+def chooseMode(classLabel, modifier):  # choose between instrument and sample choice mode
     
-    if label == 0:
+    if classLabel == 0:
         modifier = 1 if modifier == 0 else 0    # switch between modes
     return modifier
 
-def chooseSound(label, instrument, modifier):   # choose the sound to play
+def chooseSound(classLabel, instrument, modifier):   # choose the sound to play
 
-    if label not in range(0, 5):
-        print("Invalid class label")
+    if classLabel not in range(0, 5):
+        print("Invalid class classLabel")
         return
 
     # if in instrument choice mode, choose it and play the default sample (first one)
     if modifier == 0:
-        instrument = label
+        instrument = classLabel
         return (instrument, 1)
     
     # if in sample choice mode, choose the sample to play
     if modifier == 1:
-        return (instrument, label)
+        return (instrument, classLabel)
 
-
+'''
 def playMidi(midiToPlay):
     # Load the MIDI file
     pygame.mixer.music.load(midiDict[midiToPlay])
 
     # Play the MIDI file
     pygame.mixer.music.play()
+'''
 
-
-def main(): # receive class label and outputs in real time
+def main(): # receive class classLabel and outputs in real time
     end = False
 
     pygame.mixer.init()
@@ -75,54 +68,65 @@ def main(): # receive class label and outputs in real time
     modifier = 0    # 0 - instrument choice mode / 1 - sample choice mode
     instrument = 1  # drums
     
-    testBusLabel = [2, 1, 0, 3, 1, 0, 4, 1, 0, 2, 1, 0, 3, 1, 0]
+    print(audioDict)
 
-    pygame.mixer.Sound(r"sounds/audio/audioBeat.wav").play(-1)  # -1 means loop indefinitely
-    tempo = 72 # bpm
+    testBusclassLabel = [2, 1, 0, 3, 1, 0, 4, 1, 0, 2, 1, 0, 3, 1, 0]
+
+    
+    sound = pygame.mixer.Sound(r"sounds/_archive/audioBeat.wav")
+    sound.set_volume(0.3)  # Adjust the volume (0.0 - 1.0)
+    # sound.play(-1)  # -1 means loop indefinitely
+    tempo = 115 # bpm for Heart of Glass
     delay = int(60000 / tempo)   # ms
 
     index = 0
     while not end:
         print()
-        
-
-        label = testBusLabel[index]; print("Label: ", label)
+        # TO RECEIVE CLASS classLabel FROM MATLAB
+        classLabel = testBusclassLabel[index]; print("classLabel: ", classLabel)
     
-        if label in audioDict:  # if the label is a valid non modifier class
-
+    # if the classLabel is a valid non modifier class
+        if classLabel in audioDict:
+        
+        # change instrument
             if modifier == 0:
                 print("Instrument choice mode")
-                instrument = label; print("Instrument", instrument)
-
+                instrument = classLabel; print("Instrument", instrument)
+        # change sound
             elif modifier == 1:
                 print("Sample choice mode")
-                audioToPlay = chooseSound(label, instrument, modifier); print("Audio", audioToPlay)  # tuple (instrument, sample)
+                audioToPlay = chooseSound(classLabel, instrument, modifier); print("Audio", audioToPlay)  # tuple (instrument, samplerate)
             
 
-                # If the sound for this class is already playing, stop it
+            # If the sound for this class is already playing, stop it
                 if audioToPlay in playingSounds:
                     playingSounds[audioToPlay].stop()
                     # print("here")
                     del playingSounds[audioToPlay]
                 else:
-                    # Otherwise, start playing the sound in a loop
+            # Otherwise, start playing the sound in a loop
                     playingSounds[audioToPlay] = pygame.mixer.Sound(audioDict[audioToPlay[0]][audioToPlay[1] - 1])
 
                     pygame.time.wait(delay) # align next beat
 
                     playingSounds[audioToPlay].play(1)  # -1 means loop indefinitely
 
-        if label == 0:
+        # end if ESC key is pressed
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    end = True
+
+    # if the classLabel is a modifier class
+        if classLabel == 0: 
             modifier = 1 if modifier == 0 else 0
             print("Modifier: ", modifier)
 
         # temporary testing ending condition
         end = input("Next? (y/n): ") == 'n'
         index += 1
-        if index == len(testBusLabel):
+        if index == len(testBusclassLabel):
             end = True
-        
-
         
 
 if __name__ == "__main__":
