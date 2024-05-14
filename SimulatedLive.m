@@ -70,6 +70,10 @@ order = 2;
 window_size = 3; % in seconds
 step_size = 0.2; % in seconds
 
+host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
+port = 12345;         % Port number on which Python server is listening
+
+tto = tcpclient(host, port);
 
 % Initialize figure for real-time plotting
 figure;
@@ -110,7 +114,7 @@ while true
     xlim([t_segment(1) t_segment(end)]);
 
     [p, f] = periodogram(segment_data, [], [], fs);
-    set(h2, 'YData', p);
+    set(h2, 'XData', f, 'YData', p);
     xlim([0 50]);
     
 
@@ -124,10 +128,72 @@ while true
 
     if(m>0.24)
      fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+    
+
+        try
+                                 
+            % Send random integer numbers every second
+           
+                
+                % Format the message to send (convert random_integer to string)
+                message = sprintf('%d\n', refFreq(ind));
+                
+                % Send the message over TCP/IP
+                write(tto, message);  % Send as characters
+                
+                % Display the sent message (optional)
+                %disp(['Frequency: ', num2str(message)]);
+                
+                
+        
+        catch ME
+            disp(['Error occurred: ', ME.message]);
+            if exist('tto', 'var') && isvalid(t)
+                delete(t);  % Close and delete the tcpclient object on error
+            end
+        end
+
     end
+
     
     % % Check if the user pressed the escape key
     % if waitforbuttonpress == 1
     %     break;
     % end
 end
+
+
+%% MATLAB Script: send_random_data.m
+
+% % Define parameters
+% host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
+% port = 12345;         % Port number on which Python server is listening
+% 
+% try
+%     % Create TCP/IP client object
+%     t = tcpclient(host, port);
+%     
+%     % Send random integer numbers every second
+%     while true
+%         % Generate a random integer between 1 and 100 (adjust range as needed)
+%         random_integer = randi([1, 100]);  % Random integer between 1 and 100
+%         
+%         % Format the message to send (convert random_integer to string)
+%         message = sprintf('%d\n', random_integer);
+%         
+%         % Send the message over TCP/IP
+%         write(t, message, 'char');  % Send as characters
+%         
+%         % Display the sent message (optional)
+%         disp(['Sent random integer: ', num2str(random_integer)]);
+%         
+%         % Pause for 1 second before sending the next random number
+%         pause(1);  
+%     end
+%     
+% catch ME
+%     disp(['Error occurred: ', ME.message]);
+%     if exist('t', 'var') && isvalid(t)
+%         delete(t);  % Close and delete the tcpclient object on error
+%     end
+%end
