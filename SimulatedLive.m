@@ -1,8 +1,9 @@
 %% Simulate EEG Data
+clear, close all, clc
 
 % Simulate EEG data
 fs = 250; % Sampling frequency (Hz)
-time = 10; % 10 seconds of data
+time = 5; % 10 seconds of data
 t = 0:1/fs:(time - 1/fs);
 freq_segments = [8.57, 12, 15, 10, 8.57]; % Frequencies for each segment (Hz)
 amplitude = 50; % Amplitude of the simulated signal
@@ -23,6 +24,10 @@ end
 % Add noise to the simulated EEG data
 eeg_data = eeg_data + randn(size(eeg_data)) * 10;
 
+load("mixed_signal_16_24.mat");
+eeg_data = mixed_signal;
+t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
+
 % Plot the simulated EEG data
 figure;
 plot(t, eeg_data);
@@ -32,8 +37,8 @@ title('Simulated EEG Data');
 
 
 %% Initializing variables for using CCA;
-refFreq = [8.57 10 12 15];
-time = 2; % Seconds;
+refFreq = [8 12 18];
+time = 5; % Seconds;
 fs= 250;
 classNum = length(refFreq); 
 %trialNum = 1;
@@ -67,10 +72,8 @@ order = 2;
 %% Simulate Data Acquisition and Real-time Plotting
 
 % Set parameters
-window_size = 3; % in seconds
-step_size = 0.2; % in seconds
-
-
+window_size = 5; % in seconds
+step_size = 1; % in seconds
 % Initialize figure for real-time plotting
 figure;
 subplot(1,2,1)
@@ -79,16 +82,21 @@ title('Raw EEG Data');
 xlabel('Time (s)');
 ylabel('Amplitude');
 ylim([-100 100]);
+%xlim([0 window_size]) % Set initial x-axis limits
+%set(gca, 'XTick', 0:1:window_size) % Set x-axis ticks every second
 
 subplot(1,2,2)
 h2 = plot(zeros(1,2*fs)); % Initialize plot
 title('Raw EEG Data FFT');
 xlabel('Frequency (Hz)');
 ylabel('Power');
-
+xlim([0 50]) % Set initial x-axis limits
 
 i_segment = 0;
 filtered_window = zeros(1, 2*fs);
+
+counter = 0;
+
 while true
     i_segment = i_segment + 1;
     pause(step_size) % Wait for step_size seconds
@@ -99,35 +107,42 @@ while true
     segment_data = eeg_data(start_idx:end_idx);
     t_segment = t(start_idx:end_idx);
 
-    filtered_window = filter(low_b, low_a, segment_data);
-    filtered_window = filtfilt(high_b, high_a, filtered_window);
-    filtered_window = filtfilt(notch_b, notch_a, filtered_window);
 
-    filtered_window = filtered_window(250*1+1:end);
+    filtered_window = filter(low_b, low_a, segment_data);
+    filtered_window = filter(high_b, high_a, filtered_window);
+    filtered_window = filter(notch_b, notch_a, filtered_window);
+
+    %filtered_window = filtered_window(250*1+1:end);
 
     % Update plot 
+     %set(gca, 'XTick', t_segment(1):1:t_segment(end)) % Update x-axis ticks
+
     set(h1, 'XData', t_segment, 'YData', segment_data);
-    xlim([t_segment(1) t_segment(end)]);
+    xlim([t_segment(1) t_segment(end)])
+    
 
     [p, f] = periodogram(segment_data, [], [], fs);
     set(h2, 'YData', p);
-    xlim([0 50]);
+    xlim([0 50])
     
-
     drawnow;
 
     for j = 1:classNum
-        [~, ~, corr] = canoncorr(filtered_window', Y{j}');
+        [~, ~, corr] = canoncorr(filtered_window, Y{j}');
         r(j) = max(corr);
     end
+
     [m, ind] = max(r);
+    prev_ind = ind;
+
+    if(m>0.24 && prev_ind==ind)
+        counter = counter+1;
+    else
+        counter = 0;
+    end
 
     if(m>0.24)
      fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+     counter = 0;
     end
-    
-    % % Check if the user pressed the escape key
-    % if waitforbuttonpress == 1
-    %     break;
-    % end
 end

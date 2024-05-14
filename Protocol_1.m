@@ -1,9 +1,9 @@
 %%  data import and visualization
 close all, clear, clc
 
-flick_f = 16;
-data = table2array(readtable(['Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
-data = data(250:250*6, :);
+flick_f = 36;
+data = table2array(readtable(['Data/Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
+data = data(100:end, :);
 
 % data = table2array(readtable(['S202007965_21_Protocol#2_1SFT_7.5Hz_Trials3_7.csv']));
 % data = data(50:end, :);
@@ -13,6 +13,7 @@ channel_labels = {'P7','O1','Oz','O2','P8','P3','Pz','P4'};
 
 fs = 250;
 t = 0:1/fs:(length(data)-1)/fs;
+
 
 channel = 3;
 
@@ -104,13 +105,26 @@ order = 2;
 % filtered_signal = filter(b, a, filtered_signal, [], 1);
 
 
-filtered_signal = signal;
+%filtered_signal = signal;
+
+filt_t = 0:1/fs:(length(data)-351)/fs;
+
+filtered_signal = filter(low_b, low_a, data);
+filtered_signal = filter(high_b, high_a, filtered_signal);
+filtered_signal = filter(notch_b, notch_a, filtered_signal);
+
+% Remove the first 350 samples from all columns
+filtered_signal = filtered_signal(351:end, :);
 
 figure
 for i=1:8
-    filtered_signal(:,i) = filtfilt(low_b, low_a, data(:,i));
-    filtered_signal(:,i) = filtfilt(high_b, high_a, data(:,i));
-    filtered_signal(:,i) = filtfilt(notch_b, notch_a, data(:,i));
+    % filtered_signal(:,i) = filter(low_b, low_a, data(:,i));
+    % filtered_signal(:,i) = filter(high_b, high_a, filtered_signal(:,i));
+    % filtered_signal(:,i) = filter(notch_b, notch_a, filtered_signal(:,i));
+    % 
+    % filtered_signal(:,i) = filtered_signal(350:end, :);
+
+    filt_t = 0:1/fs:(length(filtered_signal)-1)/fs;
 
     subplot(8,2,2*i-1)
     plot(t, data(:,i))
@@ -120,12 +134,15 @@ for i=1:8
     grid on
 
     subplot(8,2,2*i)
-    plot(t, filtered_signal(:,i))
+    plot(filt_t, filtered_signal(:,i))
     title(['Channel ', channel_labels{i}, ': Filtered Signal with Bandpass 1-40 Hz'])
     xlabel('Time (s)')
     ylabel('Amplitude (μV)')
     grid on
 end
+
+filtered_stim_36Hz = filtered_signal(:, 3);
+save("filtered_stim_36Hz", "filtered_stim_36Hz")
 
 %% 8-channel FFT analysis
 close all
