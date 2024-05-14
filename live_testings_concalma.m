@@ -38,63 +38,6 @@ for i_segment = 1:total_trial
 
         data_chan3 = data(channel,:);
 
-
-        % Low-pass 40 Hz
-        order = 8; 
-        [b, a] = butter(order, 40/(fs/2), 'low');     
-        data_chan3_filtered = filter(b, a, data_chan3, [], 1);
-            
-        % High-pass 1 Hz
-        order = 2; 
-        [b, a] = butter(order, 1/(fs/2), 'high');        
-        data_chan3_filtered = filter(b, a, data_chan3_filtered, [], 1);
-
-        % Notch-filter 50 Hz
-        order = 2; 
-        [b, a] = butter(order, [48 52]/(fs/2), 'stop');
-        data_chan3_filtered = filter(b, a, data_chan3_filtered, [], 1);
-
-        % Detrend and PSD!!!
-        subplot(3,2,1)
-        plot(data_chan3)
-        title("Raw Signal")
-
-        window = 256;
-        noverlap = window/2;
-
-        subplot(3,2,2)
-        [p, f] = pwelch(data_chan3, window, noverlap, [], fs);
-        plot(f,p)
-        title("Raw Signal PSD")
-        xlim([4 40])
-
-        subplot(3,2,3)
-        plot(data_chan3_filtered)
-        title("Filtered Signal")
-
-        subplot(3,2,4)
-        [filt_p, filt_f] = pwelch(data_chan3_filtered, [], [], 2^12, fs);
-        plot(filt_f,filt_p)
-        title("Filtered Signal PSD")
-        xlim([4 40])
-
-        detrended = DataFilter.detrend(data_chan3_filtered, int32(DetrendOperations.LINEAR));
-
-        subplot(3,2,5)
-        plot(detrended)
-        title("Detrended Signal")
-
-        subplot(3,2,6)
-        [d_p, d_f] = pwelch(data_chan3_filtered, [], [], 2^12, fs);
-        plot(d_f,d_p)
-        title("Detrended Signal PSD")
-        xlim([4 40])
-
-
-        % title(['Channel ', channel, ': PSD of the Signal'])
-        % xlabel('Frequency (Hz)')
-        % ylabel('Amplitude (?)')
-
 end
 
 board_shim.stop_stream();

@@ -60,7 +60,7 @@ for i = 1:trialNum
         [~, ~, corr] = canoncorr(data, Y{j}');
         r(j) = max(corr);
     end
-    [~, ind] = max(r);
+    [m, ind] = max(r);
     
 
     fprintf('Trial %d: SSVEP Frequency: %d Hz\n', i, refFreq(ind));
