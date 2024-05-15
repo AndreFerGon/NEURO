@@ -83,11 +83,13 @@ def playSounds():
             # change instrument
                 if mode == 0:
                     instrument = label;
+                    # print("Instrument", instrument, '\n')
                     mode = switchModes(mode)
 
             # change sound
                 elif mode == 1:
-                    audioToPlay = (instrument, label); print("Audio", audioToPlay, '\n')  # tuple (instrument, samplerate)
+                    audioToPlay = (instrument, label); # tuple (instrument, samplerate)
+                    # print("Audio", audioToPlay, '\n')  
                 
 
                 # # Wait until the next downbeat to play the sound
