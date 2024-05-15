@@ -35,7 +35,7 @@ clear trial_signal
 
 
 %% Initializing variables for using CCA;
-refFreq = [16 24 36];
+refFreq = [8 12 18];
 time = 4; % Seconds;
 fs= 250;
 classNum = 3; 
@@ -60,7 +60,7 @@ for i = 1:trialNum
         [~, ~, corr] = canoncorr(data, Y{j}');
         r(j) = max(corr);
     end
-    [~, ind] = max(r);
+    [m, ind] = max(r);
     
 
     fprintf('Trial %d: SSVEP Frequency: %d Hz\n', i, refFreq(ind));

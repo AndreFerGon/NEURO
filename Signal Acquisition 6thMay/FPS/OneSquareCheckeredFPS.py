@@ -72,7 +72,7 @@ def main():
     pygame.display.set_caption("Checkerboards with Different Intervals")
 
     clock = pygame.time.Clock()
-    fps = 60   
+    fps = 60;   
    
     #toggle_frame_interval = 2 #30Hz
     #toggle_frame_interval = 3 #20Hz
