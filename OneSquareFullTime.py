@@ -1,5 +1,6 @@
 import pygame
 import sys
+import numpy as np
 
 # Constants
 BLACK = (0, 0, 0)
@@ -63,16 +64,16 @@ def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 1620
-    screen_height = 1000
-    screen = pygame.display.set_mode((screen_width, screen_height))
+    screen_width = 1920/1.2
+    screen_heigth = 1080/1.2
+    screen = pygame.display.set_mode((screen_width, screen_heigth))
     pygame.display.set_caption("Checkerboards with Different Intervals")
 
     clock = pygame.time.Clock()
-    fps = 60
+    fps = 144
 
-    delay_duration = 3000  # In milliseconds
-    stimuli_duration = 7000
+    delay_duration = 8000  # In milliseconds
+    stimuli_duration = 10000
     start_time = pygame.time.get_ticks()  # Start time at initialization
     start_time_beginning = pygame.time.get_ticks()
     elapsed_time = 0  # Initialize elapsed time
@@ -81,7 +82,7 @@ def main():
     # Load font for displaying stopwatch
     font = pygame.font.Font(None, 20)
 
-    frequency = 30
+    frequency=14.4
     #frequency = 20
     #frequency = 15
     #frequency = 12
@@ -92,8 +93,9 @@ def main():
     delay = 1000 / frequency
 
     # Create multiple checkerboard squares with different toggle intervals
+    square_length = 600
     squares_info = [
-        {"rect": pygame.Rect(500, 200, 600, 600), "num_rows": 1, "num_cols": 1, "toggle_interval": delay},
+        {"rect": pygame.Rect((screen_width-square_length)/2, (screen_heigth-square_length)/2, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay},
         
     ]
 
@@ -103,8 +105,15 @@ def main():
         squares.append(checkerboard)
 
     running = True
+
+    ciclo = 0
+
+    frequencies = np.array([16,18,19.2,24])
     
     while running:
+
+
+
         elapsed_time = pygame.time.get_ticks() - start_time
         total_time = pygame.time.get_ticks() - start_time_beginning
         #print(elapsed_time)
@@ -113,7 +122,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        screen.fill(GREY)
+        screen.fill(BLACK)
         display_stopwatch(screen, font, total_time)
 
         if not delay_complete and elapsed_time >= delay_duration:
@@ -131,7 +140,29 @@ def main():
                 # Reset delay state and start time
                 delay_complete = False
                 start_time = pygame.time.get_ticks()
+
+                delay_duration = 6000
+
+                ciclo=ciclo+1;
+
+                frequency = frequencies[ciclo]
+                delay = 1000 / frequency
+
                 
+
+
+                squares_info = [
+                {"rect": pygame.Rect((screen_width-square_length)/2, (screen_heigth-square_length)/2, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay},
+                           ]
+
+                squares = []
+                for info in squares_info:
+                    checkerboard = CheckerboardSquare(info["rect"], info["num_rows"], info["num_cols"], info["toggle_interval"])
+                    squares.append(checkerboard)
+                
+       
+       
+       
         pygame.display.flip()
         clock.tick(fps)
 

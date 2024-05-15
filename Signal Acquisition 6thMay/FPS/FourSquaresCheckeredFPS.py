@@ -46,7 +46,7 @@ class CheckerboardSquare:
                                         cell_height)
                 pygame.draw.rect(screen, self.colors[row][col], cell_rect)
 
-def display_frame(screen, font, frames_counted, frames_counted_stimuli, elapsed_time):
+def display_frame(screen, screen_width, screen_heigth, font, frames_counted, frames_counted_stimuli, elapsed_time):
     # Calculate seconds and milliseconds    
     seconds = elapsed_time // 1000
     milliseconds = elapsed_time % 1000
@@ -56,38 +56,38 @@ def display_frame(screen, font, frames_counted, frames_counted_stimuli, elapsed_
     frames_text_3 = f"Elapsed Time: {seconds}.{milliseconds:03d} seconds"
 
     text_surface = font.render(frames_text_1, True, BLACK)
-    screen.blit(text_surface, (720, 930))
+    screen.blit(text_surface, (screen_width/2 -100, screen_heigth-60))
     text_surface = font.render(frames_text_2, True, BLACK)
-    screen.blit(text_surface, (720, 955))
+    screen.blit(text_surface, (screen_width/2-100, screen_heigth-40))
     text_surface = font.render(frames_text_3, True, BLACK)
-    screen.blit(text_surface, (720, 980))
+    screen.blit(text_surface, (screen_width/2-100, screen_heigth-20))
 
 def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 1620
-    screen_height = 1000
+    screen_width = 1920/1.5
+    screen_height = 1080/1.5
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Checkerboards with Different Intervals")
 
     clock = pygame.time.Clock()
-    fps = 60
+    fps = 144
 
     #toggle_frame_interval = 2 #30Hz
     #toggle_frame_interval = 3 #20Hz
-    toggle_frame_interval_5 = 4 #15Hz
-    toggle_frame_interval_4 = 5 #12Hz
-    toggle_frame_interval_3 = 6 #10Hz
-    toggle_frame_interval_2 = 7 #8.57Hz
-    toggle_frame_interval_1 = 8 #7.5Hz
+    toggle_frame_interval_5 = 9 #16Hz
+    toggle_frame_interval_4 = 10 #14.4Hz
+    toggle_frame_interval_3 = 12#12Hz
+    toggle_frame_interval_2 = 15 #9.6Hz
+    toggle_frame_interval_1 = 18 #8Hz
 
     delay_duration = 3 #in seconds
-    delay_frames = delay_duration * 60
+    delay_frames = delay_duration * fps
     delay_complete = False
 
     stimuli_duration = 7 #in seconds
-    stimuli_frames = stimuli_duration * 60
+    stimuli_frames = stimuli_duration * fps
 
     start_time = pygame.time.get_ticks()  # Start time at initialization
     elapsed_time = 0  # Initialize elapsed time
@@ -95,12 +95,14 @@ def main():
     # Load font for displaying stopwatch
     font = pygame.font.Font(None, 20)
 
+    square_length = 200
+
     squares_info = [
-        {"rect": pygame.Rect(50, 50, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_1},
-        {"rect": pygame.Rect(50, 650, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_2},
-        {"rect": pygame.Rect(1250, 50, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_3},
-        {"rect": pygame.Rect(1250, 650, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_4},
-        {"rect": pygame.Rect(650, 350, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_5}
+        {"rect": pygame.Rect(50, 50, square_length, square_length), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_1},
+        {"rect": pygame.Rect(screen_width-250, screen_height-250, square_length, square_length), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_2},
+        {"rect": pygame.Rect(50, screen_height-250, square_length, square_length), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_3},
+        {"rect": pygame.Rect(screen_width-250, 50, square_length, square_length), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_4},
+        {"rect": pygame.Rect(screen_width/2-square_length/2, screen_height/2-square_length/2, square_length, square_length), "num_rows": 8, "num_cols": 8, "toggle_interval": toggle_frame_interval_5}
     ]
 
     squares = []
@@ -121,7 +123,7 @@ def main():
                 running = False
 
         screen.fill(GREY)
-        display_frame(screen, font, frame_count , frame_count_stimuli, elapsed_time)
+        display_frame(screen, screen_width, screen_height,font, frame_count , frame_count_stimuli, elapsed_time)
 
         if not delay_complete and frame_count_stimuli >= delay_frames:
             delay_complete = True
