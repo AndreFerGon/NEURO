@@ -3,9 +3,9 @@ clear, close all, clc
 
 % Simulate EEG data
 fs = 250; % Sampling frequency (Hz)
-time = 5; % 10 seconds of data
+time = 10; % 10 seconds of data
 t = 0:1/fs:(time - 1/fs);
-freq_segments = [8.57, 12, 15, 10, 8.57]; % Frequencies for each segment (Hz)
+freq_segments = [8, 9.6, 12, 14.4, 18]; % Frequencies for each segment (Hz)
 amplitude = 50; % Amplitude of the simulated signal
 
 % Initialize EEG data
@@ -24,9 +24,9 @@ end
 % Add noise to the simulated EEG data
 eeg_data = eeg_data + randn(size(eeg_data)) * 10;
 
-load("mixed_signal_16_24.mat");
-eeg_data = mixed_signal;
-t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
+% load("mixed_signal_16_24.mat");
+% eeg_data = mixed_signal;
+% t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
 
 % Plot the simulated EEG data
 figure;
@@ -37,7 +37,7 @@ title('Simulated EEG Data');
 
 
 %% Initializing variables for using CCA;
-refFreq = [8 12 18];
+refFreq = [8, 9.6, 12, 14.4, 18];
 time = 5; % Seconds;
 fs= 250;
 classNum = length(refFreq); 

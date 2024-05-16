@@ -72,7 +72,7 @@ class ColorSwitchingSquare:
     def update(self):
         if self.timer_active:
             current_time = pygame.time.get_ticks()
-            if current_time - self.timer_start_time >= 1500:  # 1500 milliseconds = 1.5 seconds
+            if current_time - self.timer_start_time >= 300: 
                 self.current_color = self.default_color
                 self.timer_active = False
 
@@ -88,7 +88,7 @@ def display_stopwatch(screen, font, elapsed_time):
     text_surface = font.render(stopwatch_text, True, BLACK)
     screen.blit(text_surface, (720, 980))
 
-def handle_socket_communication():
+def handle_socket_communication(color_squares):
     host = 'localhost'
     port = 12345
 
@@ -107,8 +107,14 @@ def handle_socket_communication():
                 break
             
             received_message = data.decode().strip()
-            received_integer = float(received_message)
+            received_integer = int(received_message)
             print(f"Received integer: {received_integer}")
+            
+            # Set the corresponding square to green
+            for color_square_data in color_squares:
+                if color_square_data["id"] == str(received_integer):
+                    color_square_data["square"].set_permanent_green()
+                    break
             
     except Exception as e:
         print(f"Error occurred: {e}")
@@ -120,13 +126,30 @@ def handle_socket_communication():
 def main():
     pygame.init()
 
+    screen_width = 800
+    screen_height = 600
+
+    color_squares = []
+
+    square_info = [
+        {"rect": pygame.Rect(screen_width/32.4 - screen_width/324, screen_height/20- screen_height/200, screen_width/5, screen_width/5), "default_color": RED, "id": "1"},
+        {"rect": pygame.Rect(screen_width/32.4 - screen_width/324, screen_height/1.5384- screen_height/200, screen_width/5, screen_width/5), "default_color": RED, "id": "2"},
+        {"rect": pygame.Rect(screen_width/1.3 - screen_width/324, screen_height/20- screen_height/200, screen_width/5, screen_width/5), "default_color": RED, "id": "3"},
+        {"rect": pygame.Rect(screen_width/1.3 - screen_width/324, screen_height/1.5384- screen_height/200, screen_width/5, screen_width/5), "default_color": RED, "id": "4"},
+        {"rect": pygame.Rect(screen_width/2.49 - screen_width/324, screen_height/2.857- screen_height/200, screen_width/5, screen_width/5), "default_color": RED, "id": "5"}
+    ]
+
+    
+    for info in square_info:
+        color_square = ColorSwitchingSquare(info["rect"], info["default_color"])
+        color_squares.append({"square": color_square, "id": info["id"]})
+
     # Start the socket communication in a separate thread
-    socket_thread = threading.Thread(target=handle_socket_communication, daemon=True)
+    socket_thread = threading.Thread(target=handle_socket_communication, args=(color_squares,), daemon=True)
     socket_thread.start()
 
     # Set up the screen
-    screen_width = 1620
-    screen_height = 1000
+    
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Checkerboards with Different Intervals")
 
@@ -150,28 +173,14 @@ def main():
     delay4 = 1000 / frequency4
     delay5 = 1000 / frequency5
 
-    color_squares = []
-
-    square_info = [
-        {"rect": pygame.Rect(45, 45, 305, 305), "default_color": RED, "id": "1"},
-        {"rect": pygame.Rect(45, 645, 305, 305), "default_color": RED, "id": "2"},
-        {"rect": pygame.Rect(1245, 45, 305, 305), "default_color": RED, "id": "3"},
-        {"rect": pygame.Rect(1245, 645, 305, 305), "default_color": RED, "id": "4"},
-        {"rect": pygame.Rect(645, 345, 305, 305), "default_color": RED, "id": "5"}
-    ]
-
-    for info in square_info:
-        color_square = ColorSwitchingSquare(info["rect"], info["default_color"])
-        color_squares.append({"square": color_square, "id": info["id"]})
-
     checkerboard_squares = []
 
     checkerboard_info = [
-        {"rect": pygame.Rect(50, 50, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay1},
-        {"rect": pygame.Rect(50, 650, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay2},
-        {"rect": pygame.Rect(1250, 50, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay3},
-        {"rect": pygame.Rect(1250, 650, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay4},
-        {"rect": pygame.Rect(650, 350, 300, 300), "num_rows": 8, "num_cols": 8, "toggle_interval": delay5}
+        {"rect": pygame.Rect(screen_width/32.4, screen_height/20, screen_width/5.1, screen_width/5.1), "num_rows": 8, "num_cols": 8, "toggle_interval": delay1},
+        {"rect": pygame.Rect(screen_width/32.4, screen_height/1.5384, screen_width/5.1, screen_width/5.1), "num_rows": 8, "num_cols": 8, "toggle_interval": delay2},
+        {"rect": pygame.Rect(screen_width/1.3, screen_height/20, screen_width/5.1, screen_width/5.1), "num_rows": 8, "num_cols": 8, "toggle_interval": delay3},
+        {"rect": pygame.Rect(screen_width/1.3, screen_height/1.5384, screen_width/5.1, screen_width/5.1), "num_rows": 8, "num_cols": 8, "toggle_interval": delay4},
+        {"rect": pygame.Rect(screen_width/2.49, screen_height/2.857, screen_width/5.1, screen_width/5.1), "num_rows": 8, "num_cols": 8, "toggle_interval": delay5}
     ]
 
     for info in checkerboard_info:
