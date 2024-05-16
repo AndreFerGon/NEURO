@@ -62,13 +62,13 @@ def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 1620
-    screen_height = 1000
+    screen_width = 1920/1.4
+    screen_height = 1080/1.4
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Checkerboards with Different Intervals")
 
     clock = pygame.time.Clock()
-    fps = 60
+    fps = 144
 
     delay_duration = 3000  # In milliseconds
     stimuli_duration = 7000
@@ -80,13 +80,11 @@ def main():
     # Load font for displaying stopwatch
     font = pygame.font.Font(None, 20)
 
-    #frequency = 30
-    #frequency = 20
-    frequency5 = 15
-    frequency4 = 12
-    frequency3 = 10
-    frequency2 = 60/7
-    frequency1 = 7.5
+    frequency5 = 2*144/8 # 144/8 = 18Hz
+    frequency4 = 2*144/10 # 144/10 = 14.4Hz
+    frequency3 = 2*144/12 # 144/12 = 12Hz
+    frequency2 = 2*144/15 # 144/15 = 9.6Hz
+    frequency1 = 2*144/18 # 144/18 = 8Hz
 
    
     delay1 = 1000 / frequency1
@@ -95,12 +93,14 @@ def main():
     delay4 = 1000 / frequency4
     delay5 = 1000 / frequency5
 
+    square_length = 250
+
     squares_info = [
-        {"rect": pygame.Rect(50, 50, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": delay1},
-        {"rect": pygame.Rect(50, 650, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": delay2},
-        {"rect": pygame.Rect(1250, 50, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": delay3},
-        {"rect": pygame.Rect(1250, 650, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": delay4},
-        {"rect": pygame.Rect(650, 350, 300, 300), "num_rows": 1, "num_cols": 1, "toggle_interval": delay5}
+        {"rect": pygame.Rect(50, 50, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay1},
+        {"rect": pygame.Rect(screen_width-square_length-50, screen_height-square_length-50, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay2},
+        {"rect": pygame.Rect(50, screen_height-square_length-50, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay3},
+        {"rect": pygame.Rect(screen_width-square_length-50, 50, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay4},
+        {"rect": pygame.Rect(screen_width/2-square_length/2, screen_height/2-square_length/2, square_length, square_length), "num_rows": 1, "num_cols": 1, "toggle_interval": delay5}
     ]
 
     squares = []

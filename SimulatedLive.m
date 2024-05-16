@@ -1,31 +1,16 @@
-%% Simulate EEG Data
+%% DATA IMPORT
 clear, close all, clc
 
-% Simulate EEG data
-fs = 250; % Sampling frequency (Hz)
-time = 10; % 10 seconds of data
-t = 0:1/fs:(time - 1/fs);
-freq_segments = [8, 9.6, 12, 14.4, 18]; % Frequencies for each segment (Hz)
-amplitude = 50; % Amplitude of the simulated signal
+fs = 250;
 
-% Initialize EEG data
-eeg_data = zeros(size(t));
-
-% Generate EEG signal with different frequencies for different segments
-start_idx = 1;
-for i = 1:length(freq_segments)
-    freq = freq_segments(i);
-    segment_t = t(start_idx:start_idx+length(t)/length(freq_segments)-1);
-    segment_eeg_data = amplitude * sin(2*pi*freq*segment_t);
-    eeg_data(start_idx:start_idx+length(segment_t)-1) = segment_eeg_data;
-    start_idx = start_idx + length(segment_t);
-end
-
-% Add noise to the simulated EEG data
-eeg_data = eeg_data + randn(size(eeg_data)) * 10;
+% a mixed signal with 10s rest + 10s 8Hz sti + 10s rest + 10s 12Hz stim
 
 % load("mixed_signal_16_24.mat");
 % eeg_data = mixed_signal;
+% t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
+
+% load("S202007965_21_Protocol#3_Trial3.csv")
+% eeg_data = S202007965_21_Protocol_3_Trial3(250*0.5:end, 3);
 % t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
 
 % Plot the simulated EEG data
@@ -33,12 +18,17 @@ figure;
 plot(t, eeg_data);
 xlabel('Time (s)');
 ylabel('Amplitude');
-title('Simulated EEG Data');
+title('EEG Data from Oz electrode');
+
+window_size = 6.5; % in seconds
+step_size = 1; % in seconds
 
 
 %% Initializing variables for using CCA;
-refFreq = [8, 9.6, 12, 14.4, 18];
-time = 5; % Seconds;
+
+refFreq = [7.2 8 9 9.6 12 14.4];
+time = window_size - 1.5; % Seconds;
+
 fs= 250;
 classNum = length(refFreq); 
 %trialNum = 1;
@@ -71,25 +61,20 @@ order = 2;
 
 %% Simulate Data Acquisition and Real-time Plotting
 
-% Set parameters
-
-window_size = 5; % in seconds
-step_size = 1; % in seconds
-
-host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
-port = 12345;         % Port number on which Python server is listening
-
-tto = tcpclient(host, port);
+% host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
+% port = 12345;         % Port number on which Python server is listening
+% 
+% tto = tcpclient(host, port);
 
 
 % Initialize figure for real-time plotting
 figure;
 subplot(1,2,1)
 h1 = plot(zeros(1,2*fs)); % Initialize plot
-title('Raw EEG Data');
+title(['Filtered EEG Data (' num2str(window_size-1.5) 's time window)']);
 xlabel('Time (s)');
 ylabel('Amplitude');
-ylim([-100 100]);
+%ylim([-100 100]);
 %xlim([0 window_size]) % Set initial x-axis limits
 %set(gca, 'XTick', 0:1:window_size) % Set x-axis ticks every second
 
@@ -113,26 +98,26 @@ while true
     start_idx = max(1, 1 + (i_segment-1)*step_size*fs);
     end_idx = min(length(eeg_data), start_idx + window_size*fs);
     segment_data = eeg_data(start_idx:end_idx);
-    t_segment = t(start_idx:end_idx);
+    t_segment = t(start_idx+1.5*fs:end_idx);
 
 
     filtered_window = filter(low_b, low_a, segment_data);
     filtered_window = filter(high_b, high_a, filtered_window);
     filtered_window = filter(notch_b, notch_a, filtered_window);
 
-    %filtered_window = filtered_window(250*1+1:end);
+    filtered_window = filtered_window(250*1.5+1:end);
 
     % Update plot 
      %set(gca, 'XTick', t_segment(1):1:t_segment(end)) % Update x-axis ticks
 
-    set(h1, 'XData', t_segment, 'YData', segment_data);
+    set(h1, 'XData', t_segment, 'YData', filtered_window);
     xlim([t_segment(1) t_segment(end)])
     
 
-    [p, f] = periodogram(segment_data, [], [], fs);
+    [p, f] = periodogram(filtered_window, [], [], fs);
 
     set(h2, 'XData', f, 'YData', p);
-    xlim([0 50]);
+    xlim([4 28]);
     
     drawnow;
 
@@ -150,11 +135,10 @@ while true
         counter = 0;
     end
 
-    if(m>0.24)
+    if(m>0.18)
      fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
 
      counter = 0;
-
 
         try
                                  
@@ -191,6 +175,33 @@ while true
     %     break;
     % end
 end
+
+
+%% Simulate EEG Data
+clear, close all, clc
+
+% Simulate EEG data
+fs = 250; % Sampling frequency (Hz)
+time = 60; % 10 seconds of data
+t = 0:1/fs:(time - 1/fs);
+freq_segments = [7.2 8 9 9.6 12 14.4]; % Frequencies for each segment (Hz)
+amplitude = 50; % Amplitude of the simulated signal
+
+% Initialize EEG data
+eeg_data = zeros(size(t));
+
+% Generate EEG signal with different frequencies for different segments
+start_idx = 1;
+for i = 1:length(freq_segments)
+    freq = freq_segments(i);
+    segment_t = t(start_idx:start_idx+length(t)/length(freq_segments)-1);
+    segment_eeg_data = amplitude * sin(2*pi*freq*segment_t);
+    eeg_data(start_idx:start_idx+length(segment_t)-1) = segment_eeg_data;
+    start_idx = start_idx + length(segment_t);
+end
+
+% Add noise to the simulated EEG data
+eeg_data = eeg_data + randn(size(eeg_data)) * 10;
 
 
 %% MATLAB Script: send_ssvep_data.m
@@ -237,4 +248,3 @@ function detected_freq = detect_ssvep_frequency()
     % Simulated detection logic (replace with your actual SSVEP detection algorithm)
     detected_freq = randi([8, 15]);  % Simulate random frequency detection (8, 12, or 15 Hz)
 end
-
