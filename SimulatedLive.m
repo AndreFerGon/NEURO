@@ -26,7 +26,7 @@ step_size = 1; % in seconds
 
 %% Initializing variables for using CCA;
 
-refFreq = [7.2 8 9 9.6 12 14.4];
+refFreq = [7.2 8 9 9.6 12];
 time = window_size - 1.5; % Seconds;
 
 fs= 250;
@@ -124,7 +124,7 @@ while true
     drawnow;
 
     for j = 1:classNum
-        [~, ~, corr] = canoncorr(filtered_window, Y{j}');
+        [~, ~, corr] = canoncorr(filtered_window', Y{j}');
         r(j) = max(corr);
     end
 
@@ -190,7 +190,7 @@ clear, close all, clc
 fs = 250; % Sampling frequency (Hz)
 time = 60; % 10 seconds of data
 t = 0:1/fs:(time - 1/fs);
-freq_segments = [7.2 8 9 9.6 12 14.4]; % Frequencies for each segment (Hz)
+freq_segments = [7.2 8 9 9.6 12]; % Frequencies for each segment (Hz)
 amplitude = 50; % Amplitude of the simulated signal
 window_size = 6.5; % in seconds
 step_size = 1; % in seconds
