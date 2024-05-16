@@ -1,14 +1,16 @@
 %% Brainflow Setup
 
 % board_shim.release_session(); 
-clear
+clear, clc, close all
 
 openBCI_serial_port = 'COM5'; % For Windows Operating System | Change the serial port accordingly
 file_name = 'data/raw_data.csv';
 fs = 250;
 data_save = [];
-window_size = 3; % in seconds
-step_size = 0.2; % in seconds
+window_size = 5.5; % in seconds
+step_size = 0.5; % in seconds
+
+filter_crop = 1.5;
 
 addpath(genpath('brainflow'))
 BoardShim.set_log_file('brainflow.log');
@@ -19,13 +21,13 @@ board_shim = BoardShim(0, params); % BoardIds.SYNTHETIC_BOARD (-1)  |  BoardIds.
 preset = int32(BrainFlowPresets.DEFAULT_PRESET);
 
 %% Initializing variables for using CCA;
-refFreq = [8.57 10 12 15];
-time = 2; % Seconds;
+refFreq = [7.2 8 9 9.6 12];
+time = window_size-filter_crop; % Seconds;
 classNum = length(refFreq); 
 %trialNum = 1;
 loss = 0;
 
-ref_t = 0:1/fs:(time);
+ref_t = 0:1/fs:(time-1/fs);
 
 Y = cell(1, classNum);
 r = zeros(1, classNum);
@@ -59,19 +61,19 @@ board_shim.start_stream(450000, '');
 figure;
 subplot(2,1,1)
 h1 = plot(zeros(1,2*fs)); % Initialize plot
-title('Raw EEG Data');
+title('Filtered EEG Data');
 xlabel('Time (s)');
 ylabel('Amplitude');
 ylim([-100 100]);
 
 subplot(2,1,2)
-h2 = plot(linspace(0,fs/2,fs), zeros(1,fs/2+1)); % Initialize plot
-title('Raw EEG Data PSD');
+h2 = plot(linspace(0,fs/2,fs/2+1), zeros(1,fs/2+1)); % Initialize plot
+title('Filtered EEG Data PSD');
 xlabel('Frequency (Hz)');
 ylabel('Power');
 
 window_data = zeros(1, window_size*fs); % Initialize window data
-filtered_window = zeros(1, window_size*fs);
+filtered_window = zeros(1, (window_size-filter_crop)*fs);
 
 i_segment = 0;
 while true
@@ -86,10 +88,10 @@ while true
     window_data = [window_data(length(data)+1:end), data(channel,:)];
 
     filtered_window = filter(low_b, low_a, window_data);
-    filtered_window = filtfilt(high_b, high_a, filtered_window);
-    filtered_window = filtfilt(notch_b, notch_a, filtered_window);
+    filtered_window = filter(high_b, high_a, filtered_window);
+    filtered_window = filter(notch_b, notch_a, filtered_window);
 
-    filtered_window = filtered_window(250*1+1:end);
+    filtered_window = filtered_window(250*filter_crop+1:end);
 
     % % Update plot
     % subplot(2,1,1);
@@ -104,29 +106,31 @@ while true
 
     % Update plot
     subplot(2,1,1);
-    set(h1, 'XData', (0:1/fs:2-1/fs), 'YData', filtered_window);
+    set(h1, 'XData', (0:1/fs:(window_size-filter_crop-1/fs)), 'YData', filtered_window);
     xlim([0 window_size]);
 
     subplot(2,1,2);
-    [f,p] = periodogram(filtered_window,[],[],fs);
+    [p, f] = periodogram(filtered_window,[],[],fs);
     set(h2, 'XData', f, 'YData', 10*log10(p));
-    xlim([0 fs/2]);
+    xlim([4 40]);
+
     drawnow;
-    
+
     for j = 1:classNum
+
         [~, ~, corr] = canoncorr(filtered_window', Y{j}');
         r(j) = max(corr);
     end
     [m, ind] = max(r);
 
-    if(m>0.26)
-     fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+    if(m>0.24)
+     fprintf('SSVEP Frequency: %f Hz (canoncorr = %f) \n', refFreq(ind), m);
     end
 
-    % Check if the escape key is pressed
-    if waitforbuttonpress == 1
-        break;
-    end
+    % % Check if the escape key is pressed
+    % if waitforbuttonpress == 1
+    %     break;
+    % end
 end
 
 board_shim.stop_stream();

@@ -1,3 +1,16 @@
+# Documentação do Brainflow: https://brainflow.readthedocs.io/en/stable/UserAPI.html
+
+'''
+Este scrip é executado a partir do terminal de forma a definir os elétrodos onde se quer adquirir o EEG
+
+Para correr o script é preciso primeiro definir o diretório onde ele está:
+- cd path
+
+De seguida:
+- python acquisition_brainflow.py --subject 1 --age 25 --gender Male
+
+'''
+
 import keyboard
 import logging
 import numpy as np
