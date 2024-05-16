@@ -1,2 +1,1 @@
-
-    sound_thread = threading.Thread(target=playSounds, args=(audioDict, delay, modifier, instrument))
+delayToPlay = (soundlength - (time.time() - playingSounds[audioToPlay][1]) % soundlength) / 1000
