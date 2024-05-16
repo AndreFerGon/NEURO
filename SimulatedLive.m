@@ -1,14 +1,13 @@
 %% DATA IMPORT
-
 clear, close all, clc
 
 fs = 250;
 
 % a mixed signal with 10s rest + 10s 8Hz sti + 10s rest + 10s 12Hz stim
 
-load("mixed_signal_16_24.mat");
-eeg_data = mixed_signal;
-t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
+% load("mixed_signal_16_24.mat");
+% eeg_data = mixed_signal;
+% t = 0:1/fs:(length(eeg_data)/250 - 1/fs);
 
 % load("S202007965_21_Protocol#3_Trial3.csv")
 % eeg_data = S202007965_21_Protocol_3_Trial3(250*0.5:end, 3);
@@ -26,8 +25,10 @@ step_size = 1; % in seconds
 
 
 %% Initializing variables for using CCA;
+
 refFreq = [7.2 8 9 9.6 12 14.4];
 time = window_size - 1.5; % Seconds;
+
 fs= 250;
 classNum = length(refFreq); 
 %trialNum = 1;
@@ -139,29 +140,32 @@ while true
 
      counter = 0;
 
+        try
+                                 
+            % Send random integer numbers every second
+                if refFreq(ind) == 8
+                    message = sprintf('%d\n', 1);
+                elseif refFreq(ind) == 12
+                    message = sprintf('%d\n', 2);
+                elseif refFreq(ind) == 15
+                    message = sprintf('%d\n', 3);
+                end           
 
-        % try
-        % 
-        %     % Send random integer numbers every second
-        % 
-        % 
-        %         % Format the message to send (convert random_integer to string)
-        %         message = sprintf('%d\n', refFreq(ind));
-        % 
-        %         % Send the message over TCP/IP
-        %         write(tto, message);  % Send as characters
-        % 
-        %         % Display the sent message (optional)
-        %         %disp(['Frequency: ', num2str(message)]);
-        % 
-        % 
-        % 
-        % catch ME
-        %     disp(['Error occurred: ', ME.message]);
-        %     if exist('tto', 'var') && isvalid(t)
-        %         delete(t);  % Close and delete the tcpclient object on error
-        %     end
-        % end
+                
+                % Send the message over TCP/IP
+                write(tto, message);  % Send as characters
+                
+                % Display the sent message (optional)
+                %disp(['Frequency: ', num2str(message)]);
+                
+                
+        
+        catch ME
+            disp(['Error occurred: ', ME.message]);
+            if exist('tto', 'var') && isvalid(t)
+                delete(t);  % Close and delete the tcpclient object on error
+            end
+        end
 
     end
 
@@ -172,41 +176,6 @@ while true
     % end
 end
 
-
-%% MATLAB Script: send_random_data.m
-
-% % Define parameters
-% host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
-% port = 12345;         % Port number on which Python server is listening
-% 
-% try
-%     % Create TCP/IP client object
-%     t = tcpclient(host, port);
-%     
-%     % Send random integer numbers every second
-%     while true
-%         % Generate a random integer between 1 and 100 (adjust range as needed)
-%         random_integer = randi([1, 100]);  % Random integer between 1 and 100
-%         
-%         % Format the message to send (convert random_integer to string)
-%         message = sprintf('%d\n', random_integer);
-%         
-%         % Send the message over TCP/IP
-%         write(t, message, 'char');  % Send as characters
-%         
-%         % Display the sent message (optional)
-%         disp(['Sent random integer: ', num2str(random_integer)]);
-%         
-%         % Pause for 1 second before sending the next random number
-%         pause(1);  
-%     end
-%     
-% catch ME
-%     disp(['Error occurred: ', ME.message]);
-%     if exist('t', 'var') && isvalid(t)
-%         delete(t);  % Close and delete the tcpclient object on error
-%     end
-%end
 
 %% Simulate EEG Data
 clear, close all, clc
@@ -233,3 +202,49 @@ end
 
 % Add noise to the simulated EEG data
 eeg_data = eeg_data + randn(size(eeg_data)) * 10;
+
+
+%% MATLAB Script: send_ssvep_data.m
+
+% Set up TCP/IP client
+host = 'localhost';
+port = 12345;
+
+try
+    % Create TCP/IP client object
+    tto = tcpclient(host, port);
+    
+    % Define SSVEP frequencies and corresponding messages
+    refFreq = [8, 12, 15];  % SSVEP frequencies in Hz
+    messages = {'1', '2', '3'};  % Messages to be sent corresponding to frequencies
+
+    % Simulated SSVEP detection loop
+    while true
+        % Perform SSVEP frequency detection (replace with your actual logic)
+        detected_freq = detect_ssvep_frequency();  % Example function to detect SSVEP frequency
+        
+        % Find index of detected frequency
+        [~, ind] = ismember(detected_freq, refFreq);
+        
+        if ind > 0
+            % Send corresponding message over TCP/IP
+            message = messages{ind};
+            write(tto, message);  % Send message as characters
+            fprintf('Sent SSVEP Frequency: %d Hz (Message: %s)\n', detected_freq, message);
+        end
+        
+        pause(1);  % Pause for 1 second before next detection
+    end
+    
+catch ME
+    disp(['Error occurred: ', ME.message]);
+    if exist('tto', 'var') && isvalid(tto)
+        delete(tto);  % Close and delete the tcpclient object on error
+    end
+end
+
+% Function to simulate SSVEP frequency detection (replace with actual detection logic)
+function detected_freq = detect_ssvep_frequency()
+    % Simulated detection logic (replace with your actual SSVEP detection algorithm)
+    detected_freq = randi([8, 15]);  % Simulate random frequency detection (8, 12, or 15 Hz)
+end

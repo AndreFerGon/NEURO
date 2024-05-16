@@ -19,7 +19,7 @@ userInput = queue.Queue()
 def getInput():
 
     while True:
-        inputtings = input("\n\n!!! Choose a label: ")
+        inputtings = input("\n!!! Choose a label: ")
         if inputtings.isdigit():
             userInput.put(int(inputtings))
         else:
@@ -41,22 +41,22 @@ def playSounds():
     # sound.set_volume(0.3)  # Adjust the volume (0.0 - 1.0)
     # sound.play(-1)  # -1 means loop indefinitely
     tempo = 115 # bpm for Heart of Glass
-    delay = int(60000 / tempo)   # ms
-    magnet = 16 # 16th notes per bar
+    tempoDelay = int(60000 / tempo)   # ms
+    magnet = 4 # 16th notes per bar
 
     # dictionary with class labels as keys and imported sound samples as values
-    audioDict = audioDict = {
+    audioDict = {
     1: {1: [], 2: [], 3: [], 4: []},
     2: {1: [], 2: [], 3: [], 4: []},
     3: {1: [], 2: [], 3: [], 4: []},
     4: {1: [], 2: [], 3: [], 4: []}
 }   
     
-    pygame.mixer.pre_init(48000, -16, 2, 2048)   # setup mixer to avoid sound lag
+    pygame.mixer.pre_init(48000, -16, 2, 1024)   # setup mixer to avoid sound lag
     pygame.mixer.init()
 
     song = "heartOfGlass"
-    loadsong(song, audioDict)
+    loadsong(song, audioDict, tempo)
     
     
      # Set to keep track of currently playing sounds
@@ -66,19 +66,20 @@ def playSounds():
     mode = 0    # 0 - instrument choice mode / 1 - sample choice mode
     instrument = 1  # drums
 
-    start_time = time.time()
-    next_downbeat = start_time
+    timezero = time.time()  # s
+
     while True:
         
-
         if not userInput.empty():
             # TO RECEIVE CLASS label FROM MATLAB
-            label = int(userInput.get());
+            label = int(userInput.get()); 
             # print("label: ", label, '\n')
 
 
         # if the label is a valid non mode class
             if label in (1, 2, 3, 4):
+
+                print("\nPLAYING SOUNDS\n", playingSounds.keys())
             
             # change instrument
                 if mode == 0:
@@ -86,39 +87,58 @@ def playSounds():
                     # print("Instrument", instrument, '\n')
                     mode = switchModes(mode)
 
+                
             # change sound
                 elif mode == 1:
+
                     audioToPlay = (instrument, label); # tuple (instrument, samplerate)
                     # print("Audio", audioToPlay, '\n')  
-                
+                    soundchoice = random.choice(audioDict[instrument][label])   # choose a random sound from the list
 
-                # # Wait until the next downbeat to play the sound
-                #     while True:
-                #         if (time.time() >= next_downbeat):
-                #             next_downbeat += (delay / 1000) * magnet
-                #             break
-                #         pass
                 # If the sound for this class is already playing, stop it
                     if audioToPlay in playingSounds:
+                        print("\nStopping sound", audioToPlay, '\n')
+                        alignAction(timezero, magnet, tempoDelay)
                         playingSounds[audioToPlay].stop()
-                        # print("here")
+
                         del playingSounds[audioToPlay]
-                    else:
-                # Otherwise, start playing the sound in a loop
-                        soundchoice = random.choice(audioDict[audioToPlay[0]][audioToPlay[1]])
+                    # If a sound of this instrument is already playing, switch them
+                    elif audioToPlay[0] in [i[0] for i in playingSounds]:
+                        
                         playingSounds[audioToPlay] = soundchoice
-    
+                        playInstrument_key = [key for key in playingSounds if key[0] == audioToPlay[0]][0]
+                        print(f"\nSwitching {playInstrument_key} for {audioToPlay}", '\n')
+
+                        alignAction(timezero, magnet, tempoDelay)
+                        playingSounds[playInstrument_key].stop()
+                        playingSounds[audioToPlay].play(-1)
+                        del playingSounds[playInstrument_key]
+                # Otherwise, start playing the sound in a loop    
+                    else:
+                        print("\nPlaying sound", audioToPlay, '\n')
+                        playingSounds[audioToPlay] = soundchoice
+
+                        alignAction(timezero, magnet, tempoDelay)
                         playingSounds[audioToPlay].play(-1)  # -1 means loop indefinitely
                     
         # if the label is a mode class, switch between modes
             if label == 0: 
                 mode = switchModes(mode)
 
+def alignAction(timezero, magnet, tempoDelay):
+    # calculate the delay to play the sound
+
+    delayToPlay = tempoDelay * magnet - 1000 * (time.time() - timezero) % int(tempoDelay * magnet)
+    print("\ndelayToPlay: ", delayToPlay, '\n')
+    time.sleep(delayToPlay / 1000)
+    # play a test beep
+    sound = pygame.mixer.Sound(r"sounds/heartOfGlass/1/11.wav")
+    sound.play(maxtime=300)
 
 def switchModes(mode):  # switch between instrument and sample choice mode
     
     mode = 1 if mode == 0 else 0
-    print(f"Choose a(n) {'instrument' if mode == 1 else 'sample'}\n")
+    print(f"Mode changed to {'instrument (0)' if mode == 0 else 'sample (1)'}\n")
     return mode
 
 '''
@@ -143,7 +163,7 @@ def playMidi(midiToPlay):
     pygame.mixer.music.play()
 '''
 
-def loadsong(song, audioDict):
+def loadsong(song, audioDict, tempo):
     
     print("\nloading song stems...")
 # for each folder of instrument type
@@ -155,9 +175,12 @@ def loadsong(song, audioDict):
 
             # index = stem[:-4].lstrip(str(instrument)) # remove the instrument name and the .wav extension
             # stems = {}
+            sound = pygame.mixer.Sound(instrumentPath + stem)
+            # soundBeats = int(sound.get_length() / (tempo / 60))  # get the length of the sound in beats
+            # print("Beats:", soundBeats)
 
             # add tuples of sound file paths to the dictionary
-            audioDict[instrument][int(stem[1])].append(pygame.mixer.Sound(instrumentPath + stem))
+            audioDict[instrument][int(stem[1])].append(sound)
     print('\n')
     # print(audioDict)
 
