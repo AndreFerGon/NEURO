@@ -4,7 +4,7 @@ import socket
 import threading
 from classToSound_neuro2 import *
 
-# --- constants ---
+# --- constants -
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
