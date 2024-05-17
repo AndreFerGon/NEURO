@@ -81,14 +81,23 @@ def main():
     input_thread.start()
 
     # Set up the screen
-    screen_width = 800
-    screen_height = 600
+    screen_width = 1620
+    screen_height = 1000
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     current_time = pygame.time.get_ticks()
 
-    # Start the socket communication in a separate thread
-    
+    icon_size =(screen_width/15,screen_width/15)
+
+    icons = []
+    for i in range(1, 5):
+        icon = pygame.image.load(f'Icons/icon{i}.png')  # Change the path as necessary
+        icon = pygame.transform.scale(icon, icon_size)  # Scale the icon to the desired size
+        icons.append(icon)
+
+    # Define the positions of the icons
+    icon_positions = [(screen_width/32.4+screen_width/5.1,screen_height/20+screen_width/(2*5.1)), (screen_width / 1.3-screen_width/15, screen_height/20+screen_width/(2*5.1)), (screen_width/32.4+screen_width/5.1, screen_height/1.5384+screen_width/(2*5.1)), (screen_width / 1.3-screen_width/15, screen_height/1.5384+screen_width/(2*5.1))]
+        
     default_colored_square_color = BLACK
     color_squares = []
 
@@ -104,20 +113,18 @@ def main():
         color_square = ColorSwitchingSquare(info["rect"], info["default_color"])
         color_squares.append({"square": color_square, "id": info["id"]})
 
-
-
     # Frequency of square show/hide (seconds)
     # Frequency of square show/hide (seconds)
-    frequency = [8, 9.6, 12, 14.4, 16]
+    frequency = [1, 2, 4, 8, 16]
     delays = [500 / f for f in frequency]
 
     # Positions and sizes for each square
     square_params = [
-        {"position": (screen_width / 32.4, screen_height / 20), "delay": delays[0]},
-        {"position": (screen_width / 32.4, screen_height / 1.5384), "delay": delays[1]},
-        {"position": (screen_width / 1.3, screen_height / 20), "delay": delays[2]},
-        {"position": (screen_width / 1.3, screen_height / 1.5384), "delay": delays[3]},
-        {"position": (screen_width / 2.49, screen_height / 2.857), "delay": delays[4]}
+        {"position": (screen_width / 32.4, screen_height / 20), "delay": delays[1]},
+        {"position": (screen_width / 32.4, screen_height / 1.5384), "delay": delays[3]},
+        {"position": (screen_width / 1.3, screen_height / 20), "delay": delays[4]},
+        {"position": (screen_width / 1.3, screen_height / 1.5384), "delay": delays[2]},
+        {"position": (screen_width / 2.49, screen_height / 2.857), "delay": delays[0]}
     ]
 
     squares = []
@@ -148,6 +155,10 @@ def main():
 
         # Draw on the screen
         fenetre.fill(BLACK)
+
+        # Draw the icons onto the window surface
+        for icon, position in zip(icons, icon_positions):
+            fenetre.blit(icon, position)
 
         for cs in color_squares:
             cs["square"].draw(fenetre)
