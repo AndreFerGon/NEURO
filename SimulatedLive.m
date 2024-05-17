@@ -146,15 +146,15 @@ while true
              if (counter == 4)                 
             % Send random integer numbers every second
                 if refFreq(ind) == 7.2
-                    message = sprintf('%d', 0);                    
+                    message = sprintf('%i', 0);                    
                 elseif refFreq(ind) == 8
-                    message = sprintf('%d', 1);
+                    message = sprintf('%i', 1);
                 elseif refFreq(ind) == 9
-                    message = sprintf('%d', 2);
+                    message = sprintf('%i', 2);
                 elseif refFreq(ind) == 9.6
-                    message = sprintf('%d', 3);
+                    message = sprintf('%i', 3);
                 elseif refFreq(ind) == 12
-                    message = sprintf('%d', 4);
+                    message = sprintf('%i', 4);
                 end      
                 fprintf(message)
 
@@ -172,8 +172,8 @@ while true
         
         catch ME
             disp(['Error occurred: ', ME.message]);
-            if exist('tto', 'var') && isvalid(t)
-                delete(t);  % Close and delete the tcpclient object on error
+            if exist('tto', 'var') && isvalid(tto)
+                delete(tto);  % Close and delete the tcpclient object on error
             end
         end
 
