@@ -2,7 +2,7 @@ import pygame
 import sys
 import socket
 import threading
-
+from classToSound_neuro2 import *
 
 # --- constants ---
 
@@ -54,40 +54,11 @@ class ColorSwitchingSquare:
     def draw(self, screen):
         pygame.draw.rect(screen, self.current_color, self.rect)
 
-def handle_socket_communication(color_squares):
-    host = 'localhost'
-    port = 12345
 
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((host, port))
-    server_socket.listen(1)
-    print(f"Listening on {host}:{port}...")
-
-    try:
-        client_socket, addr = server_socket.accept()
-        print(f"Connection established from {addr}")
-
-        while True:
-            data = client_socket.recv(1024)
-            if not data:
-                break
-            
-            received_message = data.decode().strip()
-            received_integer = int(received_message)
-            print(f"Received integer: {received_integer}")
-            
-            # Set the corresponding square to green
-            for color_square_data in color_squares:
-                if color_square_data["id"] == str(received_integer):
-                    color_square_data["square"].set_permanent_green()
-                    break
-            
-    except Exception as e:
-        print(f"Error occurred: {e}")
-    
-    finally:
-        client_socket.close()
-        server_socket.close()
+def change_colored_squares(color_squares,received_integer):
+    for color_square_data in color_squares:
+        if color_square_data["id"] == str(received_integer):
+            color_square_data["square"].set_permanent_green()         
 
 
 
@@ -95,6 +66,19 @@ def handle_socket_communication(color_squares):
 
 def main():
     pygame.init()
+
+    # have two threads, one for playing sounds and the other for receiving a real time input from the user
+
+    # Thread to play sounds
+    sound_thread = threading.Thread(target=playSounds)
+    sound_thread.start()
+
+    # sleep using os for 3 seconds to allow the sound thread to start
+    time.sleep(1)
+
+    # Thread to get user input
+    input_thread = threading.Thread(target=getInput)
+    input_thread.start()
 
     # Set up the screen
     screen_width = 800
@@ -109,19 +93,17 @@ def main():
     color_squares = []
 
     square_info = [
-        {"rect": pygame.Rect(screen_width/32.4 - screen_width/530, screen_height/20 - screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "1"},
-        {"rect": pygame.Rect(screen_width/32.4 - screen_width/530, screen_height/1.5384- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "3"},
-        {"rect": pygame.Rect(screen_width/1.3 - screen_width/530, screen_height/20- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "4"},
-        {"rect": pygame.Rect(screen_width/1.3 - screen_width/530, screen_height/1.5384- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "2"},
-        {"rect": pygame.Rect(screen_width/2.49 - screen_width/530, screen_height/2.857- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "5"}
+        {"rect": pygame.Rect(screen_width/32.4 - screen_width/530, screen_height/20 - screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "0"},
+        {"rect": pygame.Rect(screen_width/32.4 - screen_width/530, screen_height/1.5384- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "2"},
+        {"rect": pygame.Rect(screen_width/1.3 - screen_width/530, screen_height/20- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "3"},
+        {"rect": pygame.Rect(screen_width/1.3 - screen_width/530, screen_height/1.5384- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "1"},
+        {"rect": pygame.Rect(screen_width/2.49 - screen_width/530, screen_height/2.857- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "4"}
     ]
     
     for info in square_info:
         color_square = ColorSwitchingSquare(info["rect"], info["default_color"])
         color_squares.append({"square": color_square, "id": info["id"]})
 
-    socket_thread = threading.Thread(target=handle_socket_communication, args=(color_squares,), daemon=True)
-    socket_thread.start()
 
 
     # Frequency of square show/hide (seconds)
@@ -160,6 +142,10 @@ def main():
         for cs in color_squares:
             cs["square"].update() 
 
+        while not labelQueue.empty():
+            label = labelQueue.get()
+            change_colored_squares(color_squares, label)
+
         # Draw on the screen
         fenetre.fill(BLACK)
 
@@ -171,6 +157,11 @@ def main():
 
 
         pygame.display.update()
+
+      
+
+        
+
 
 if __name__ == "__main__":
     main()

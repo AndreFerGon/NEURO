@@ -138,7 +138,7 @@ while true
     end
 
     if(m>0.18)
-     fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+     %fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
 
      counter = 0;
 
@@ -146,16 +146,17 @@ while true
                                  
             % Send random integer numbers every second
                 if refFreq(ind) == 7.2
-                    message = sprintf('%d\n', 1);
+                    message = sprintf('%d', 0);                    
                 elseif refFreq(ind) == 8
-                    message = sprintf('%d\n', 2);
+                    message = sprintf('%d', 1);
                 elseif refFreq(ind) == 9
-                    message = sprintf('%d\n', 3);
+                    message = sprintf('%d', 2);
                 elseif refFreq(ind) == 9.6
-                    message = sprintf('%d\n', 4);
+                    message = sprintf('%d', 3);
                 elseif refFreq(ind) == 12
-                    message = sprintf('%d\n', 5);
-                end           
+                    message = sprintf('%d', 4);
+                end      
+                fprintf(message)
 
                 
                 % Send the message over TCP/IP
