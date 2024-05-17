@@ -5,11 +5,11 @@ clear, clc, close all
 
 openBCI_serial_port = 'COM5'; % For Windows Operating System | Change the serial port accordingly
 
-% Variables used to store the data and pass them into csv files (Hasbulla)
-eeg_raw_arr = []
-eeg_filtered_arr = []
-file_name_raw = 'data/raw_eeg.xlsx';
-file_name_processed = 'data/processed_eeg.xlsx'
+% Variables used to store the data and pass them into csv files
+raw_eeg_arr = []
+processed_eeg_arr = []
+file_name_raw = 'data/raw_eeg.csv';
+file_name_processed = 'data/processed_eeg.csv'
 
 fs = 250;
 data_save = [];
@@ -94,9 +94,11 @@ while true
     % 1: Signal Acquisition
     data = board_shim.get_board_data(board_shim.get_board_data_count(preset), preset);
 
-    % Save incoming raw data to raw_eeg_arr (Hasbulla)
-    eeg_raw_arr = [eeg_raw_arr, data];
-    writematrix(eeg_raw_arr,file_name_raw);
+    % Save incoming raw data to raw_eeg_arr
+    raw_eeg_arr = [raw_eeg_arr, data];
+
+    if isfile(file_name_raw)
+        writematrix()
 
 
     t = 0:1/fs:(size(data,2)-1)/fs;
@@ -110,10 +112,9 @@ while true
 
     filtered_window = filtered_window(250*filter_crop+1:end);
 
-    % Save filtered eeg data from chann 3 to eeg_processed_arr (Hasbulla)
-    new_filtered_data = filtered_window(:,end-size(data, 2)+1:end)
-    eeg_filtered_arr = [eeg_filtered_arr, new_filtered_data];
-    writematrix(eeg_filtered_arr,file_name_processed);
+    % Save filtered eeg data from chann 3 to eeg_processed_arr
+    new_processed_data = filtered_window(:,(size(filtered_window,2)-size(data,2)):size(filtered_window));
+    processed_eeg_arr = [processed_eeg_arr, new_processed_data]
 
     % % Update plot
     % subplot(2,1,1);
