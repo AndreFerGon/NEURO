@@ -137,13 +137,13 @@ while true
         counter = 0;
     end
 
-    if(m>0.18)
-     %fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+    if(m>0.24)
+     fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+    end
 
-     counter = 0;
 
         try
-                                 
+             if (counter == 4)                 
             % Send random integer numbers every second
                 if refFreq(ind) == 7.2
                     message = sprintf('%d', 0);                    
@@ -157,6 +157,9 @@ while true
                     message = sprintf('%d', 4);
                 end      
                 fprintf(message)
+
+                counter = 0;
+             end
 
                 
                 % Send the message over TCP/IP
@@ -174,7 +177,6 @@ while true
             end
         end
 
-    end
 
     
     % % Check if the user pressed the escape key
