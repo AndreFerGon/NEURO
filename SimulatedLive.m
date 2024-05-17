@@ -26,7 +26,7 @@ step_size = 1; % in seconds
 
 %% Initializing variables for using CCA;
 
-refFreq = [7.2 8 9 9.6 12 14.4];
+refFreq = [7.2 8 9 9.6 12];
 time = window_size - 1.5; % Seconds;
 
 fs= 250;
@@ -61,10 +61,12 @@ order = 2;
 
 %% Simulate Data Acquisition and Real-time Plotting
 
-% host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
-% port = 12345;         % Port number on which Python server is listening
+
+
+host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
+port = 12345;         % Port number on which Python server is listening
 % 
-% tto = tcpclient(host, port);
+tto = tcpclient(host, port);
 
 
 % Initialize figure for real-time plotting
@@ -122,7 +124,7 @@ while true
     drawnow;
 
     for j = 1:classNum
-        [~, ~, corr] = canoncorr(filtered_window, Y{j}');
+        [~, ~, corr] = canoncorr(filtered_window', Y{j}');
         r(j) = max(corr);
     end
 
@@ -136,20 +138,25 @@ while true
     end
 
     if(m>0.18)
-     fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+     %fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
 
      counter = 0;
 
         try
                                  
             % Send random integer numbers every second
-                if refFreq(ind) == 8
-                    message = sprintf('%d\n', 1);
+                if refFreq(ind) == 7.2
+                    message = sprintf('%d', 0);                    
+                elseif refFreq(ind) == 8
+                    message = sprintf('%d', 1);
+                elseif refFreq(ind) == 9
+                    message = sprintf('%d', 2);
+                elseif refFreq(ind) == 9.6
+                    message = sprintf('%d', 3);
                 elseif refFreq(ind) == 12
-                    message = sprintf('%d\n', 2);
-                elseif refFreq(ind) == 15
-                    message = sprintf('%d\n', 3);
-                end           
+                    message = sprintf('%d', 4);
+                end      
+                fprintf(message)
 
                 
                 % Send the message over TCP/IP
@@ -184,8 +191,10 @@ clear, close all, clc
 fs = 250; % Sampling frequency (Hz)
 time = 60; % 10 seconds of data
 t = 0:1/fs:(time - 1/fs);
-freq_segments = [7.2 8 9 9.6 12 14.4]; % Frequencies for each segment (Hz)
+freq_segments = [7.2 8 9 9.6 12]; % Frequencies for each segment (Hz)
 amplitude = 50; % Amplitude of the simulated signal
+window_size = 6.5; % in seconds
+step_size = 1; % in seconds
 
 % Initialize EEG data
 eeg_data = zeros(size(t));
@@ -204,47 +213,47 @@ end
 eeg_data = eeg_data + randn(size(eeg_data)) * 10;
 
 
-%% MATLAB Script: send_ssvep_data.m
-
-% Set up TCP/IP client
-host = 'localhost';
-port = 12345;
-
-try
-    % Create TCP/IP client object
-    tto = tcpclient(host, port);
-    
-    % Define SSVEP frequencies and corresponding messages
-    refFreq = [8, 12, 15];  % SSVEP frequencies in Hz
-    messages = {'1', '2', '3'};  % Messages to be sent corresponding to frequencies
-
-    % Simulated SSVEP detection loop
-    while true
-        % Perform SSVEP frequency detection (replace with your actual logic)
-        detected_freq = detect_ssvep_frequency();  % Example function to detect SSVEP frequency
-        
-        % Find index of detected frequency
-        [~, ind] = ismember(detected_freq, refFreq);
-        
-        if ind > 0
-            % Send corresponding message over TCP/IP
-            message = messages{ind};
-            write(tto, message);  % Send message as characters
-            fprintf('Sent SSVEP Frequency: %d Hz (Message: %s)\n', detected_freq, message);
-        end
-        
-        pause(1);  % Pause for 1 second before next detection
-    end
-    
-catch ME
-    disp(['Error occurred: ', ME.message]);
-    if exist('tto', 'var') && isvalid(tto)
-        delete(tto);  % Close and delete the tcpclient object on error
-    end
-end
-
-% Function to simulate SSVEP frequency detection (replace with actual detection logic)
-function detected_freq = detect_ssvep_frequency()
-    % Simulated detection logic (replace with your actual SSVEP detection algorithm)
-    detected_freq = randi([8, 15]);  % Simulate random frequency detection (8, 12, or 15 Hz)
-end
+% %% MATLAB Script: send_ssvep_data.m
+% 
+% % Set up TCP/IP client
+% host = 'localhost';
+% port = 12345;
+% 
+% try
+%     % Create TCP/IP client object
+%     tto = tcpclient(host, port);
+%     
+%     % Define SSVEP frequencies and corresponding messages
+%     refFreq = [8, 12, 15];  % SSVEP frequencies in Hz
+%     messages = {'1', '2', '3'};  % Messages to be sent corresponding to frequencies
+% 
+%     % Simulated SSVEP detection loop
+%     while true
+%         % Perform SSVEP frequency detection (replace with your actual logic)
+%         detected_freq = detect_ssvep_frequency();  % Example function to detect SSVEP frequency
+%         
+%         % Find index of detected frequency
+%         [~, ind] = ismember(detected_freq, refFreq);
+%         
+%         if ind > 0
+%             % Send corresponding message over TCP/IP
+%             message = messages{ind};
+%             write(tto, message);  % Send message as characters
+%             fprintf('Sent SSVEP Frequency: %d Hz (Message: %s)\n', detected_freq, message);
+%         end
+%         
+%         pause(1);  % Pause for 1 second before next detection
+%     end
+%     
+% catch ME
+%     disp(['Error occurred: ', ME.message]);
+%     if exist('tto', 'var') && isvalid(tto)
+%         delete(tto);  % Close and delete the tcpclient object on error
+%     end
+% end
+% 
+% % Function to simulate SSVEP frequency detection (replace with actual detection logic)
+% function detected_freq = detect_ssvep_frequency()
+%     % Simulated detection logic (replace with your actual SSVEP detection algorithm)
+%     detected_freq = randi([8, 15]);  % Simulate random frequency detection (8, 12, or 15 Hz)
+% end
