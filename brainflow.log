@@ -1,0 +1,6 @@
+[2024-05-06 15:53:00.114] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-06 15:53:00.114] [board_logger] [trace] Board object created 0
+[2024-05-06 15:53:00.115] [board_logger] [info] opening port \\.\COM5
+[2024-05-06 15:53:00.116] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-06 15:53:00.117] [board_logger] [trace] set port settings
+[2024-05-06 15:53:00.120] [board_logger] [debug] sending v to the board
