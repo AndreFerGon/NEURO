@@ -1,1 +1,0 @@
-delayToPlay = (soundlength - (time.time() - playingSounds[audioToPlay][1]) % soundlength) / 1000
