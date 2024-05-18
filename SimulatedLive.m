@@ -66,7 +66,11 @@ order = 2;
 host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
 port = 12345;         % Port number on which Python server is listening
 % 
-tto = tcpclient(host, port);
+try
+    tto = tcpclient(host, port);
+catch ME
+    error('Failed to create TCP connection: %s', ME.message);
+end
 
 
 % Initialize figure for real-time plotting
@@ -157,26 +161,27 @@ while true
                     message = sprintf('%i', 4);
                 end      
                 fprintf(message)
+                if isvalid(tto)
+                    write(tto, message);  % Send as characters
+                else
+                    error('TCP connection is no longer valid.');
+                end
 
                 counter = 0;
              end
-
-                
-                % Send the message over TCP/IP
-                write(tto, message);  % Send as characters
-                
-                % Display the sent message (optional)
-                %disp(['Frequency: ', num2str(message)]);
-                
                 
         
-        catch ME
-            disp(['Error occurred: ', ME.message]);
-            if exist('tto', 'var') && isvalid(tto)
-                delete(tto);  % Close and delete the tcpclient object on error
-            end
+    catch ME
+        disp(['Error occurred: ', ME.message]);
+        if exist('tto', 'var') && isvalid(tto)
+            delete(tto);  % Close and delete the tcpclient object on error
         end
-
+        try
+            tto = tcpclient(host, port);  % Attempt to reconnect
+        catch recon_ME
+            error('Failed to reconnect: %s', recon_ME.message);
+        end
+    end
 
     
     % % Check if the user pressed the escape key
