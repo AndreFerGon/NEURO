@@ -6,15 +6,16 @@ clear, clc, close all
 openBCI_serial_port = 'COM5'; % For Windows Operating System | Change the serial port accordingly
 
 % Variables used to store the data and pass them into csv files (Hasbulla)
-eeg_raw_arr = []
-eeg_filtered_arr = []
+eeg_raw_arr = [];
+eeg_filtered_arr = [];
 file_name_raw = 'data/raw_eeg.xlsx';
-file_name_processed = 'data/processed_eeg.xlsx'
+file_name_processed = 'data/processed_eeg.xlsx';
 
 fs = 250;
 data_save = [];
 window_size = 5.5; % in seconds
 step_size = 0.5; % in seconds
+threshold = 0.16;
 
 filter_crop = 1.5;
 
@@ -87,16 +88,19 @@ window_data = zeros(1, window_size*fs); % Initialize window data
 filtered_window = zeros(1, (window_size-filter_crop)*fs);
 
 i_segment = 0;
+prev_ind = 0;
+ind = 0;
 
 while true
     i_segment = i_segment + 1;
     pause(step_size); % Wait for step_size seconds
     % 1: Signal Acquisition
     data = board_shim.get_board_data(board_shim.get_board_data_count(preset), preset);
+    %size(data)
 
     % Save incoming raw data to raw_eeg_arr (Hasbulla)
     eeg_raw_arr = [eeg_raw_arr, data];
-    writematrix(eeg_raw_arr,file_name_raw);
+    % writematrix(eeg_raw_arr,file_name_raw);
 
 
     t = 0:1/fs:(size(data,2)-1)/fs;
@@ -111,9 +115,9 @@ while true
     filtered_window = filtered_window(250*filter_crop+1:end);
 
     % Save filtered eeg data from chann 3 to eeg_processed_arr (Hasbulla)
-    new_filtered_data = filtered_window(:,end-size(data, 2)+1:end)
-    eeg_filtered_arr = [eeg_filtered_arr, new_filtered_data];
-    writematrix(eeg_filtered_arr,file_name_processed);
+    % new_filtered_data = filtered_window(:,end-size(data, 2)+1:end);
+    % eeg_filtered_arr = [eeg_filtered_arr, new_filtered_data];
+    % writematrix(eeg_filtered_arr,file_name_processed);
 
     % % Update plot
     % subplot(2,1,1);
@@ -138,6 +142,7 @@ while true
 
     drawnow;
 
+    prev_ind = ind;
     for j = 1:classNum
 
         [~, ~, corr] = canoncorr(filtered_window', Y{j}');
@@ -145,15 +150,15 @@ while true
     end
     [m, ind] = max(r);
 
-    prev_ind = ind;
+   
 
-    if(m>0.24 && prev_ind==ind)
+    if(m>threshold && prev_ind==ind)
         counter = counter+1;
     else
         counter = 0;
     end
 
-    if(m>0.24)
+    if(m>threshold)
      fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
     end
 
@@ -171,24 +176,24 @@ while true
             elseif refFreq(ind) == 12
                 message = sprintf('%d', 4);
             end      
-            fprintf(message)
+            fprintf('CLASS DETECTED: %d Hz  \n', refFreq(ind));
 
             counter = 0;
          end
 
-            
+
             % Send the message over TCP/IP
             write(tto, message);  % Send as characters
-            
+
             % Display the sent message (optional)
             %disp(['Frequency: ', num2str(message)]);
-            
-            
-    
+
+
+
     catch ME
-        disp(['Error occurred: ', ME.message]);
-        if exist('tto', 'var') && isvalid(t)
-            delete(t);  % Close and delete the tcpclient object on error
+        %disp(['Error occurred: ', ME.message]);
+        if exist('tto', 'var') && isvalid(tto)
+            delete(tto);  % Close and delete the tcpclient object on error
         end
     end
 
