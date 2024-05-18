@@ -1,15 +1,15 @@
 import pygame
 import sys
-import socket
 import threading
-from classToSound_neuro2 import *
+import time
+from classToSound_neuro2_2 import *
 
-# --- constants -
+# --- constants ---
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0,255,0)
-RED = (255,0,0)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
 
 # --- classes ---
 
@@ -47,18 +47,58 @@ class ColorSwitchingSquare:
     def update(self):
         if self.timer_active:
             current_time = pygame.time.get_ticks()
-            if current_time - self.timer_start_time >= 300: 
+            if current_time - self.timer_start_time >= 300:
                 self.current_color = self.default_color
                 self.timer_active = False
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.current_color, self.rect)
 
-
-def change_colored_squares(color_squares,received_integer):
+def change_colored_squares(color_squares, received_integer):
     for color_square_data in color_squares:
         if color_square_data["id"] == str(received_integer):
-            color_square_data["square"].set_permanent_green()         
+            color_square_data["square"].set_permanent_green()
+
+def display_icons(screen, screen_width, screen_height):
+    icon_size = (screen_width / 15, screen_width / 15)
+    icons = []
+    positions = [
+        (screen_width / 32.4 + screen_width / 5.1, screen_height / 20 + screen_width / (2 * 5.1)),
+        (screen_width / 1.3 - screen_width / 15, screen_height / 1.5384 + screen_width / (2 * 5.1)),
+        (screen_width / 32.4 + screen_width / 5, screen_height / 1.5384 + screen_width / (2 * 5.1)),
+        (screen_width / 1.3 - screen_width / 15, screen_height / 20 + screen_width / (2 * 5.1))
+        
+    ]
+
+    for i, position in enumerate(positions):
+        icon = pygame.image.load(f'Icons/icon{i + 1}.png')
+        icon = pygame.transform.scale(icon, icon_size)
+        icons.append((icon, position))
+        screen.blit(icon, position)
+
+    return icons
+
+def display_menu_icon(screen, screen_width, screen_height, label):
+    icon_size = (screen_width/15, screen_width/15)
+    icon_position = (screen_width / 2.49 + 100, screen_height / 2.857 - 150)
+
+    icon = pygame.image.load(f'Icons/icon{label}.png')
+    icon = pygame.transform.scale(icon, icon_size)
+    screen.blit(icon, icon_position)
+
+def display_play_icon(screen, screen_width, screen_height, sample):
+    icon_size = (screen_width/15, screen_width/15)
+    icon = pygame.image.load(f'Icons/play.png')
+    icon = pygame.transform.scale(icon, icon_size)
+    
+    positions = [
+        (screen_width / 32.4 + screen_width / 5.1, screen_height / 20 ),
+        (screen_width / 1.3 - screen_width / 15, screen_height / 1.5384 ),
+        (screen_width / 32.4 + screen_width / 5, screen_height / 1.5384 ),
+        (screen_width / 1.3 - screen_width / 15, screen_height / 20 )
+    ]
+
+    screen.blit(icon, positions[sample-1])
 
 
 
@@ -67,53 +107,35 @@ def change_colored_squares(color_squares,received_integer):
 def main():
     pygame.init()
 
-    # have two threads, one for playing sounds and the other for receiving a real time input from the user
-
     # Thread to play sounds
     sound_thread = threading.Thread(target=playSounds)
     sound_thread.start()
 
-    # sleep using os for 3 seconds to allow the sound thread to start
+    # Allow the sound thread to start
     time.sleep(1)
 
-    # Thread to get user input
-    input_thread = threading.Thread(target=getInput)
-    input_thread.start()
-
     # Set up the screen
-    screen_width = 1620
-    screen_height = 1000
+    screen_width = 800
+    screen_height = 600
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     current_time = pygame.time.get_ticks()
 
-    icon_size =(screen_width/15,screen_width/15)
-
-    icons = []
-    for i in range(1, 5):
-        icon = pygame.image.load(f'Icons/icon{i}.png')  # Change the path as necessary
-        icon = pygame.transform.scale(icon, icon_size)  # Scale the icon to the desired size
-        icons.append(icon)
-
-    # Define the positions of the icons
-    icon_positions = [(screen_width/32.4+screen_width/5.1,screen_height/20+screen_width/(2*5.1)), (screen_width / 1.3-screen_width/15, screen_height/20+screen_width/(2*5.1)), (screen_width/32.4+screen_width/5.1, screen_height/1.5384+screen_width/(2*5.1)), (screen_width / 1.3-screen_width/15, screen_height/1.5384+screen_width/(2*5.1))]
-        
     default_colored_square_color = BLACK
     color_squares = []
 
     square_info = [
-        {"rect": pygame.Rect(screen_width/32.4 - screen_width/530, screen_height/20 - screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "1"},
-        {"rect": pygame.Rect(screen_width/32.4 - screen_width/530, screen_height/1.5384- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "3"},
-        {"rect": pygame.Rect(screen_width/1.3 - screen_width/530, screen_height/20- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "4"},
-        {"rect": pygame.Rect(screen_width/1.3 - screen_width/530, screen_height/1.5384- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "2"},
-        {"rect": pygame.Rect(screen_width/2.49 - screen_width/530, screen_height/2.857- screen_height/250, screen_width/5, screen_width/5), "default_color": default_colored_square_color, "id": "0"}
+        {"rect": pygame.Rect(screen_width / 32.4 - screen_width / 530, screen_height / 20 - screen_height / 250, screen_width / 5, screen_width / 5), "default_color": default_colored_square_color, "id": "1"},
+        {"rect": pygame.Rect(screen_width / 32.4 - screen_width / 530, screen_height / 1.5384 - screen_height / 250, screen_width / 5, screen_width / 5), "default_color": default_colored_square_color, "id": "3"},
+        {"rect": pygame.Rect(screen_width / 1.3 - screen_width / 530, screen_height / 20 - screen_height / 250, screen_width / 5, screen_width / 5), "default_color": default_colored_square_color, "id": "4"},
+        {"rect": pygame.Rect(screen_width / 1.3 - screen_width / 530, screen_height / 1.5384 - screen_height / 250, screen_width / 5, screen_width / 5), "default_color": default_colored_square_color, "id": "2"},
+        {"rect": pygame.Rect(screen_width / 2.49 - screen_width / 530, screen_height / 2.857 - screen_height / 250, screen_width / 5, screen_width / 5), "default_color": default_colored_square_color, "id": "0"}
     ]
-    
+
     for info in square_info:
         color_square = ColorSwitchingSquare(info["rect"], info["default_color"])
         color_squares.append({"square": color_square, "id": info["id"]})
 
-    # Frequency of square show/hide (seconds)
     # Frequency of square show/hide (seconds)
     frequency = [1, 2, 4, 8, 16]
     delays = [500 / f for f in frequency]
@@ -133,6 +155,22 @@ def main():
         square = Square(rect, current_time, params["delay"])
         squares.append(square)
 
+    previous_instrument = 1
+    mode = 0 #instrument choosing
+    sample = -1
+    playing_instrument_1 = False
+    playing_instrument_2 = False
+    playing_instrument_3 = False
+    playing_instrument_4 = False
+    playing_sample_1 = False
+    playing_sample_2 = False
+    playing_sample_3= False
+    playing_sample_4 = False
+    display_icons_flag = True
+    show_menu_icon = False
+    playing = True
+
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -147,18 +185,124 @@ def main():
             square.update(current_time)
 
         for cs in color_squares:
-            cs["square"].update() 
+            cs["square"].update()
 
         while not labelQueue.empty():
+
+                    
             label = labelQueue.get()
             change_colored_squares(color_squares, label)
+
+            # if mode == 0 and label == 0:  # go to previous instrument
+            #     mode = 1
+            #     display_icons_flag = False
+            #     show_menu_icon = True
+
+            # elif mode == 0 and label != 0:  # choose instrument
+            #     mode = 1
+            #     display_icons_flag = False
+            #     previous_instrument = label
+            #     show_menu_icon = True
+                
+            # elif mode == 1 and label == 0:  # from samples to instruments
+            #     mode = 0
+            #     display_icons_flag = True
+            #     show_menu_icon = False
+
+            if mode == 0:
+                display_icons_flag = True
+                show_menu_icon = False
+                if label == 0:
+                    mode = 1
+                    display_icons_flag = False
+                    show_menu_icon = True
+                elif label != 0:
+                    mode = 1
+                    previous_instrument = label
+                    display_icons_flag = False
+                    show_menu_icon = True
+
+            elif mode == 1:
+                display_icons_flag = False
+                show_menu_icon = True
+                if label == 0:
+                    mode = 0
+                    display_icons_flag = True
+                    show_menu_icon = False
+
+                
+                if label == 1 and playing_sample_1 == False:
+                    if playing_sample_2 == True:
+                        playing_sample_2 = False
+                    elif playing_sample_3 == True:
+                        playing_sample_3 = False
+                    elif playing_sample_4 == True:
+                        playing_sample_4 = False
+                    playing_sample_1 = True
+                    sample = 1
+                                
+                
+                elif label == 2 and playing_sample_2 == False:
+                    if playing_sample_1 == True:
+                        playing_sample_1 = False
+                    elif playing_sample_3 == True:
+                        playing_sample_3 = False
+                    elif playing_sample_4 == True:
+                        playing_sample_4 = False
+                    playing_sample_2 = True
+                    sample = 2
+                
+                elif label == 3 and playing_sample_3 == False:
+                    if playing_sample_2 == True:
+                        playing_sample_2 = False
+                    elif playing_sample_1 == True:
+                        playing_sample_1 = False
+                    elif playing_sample_4 == True:
+                        playing_sample_4 = False
+                    playing_sample_3 = True
+                    sample = 3
+                
+                elif label == 4 and playing_sample_4 == False:
+                    if playing_sample_2 == True:
+                        playing_sample_2 = False
+                    elif playing_sample_3 == True:
+                        playing_sample_3 = False
+                    elif playing_sample_1 == True:
+                        playing_sample_1 = False
+                    playing_sample_4 = True 
+                    sample = 4             
+                
+                
+                elif label == 1 and playing_sample_1 == True:
+                    playing_sample_1 = False
+                    sample = -1
+                elif label == 2 and playing_sample_2 == True:
+                    playing_sample_2 = False
+                    sample = -1
+                elif label == 3 and playing_sample_3 == True:
+                    playing_sample_3 = False
+                    sample = -1
+                elif label == 4 and playing_sample_4 == True:
+                    playing_sample_4 = False
+                    sample = -1
+
+
+
+
+     
 
         # Draw on the screen
         fenetre.fill(BLACK)
 
-        # Draw the icons onto the window surface
-        for icon, position in zip(icons, icon_positions):
-            fenetre.blit(icon, position)
+        # Draw the icons onto the window surface if the input is 0
+        if display_icons_flag:
+            display_icons(fenetre, screen_width, screen_height)
+
+        if show_menu_icon:
+            display_menu_icon(fenetre, screen_width, screen_height,previous_instrument)
+
+        if playing and sample != -1:
+            display_play_icon(fenetre, screen_width, screen_height,sample)
 
         for cs in color_squares:
             cs["square"].draw(fenetre)
@@ -166,13 +310,7 @@ def main():
         for square in squares:
             square.draw(fenetre)
 
-
         pygame.display.update()
-
-      
-
-        
-
 
 if __name__ == "__main__":
     main()
