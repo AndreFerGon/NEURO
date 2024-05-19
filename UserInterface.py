@@ -2,7 +2,7 @@ import pygame
 import sys
 import threading
 import time
-from classToSound_neuro2_2 import *
+from classToSound_neuro import *
 
 # --- constants ---
 
