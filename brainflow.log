@@ -230,3 +230,7 @@
 [2024-05-17 18:50:13.357] [board_logger] [debug] sending v to the board
 [2024-05-17 18:50:14.391] [board_logger] [debug] sending d to the board
 [2024-05-17 18:50:15.589] [board_logger] [debug] sending b to the board
+[2024-05-19 03:31:19.364] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-19 03:31:19.368] [board_logger] [trace] Board object created 0
+[2024-05-19 03:31:19.368] [board_logger] [info] opening port \\.\COM5
+[2024-05-19 03:31:19.369] [board_logger] [error] Make sure you provided correct port name and have permissions to open it(run with sudo/admin). Also, close all other apps using this port.

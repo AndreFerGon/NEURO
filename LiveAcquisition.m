@@ -14,8 +14,8 @@ file_name_processed = 'data/processed_eeg.xlsx';
 fs = 250;
 data_save = [];
 window_size = 5.5; % in seconds
-step_size = 0.5; % in seconds
-threshold = 0.16;
+step_size = 1; % in seconds
+threshold = 0.24;
 
 filter_crop = 1.5;
 
@@ -63,6 +63,8 @@ order = 2;
 
 board_shim.prepare_session();
 board_shim.start_stream(450000, '');
+currentTime = datetime('now', 'Format', 'HH:mm:ss.SSS');
+disp(['Stream start: ', char(currentTime)]);
 
 host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
 port = 12345;         % Port number on which Python server is listening
@@ -71,18 +73,31 @@ tto = tcpclient(host, port);
 
 % Initialize figure for real-time plotting
 figure;
-subplot(2,1,1)
-h1 = plot(zeros(1,2*fs)); % Initialize plot
-title('Filtered EEG Data');
+subplot(1,2,1)
+h1 = plot(zeros(1,2*fs), 'DisplayName', 'Channel O1'); % Initialize plot for Channel 1
+hold on;
+h2 = plot(zeros(1,2*fs) - 200, 'DisplayName', 'Channel Oz'); % Initialize plot for Channel 2 with offset
+h3 = plot(zeros(1,2*fs) + 200, 'DisplayName', 'Channel O2'); % Initialize plot for Channel 3 with offset
+hold off;
+title(['Filtered EEG Data (' num2str(window_size-1.5) 's time window)']);
 xlabel('Time (s)');
 ylabel('Amplitude');
-ylim([-100 100]);
+legend('show', 'Location','best');
+%ylim([-100 100]);
+%xlim([0 window_size]) % Set initial x-axis limits
+%set(gca, 'XTick', 0:1:window_size) % Set x-axis ticks every second
 
-subplot(2,1,2)
-h2 = plot(linspace(0,fs/2,fs/2+1), zeros(1,fs/2+1)); % Initialize plot
-title('Filtered EEG Data PSD');
+subplot(1,2,2)
+h4 = plot(zeros(1,2*fs), 'DisplayName', 'Channel O1'); % Initialize plot for PSD of Channel 1
+hold on;
+h5 = plot(zeros(1,2*fs), 'DisplayName', 'Channel Oz'); % Initialize plot for PSD of Channel 2
+h6 = plot(zeros(1,2*fs), 'DisplayName', 'Channel O2'); % Initialize plot for PSD of Channel 3
+hold off;
+title('Raw EEG Data FFT');
 xlabel('Frequency (Hz)');
 ylabel('Power');
+xlim([0 50]) % Set initial x-axis limits
+legend('show');
 
 window_data = zeros(1, window_size*fs); % Initialize window data
 filtered_window = zeros(1, (window_size-filter_crop)*fs);
@@ -91,7 +106,8 @@ i_segment = 0;
 prev_ind = 0;
 ind = 0;
 
-while true
+stopLoop = true;
+while stopLoop
     i_segment = i_segment + 1;
     pause(step_size); % Wait for step_size seconds
     % 1: Signal Acquisition
@@ -114,37 +130,28 @@ while true
 
     filtered_window = filtered_window(250*filter_crop+1:end);
 
-    % Save filtered eeg data from chann 3 to eeg_processed_arr (Hasbulla)
-    % new_filtered_data = filtered_window(:,end-size(data, 2)+1:end);
-    % eeg_filtered_arr = [eeg_filtered_arr, new_filtered_data];
-    % writematrix(eeg_filtered_arr,file_name_processed);
 
-    % % Update plot
-    % subplot(2,1,1);
-    % set(h1, 'XData', (0:1/fs:window_size-1/fs), 'YData', window_data);
-    % xlim([0 window_size]);
-    % 
-    % subplot(2,1,2);
-    % [f,p] = periodogram(window_data,[],[],fs);
-    % set(h2, 'XData', f, 'YData', 10*log10(p));
-    % xlim([0 fs/2]);
+    % Update plot with offsets
+    set(h1, 'XData', t_segment, 'YData', filtered_window(:, 1));
+    set(h2, 'XData', t_segment, 'YData', filtered_window(:, 2) - 200);
+    set(h3, 'XData', t_segment, 'YData', filtered_window(:, 3) + 200);
+    xlim([t_segment(1) t_segment(end)]);
+    
+    % Calculate PSD
+    [p1, ~] = periodogram(filtered_window(:, 1), [], [], fs);
+    [p2, ~] = periodogram(filtered_window(:, 2), [], [], fs);
+    [p3, f] = periodogram(filtered_window(:, 3), [], [], fs);
 
-
-    % Update plot
-    subplot(2,1,1);
-    set(h1, 'XData', (0:1/fs:(window_size-filter_crop-1/fs)), 'YData', filtered_window);
-    xlim([0 window_size]);
-
-    subplot(2,1,2);
-    [p, f] = periodogram(filtered_window,[],[],fs);
-    set(h2, 'XData', f, 'YData', 10*log10(p));
-    xlim([4 40]);
+    % Update PSD plot
+    set(h4, 'XData', f, 'YData', p1);
+    set(h5, 'XData', f, 'YData', p2);
+    set(h6, 'XData', f, 'YData', p3);
+    xlim([4 28]);
 
     drawnow;
 
     prev_ind = ind;
     for j = 1:classNum
-
         [~, ~, corr] = canoncorr(filtered_window', Y{j}');
         r(j) = max(corr);
     end
@@ -197,10 +204,7 @@ while true
         end
     end
 
-    % % Check if the escape key is pressed
-    % if waitforbuttonpress == 1
-    %     break;
-    % end
+
 end
 
 board_shim.stop_stream();
