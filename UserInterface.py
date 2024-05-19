@@ -491,10 +491,6 @@ def main():
             elif instrument_menu == 0:
                 sample = -1         
 
-
-
-
-
         # Draw on the screen
         fenetre.fill(BLACK)
 
