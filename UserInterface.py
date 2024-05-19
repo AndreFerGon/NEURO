@@ -158,18 +158,36 @@ def main():
     previous_instrument = 1
     mode = 0 #instrument choosing
     sample = -1
-    playing_instrument_1 = False
-    playing_instrument_2 = False
-    playing_instrument_3 = False
-    playing_instrument_4 = False
-    playing_sample_1 = False
-    playing_sample_2 = False
-    playing_sample_3= False
-    playing_sample_4 = False
+    playing_instrument_1_sample_1 = False
+    playing_instrument_1_sample_2 = False
+    playing_instrument_1_sample_3= False
+    playing_instrument_1_sample_4 = False
+    
+    playing_instrument_2_sample_1 = False
+    playing_instrument_2_sample_2 = False
+    playing_instrument_2_sample_3= False
+    playing_instrument_2_sample_4 = False
+
+    playing_instrument_3_sample_1 = False
+    playing_instrument_3_sample_2 = False
+    playing_instrument_3_sample_3= False
+    playing_instrument_3_sample_4 = False
+    
+    playing_instrument_4_sample_1 = False
+    playing_instrument_4_sample_2 = False
+    playing_instrument_4_sample_3= False
+    playing_instrument_4_sample_4 = False
+
     display_icons_flag = True
     show_menu_icon = False
     playing = True
 
+    playing_instrument_1 = False
+    playing_instrument_2 = False
+    playing_instrument_3 = False
+    playing_instrument_4 = False
+
+    instrument_menu = 0
 
     while True:
         for event in pygame.event.get():
@@ -193,103 +211,289 @@ def main():
             label = labelQueue.get()
             change_colored_squares(color_squares, label)
 
-            # if mode == 0 and label == 0:  # go to previous instrument
-            #     mode = 1
-            #     display_icons_flag = False
-            #     show_menu_icon = True
-
-            # elif mode == 0 and label != 0:  # choose instrument
-            #     mode = 1
-            #     display_icons_flag = False
-            #     previous_instrument = label
-            #     show_menu_icon = True
-                
-            # elif mode == 1 and label == 0:  # from samples to instruments
-            #     mode = 0
-            #     display_icons_flag = True
-            #     show_menu_icon = False
-
-            if mode == 0:
+            if mode == 0:                            #choosing instrument mode
                 display_icons_flag = True
                 show_menu_icon = False
-                if label == 0:
+                if label == 0:                       #go to previous intrument
                     mode = 1
                     display_icons_flag = False
                     show_menu_icon = True
-                elif label != 0:
+                    instrument_menu = previous_instrument
+                elif label != 0:                     #go to new instrument
                     mode = 1
                     previous_instrument = label
                     display_icons_flag = False
                     show_menu_icon = True
+                    instrument_menu = label
+                
 
-            elif mode == 1:
+            elif mode == 1:                          #instrument mode
                 display_icons_flag = False
                 show_menu_icon = True
-                if label == 0:
+                if label == 0:                       #go back to choosing instrument
                     mode = 0
                     display_icons_flag = True
                     show_menu_icon = False
+                    instrument_menu = label                  
+                  
+                if instrument_menu == 1 and label != 0:
+                    playing_instrument_1 = True
+                    if label == 1 and playing_instrument_1_sample_1 == False:          #play sample 1
+                        if playing_instrument_1_sample_2 == True:
+                            playing_instrument_1_sample_2 = False
+                        elif playing_instrument_1_sample_3 == True:
+                            playing_instrument_1_sample_3 = False
+                        elif playing_instrument_1_sample_4 == True:
+                            playing_instrument_1_sample_4 = False
+                        playing_instrument_1_sample_1 = True
+       
+                    elif label == 2 and playing_instrument_1_sample_2 == False:          #play sample 2
+                        if playing_instrument_1_sample_1 == True:
+                            playing_instrument_1_sample_1 = False
+                        elif playing_instrument_1_sample_3 == True:
+                            playing_instrument_1_sample_3 = False
+                        elif playing_instrument_1_sample_4 == True:
+                            playing_instrument_1_sample_4 = False
+                        playing_instrument_1_sample_2 = True
+                    
+                    elif label == 3 and playing_instrument_1_sample_3 == False:          #play sample 3
+                        if playing_instrument_1_sample_2 == True:
+                            playing_instrument_1_sample_2 = False
+                        elif playing_instrument_1_sample_1 == True:
+                            playing_instrument_1_sample_1 = False
+                        elif playing_instrument_1_sample_4 == True:
+                            playing_instrument_1_sample_4 = False
+                        playing_instrument_1_sample_3 = True
+                    
+                    elif label == 4 and playing_instrument_1_sample_4 == False:          #play sample 4 and stop other
+                        if playing_instrument_1_sample_2 == True:
+                            playing_instrument_1_sample_2 = False
+                        elif playing_instrument_1_sample_3 == True:
+                            playing_instrument_1_sample_3 = False
+                        elif playing_instrument_1_sample_1 == True:
+                            playing_instrument_1_sample_1 = False
+                        playing_instrument_1_sample_4 = True 
+                    
+                    elif label == 1 and playing_instrument_1_sample_1 == True:           #stop playing sample 1 
+                        playing_instrument_1_sample_1 = False
+                        playing_instrument_1 = False
+                    elif label == 2 and playing_instrument_1_sample_2 == True:           #stop playing sample 2
+                        playing_instrument_1_sample_2 = False
+                        playing_instrument_1 = False
+                    elif label == 3 and playing_instrument_1_sample_3 == True:           #stop playing sample 3
+                        playing_instrument_1_sample_3 = False
+                        playing_instrument_1 = False
+                    elif label == 4 and playing_instrument_1_sample_4 == True:           #stop playing sample 4
+                        playing_instrument_1_sample_4 = False
+                        playing_instrument_1 = False
+           
+                if instrument_menu == 2 and label != 0:
+                    playing_instrument_2 = True
+                    if label == 1 and playing_instrument_2_sample_1 == False:  # play sample 1
+                        if playing_instrument_2_sample_2 == True:
+                            playing_instrument_2_sample_2 = False
+                        elif playing_instrument_2_sample_3 == True:
+                            playing_instrument_2_sample_3 = False
+                        elif playing_instrument_2_sample_4 == True:
+                            playing_instrument_2_sample_4 = False
+                        playing_instrument_2_sample_1 = True
 
-                
-                if label == 1 and playing_sample_1 == False:
-                    if playing_sample_2 == True:
-                        playing_sample_2 = False
-                    elif playing_sample_3 == True:
-                        playing_sample_3 = False
-                    elif playing_sample_4 == True:
-                        playing_sample_4 = False
-                    playing_sample_1 = True
-                    sample = 1
-                                
-                
-                elif label == 2 and playing_sample_2 == False:
-                    if playing_sample_1 == True:
-                        playing_sample_1 = False
-                    elif playing_sample_3 == True:
-                        playing_sample_3 = False
-                    elif playing_sample_4 == True:
-                        playing_sample_4 = False
-                    playing_sample_2 = True
-                    sample = 2
-                
-                elif label == 3 and playing_sample_3 == False:
-                    if playing_sample_2 == True:
-                        playing_sample_2 = False
-                    elif playing_sample_1 == True:
-                        playing_sample_1 = False
-                    elif playing_sample_4 == True:
-                        playing_sample_4 = False
-                    playing_sample_3 = True
-                    sample = 3
-                
-                elif label == 4 and playing_sample_4 == False:
-                    if playing_sample_2 == True:
-                        playing_sample_2 = False
-                    elif playing_sample_3 == True:
-                        playing_sample_3 = False
-                    elif playing_sample_1 == True:
-                        playing_sample_1 = False
-                    playing_sample_4 = True 
-                    sample = 4             
-                
-                
-                elif label == 1 and playing_sample_1 == True:
-                    playing_sample_1 = False
-                    sample = -1
-                elif label == 2 and playing_sample_2 == True:
-                    playing_sample_2 = False
-                    sample = -1
-                elif label == 3 and playing_sample_3 == True:
-                    playing_sample_3 = False
-                    sample = -1
-                elif label == 4 and playing_sample_4 == True:
-                    playing_sample_4 = False
-                    sample = -1
+                    elif label == 2 and playing_instrument_2_sample_2 == False:  # play sample 2
+                        if playing_instrument_2_sample_1 == True:
+                            playing_instrument_2_sample_1 = False
+                        elif playing_instrument_2_sample_3 == True:
+                            playing_instrument_2_sample_3 = False
+                        elif playing_instrument_2_sample_4 == True:
+                            playing_instrument_2_sample_4 = False
+                        playing_instrument_2_sample_2 = True
+
+                    elif label == 3 and playing_instrument_2_sample_3 == False:  # play sample 3
+                        if playing_instrument_2_sample_2 == True:
+                            playing_instrument_2_sample_2 = False
+                        elif playing_instrument_2_sample_1 == True:
+                            playing_instrument_2_sample_1 = False
+                        elif playing_instrument_2_sample_4 == True:
+                            playing_instrument_2_sample_4 = False
+                        playing_instrument_2_sample_3 = True
+
+                    elif label == 4 and playing_instrument_2_sample_4 == False:  # play sample 4 and stop other
+                        if playing_instrument_2_sample_2 == True:
+                            playing_instrument_2_sample_2 = False
+                        elif playing_instrument_2_sample_3 == True:
+                            playing_instrument_2_sample_3 = False
+                        elif playing_instrument_2_sample_1 == True:
+                            playing_instrument_2_sample_1 = False
+                        playing_instrument_2_sample_4 = True
+
+                    elif label == 1 and playing_instrument_2_sample_1 == True:  # stop playing sample 1
+                        playing_instrument_2_sample_1 = False
+                        playing_instrument_2 = False
+                    elif label == 2 and playing_instrument_2_sample_2 == True:  # stop playing sample 2
+                        playing_instrument_2_sample_2 = False
+                        playing_instrument_2 = False
+                    elif label == 3 and playing_instrument_2_sample_3 == True:  # stop playing sample 3
+                        playing_instrument_2_sample_3 = False
+                        playing_instrument_2 = False
+                    elif label == 4 and playing_instrument_2_sample_4 == True:  # stop playing sample 4
+                        playing_instrument_2_sample_4 = False
+                        playing_instrument_2 = False
+
+                if instrument_menu == 3 and label != 0:
+                    playing_instrument_3 = True
+                    if label == 1 and playing_instrument_3_sample_1 == False:  # play sample 1
+                        if playing_instrument_3_sample_2 == True:
+                            playing_instrument_3_sample_2 = False
+                        elif playing_instrument_3_sample_3 == True:
+                            playing_instrument_3_sample_3 = False
+                        elif playing_instrument_3_sample_4 == True:
+                            playing_instrument_3_sample_4 = False
+                        playing_instrument_3_sample_1 = True
+
+                    elif label == 2 and playing_instrument_3_sample_2 == False:  # play sample 2
+                        if playing_instrument_3_sample_1 == True:
+                            playing_instrument_3_sample_1 = False
+                        elif playing_instrument_3_sample_3 == True:
+                            playing_instrument_3_sample_3 = False
+                        elif playing_instrument_3_sample_4 == True:
+                            playing_instrument_3_sample_4 = False
+                        playing_instrument_3_sample_2 = True
+
+                    elif label == 3 and playing_instrument_3_sample_3 == False:  # play sample 3
+                        if playing_instrument_3_sample_2 == True:
+                            playing_instrument_3_sample_2 = False
+                        elif playing_instrument_3_sample_1 == True:
+                            playing_instrument_3_sample_1 = False
+                        elif playing_instrument_3_sample_4 == True:
+                            playing_instrument_3_sample_4 = False
+                        playing_instrument_3_sample_3 = True
+
+                    elif label == 4 and playing_instrument_3_sample_4 == False:  # play sample 4 and stop other
+                        if playing_instrument_3_sample_2 == True:
+                            playing_instrument_3_sample_2 = False
+                        elif playing_instrument_3_sample_3 == True:
+                            playing_instrument_3_sample_3 = False
+                        elif playing_instrument_3_sample_1 == True:
+                            playing_instrument_3_sample_1 = False
+                        playing_instrument_3_sample_4 = True
+
+                    elif label == 1 and playing_instrument_3_sample_1 == True:  # stop playing sample 1
+                        playing_instrument_3_sample_1 = False
+                        playing_instrument_3 = False
+                    elif label == 2 and playing_instrument_3_sample_2 == True:  # stop playing sample 2
+                        playing_instrument_3_sample_2 = False
+                        playing_instrument_3 = False
+                    elif label == 3 and playing_instrument_3_sample_3 == True:  # stop playing sample 3
+                        playing_instrument_3_sample_3 = False
+                        playing_instrument_3 = False
+                    elif label == 4 and playing_instrument_3_sample_4 == True:  # stop playing sample 4
+                        playing_instrument_3_sample_4 = False
+                        playing_instrument_3 = False
+
+                if instrument_menu == 4 and label != 0:
+                    playing_instrument_4 = True
+                    if label == 1 and playing_instrument_4_sample_1 == False:  # play sample 1
+                        if playing_instrument_4_sample_2 == True:
+                            playing_instrument_4_sample_2 = False
+                        elif playing_instrument_4_sample_3 == True:
+                            playing_instrument_4_sample_3 = False
+                        elif playing_instrument_4_sample_4 == True:
+                            playing_instrument_4_sample_4 = False
+                        playing_instrument_4_sample_1 = True
+
+                    elif label == 2 and playing_instrument_4_sample_2 == False:  # play sample 2
+                        if playing_instrument_4_sample_1 == True:
+                            playing_instrument_4_sample_1 = False
+                        elif playing_instrument_4_sample_3 == True:
+                            playing_instrument_4_sample_3 = False
+                        elif playing_instrument_4_sample_4 == True:
+                            playing_instrument_4_sample_4 = False
+                        playing_instrument_4_sample_2 = True
+
+                    elif label == 3 and playing_instrument_4_sample_3 == False:  # play sample 3
+                        if playing_instrument_4_sample_2 == True:
+                            playing_instrument_4_sample_2 = False
+                        elif playing_instrument_4_sample_1 == True:
+                            playing_instrument_4_sample_1 = False
+                        elif playing_instrument_4_sample_4 == True:
+                            playing_instrument_4_sample_4 = False
+                        playing_instrument_4_sample_3 = True
+
+                    elif label == 4 and playing_instrument_4_sample_4 == False:  # play sample 4 and stop other
+                        if playing_instrument_4_sample_2 == True:
+                            playing_instrument_4_sample_2 = False
+                        elif playing_instrument_4_sample_3 == True:
+                            playing_instrument_4_sample_3 = False
+                        elif playing_instrument_4_sample_1 == True:
+                            playing_instrument_4_sample_1 = False
+                        playing_instrument_4_sample_4 = True
+
+                    elif label == 1 and playing_instrument_4_sample_1 == True:  # stop playing sample 1
+                        playing_instrument_4_sample_1 = False
+                        playing_instrument_4 = False
+                    elif label == 2 and playing_instrument_4_sample_2 == True:  # stop playing sample 2
+                        playing_instrument_4_sample_2 = False
+                        playing_instrument_4 = False
+                    elif label == 3 and playing_instrument_4_sample_3 == True:  # stop playing sample 3
+                        playing_instrument_4_sample_3 = False
+                        playing_instrument_4 = False
+                    elif label == 4 and playing_instrument_4_sample_4 == True:  # stop playing sample 4
+                        playing_instrument_4_sample_4 = False
+                        playing_instrument_4 = False
+
+            if instrument_menu == 1:
+                if playing_instrument_1 == True:
+                    if playing_instrument_1_sample_1 == True:
+                        sample = 1
+                    elif playing_instrument_1_sample_2 == True:
+                        sample = 2
+                    elif playing_instrument_1_sample_3 == True:
+                        sample = 3
+                    elif playing_instrument_1_sample_4 == True:
+                        sample = 4                
+                else:
+                    sample = -1                
+            elif instrument_menu == 2:
+                if playing_instrument_2 == True:
+                    if playing_instrument_2_sample_1 == True:
+                        sample = 1
+                    elif playing_instrument_2_sample_2 == True:
+                        sample = 2
+                    elif playing_instrument_2_sample_3 == True:
+                        sample = 3
+                    elif playing_instrument_2_sample_4 == True:
+                        sample = 4                
+                else:
+                    sample = -1                
+            elif instrument_menu == 3:
+                if playing_instrument_3 == True:
+                    if playing_instrument_3_sample_1 == True:
+                        sample = 1
+                    elif playing_instrument_3_sample_2 == True:
+                        sample = 2
+                    elif playing_instrument_3_sample_3 == True:
+                        sample = 3
+                    elif playing_instrument_3_sample_4 == True:
+                        sample = 4                
+                else:
+                    sample = -1   
+            elif instrument_menu == 4:
+                if playing_instrument_4 == True:
+                    if playing_instrument_4_sample_1 == True:
+                        sample = 1
+                    elif playing_instrument_4_sample_2 == True:
+                        sample = 2
+                    elif playing_instrument_4_sample_3 == True:
+                        sample = 3
+                    elif playing_instrument_4_sample_4 == True:
+                        sample = 4                
+                else:
+                    sample = -1   
+            elif instrument_menu == 0:
+                sample = -1         
 
 
 
 
-     
 
         # Draw on the screen
         fenetre.fill(BLACK)
