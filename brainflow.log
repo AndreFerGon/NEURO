@@ -4,3 +4,710 @@
 [2024-05-06 15:53:00.116] [board_logger] [trace] port \\.\COM5 is open
 [2024-05-06 15:53:00.117] [board_logger] [trace] set port settings
 [2024-05-06 15:53:00.120] [board_logger] [debug] sending v to the board
+[2024-05-17 17:39:49.233] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:39:49.236] [board_logger] [trace] Board object created 0
+[2024-05-17 17:39:49.237] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:39:49.239] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:39:49.239] [board_logger] [trace] set port settings
+[2024-05-17 17:39:49.240] [board_logger] [debug] sending v to the board
+[2024-05-17 17:39:50.286] [board_logger] [debug] sending d to the board
+[2024-05-17 17:39:51.498] [board_logger] [debug] sending b to the board
+[2024-05-17 17:46:08.404] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:46:08.409] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-17 17:46:17.051] [board_logger] [debug] sending s to the board
+[2024-05-17 17:46:45.011] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:46:45.016] [board_logger] [trace] Board object created 0
+[2024-05-17 17:46:45.016] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:46:45.019] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:46:45.019] [board_logger] [trace] set port settings
+[2024-05-17 17:46:45.020] [board_logger] [debug] sending v to the board
+[2024-05-17 17:46:46.033] [board_logger] [debug] sending d to the board
+[2024-05-17 17:46:47.244] [board_logger] [debug] sending b to the board
+[2024-05-17 17:52:30.567] [board_logger] [debug] sending s to the board
+[2024-05-17 17:53:31.301] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:53:31.306] [board_logger] [trace] Board object created 0
+[2024-05-17 17:53:31.307] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:53:31.310] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:53:31.310] [board_logger] [trace] set port settings
+[2024-05-17 17:53:31.310] [board_logger] [debug] sending v to the board
+[2024-05-17 17:53:32.834] [board_logger] [debug] sending d to the board
+[2024-05-17 17:53:34.049] [board_logger] [debug] sending b to the board
+[2024-05-17 17:54:08.893] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:54:08.897] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-17 17:54:12.638] [board_logger] [debug] sending s to the board
+[2024-05-17 17:54:14.992] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:54:15.000] [board_logger] [trace] Board object created 0
+[2024-05-17 17:54:15.001] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:54:15.004] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:54:15.005] [board_logger] [trace] set port settings
+[2024-05-17 17:54:15.007] [board_logger] [debug] sending v to the board
+[2024-05-17 17:54:16.056] [board_logger] [debug] sending d to the board
+[2024-05-17 17:54:17.271] [board_logger] [debug] sending b to the board
+[2024-05-17 17:54:50.304] [board_logger] [debug] sending s to the board
+[2024-05-17 17:54:53.444] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:54:53.449] [board_logger] [trace] Board object created 0
+[2024-05-17 17:54:53.449] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:54:53.451] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:54:53.452] [board_logger] [trace] set port settings
+[2024-05-17 17:54:53.452] [board_logger] [debug] sending v to the board
+[2024-05-17 17:54:54.494] [board_logger] [debug] sending d to the board
+[2024-05-17 17:54:55.705] [board_logger] [debug] sending b to the board
+[2024-05-17 17:55:20.462] [board_logger] [debug] sending s to the board
+[2024-05-17 17:55:24.328] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:55:24.333] [board_logger] [trace] Board object created 0
+[2024-05-17 17:55:24.333] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:55:24.336] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:55:24.337] [board_logger] [trace] set port settings
+[2024-05-17 17:55:24.338] [board_logger] [debug] sending v to the board
+[2024-05-17 17:55:25.392] [board_logger] [debug] sending d to the board
+[2024-05-17 17:55:26.612] [board_logger] [debug] sending b to the board
+[2024-05-17 17:57:30.876] [board_logger] [debug] sending s to the board
+[2024-05-17 17:57:48.951] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 17:57:48.957] [board_logger] [trace] Board object created 0
+[2024-05-17 17:57:48.958] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 17:57:48.962] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 17:57:48.963] [board_logger] [trace] set port settings
+[2024-05-17 17:57:48.963] [board_logger] [debug] sending v to the board
+[2024-05-17 17:57:50.004] [board_logger] [debug] sending d to the board
+[2024-05-17 17:57:51.211] [board_logger] [debug] sending b to the board
+[2024-05-17 18:00:14.247] [board_logger] [debug] sending s to the board
+[2024-05-17 18:00:38.761] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:00:38.768] [board_logger] [trace] Board object created 0
+[2024-05-17 18:00:38.768] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:00:38.771] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:00:38.772] [board_logger] [trace] set port settings
+[2024-05-17 18:00:38.773] [board_logger] [debug] sending v to the board
+[2024-05-17 18:00:39.820] [board_logger] [debug] sending d to the board
+[2024-05-17 18:00:41.031] [board_logger] [debug] sending b to the board
+[2024-05-17 18:02:57.850] [board_logger] [debug] sending s to the board
+[2024-05-17 18:05:21.423] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:05:21.425] [board_logger] [trace] Board object created 0
+[2024-05-17 18:05:21.425] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:05:21.428] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:05:21.429] [board_logger] [trace] set port settings
+[2024-05-17 18:05:21.429] [board_logger] [debug] sending v to the board
+[2024-05-17 18:05:22.455] [board_logger] [debug] sending d to the board
+[2024-05-17 18:05:23.673] [board_logger] [debug] sending b to the board
+[2024-05-17 18:06:33.187] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:06:33.191] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-17 18:06:45.200] [board_logger] [debug] sending s to the board
+[2024-05-17 18:07:18.590] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:07:18.594] [board_logger] [trace] Board object created 0
+[2024-05-17 18:07:18.595] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:07:18.597] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:07:18.597] [board_logger] [trace] set port settings
+[2024-05-17 18:07:18.598] [board_logger] [debug] sending v to the board
+[2024-05-17 18:07:19.618] [board_logger] [debug] sending d to the board
+[2024-05-17 18:07:20.827] [board_logger] [debug] sending b to the board
+[2024-05-17 18:08:24.610] [board_logger] [debug] sending s to the board
+[2024-05-17 18:08:28.279] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:08:28.282] [board_logger] [trace] Board object created 0
+[2024-05-17 18:08:28.283] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:08:28.285] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:08:28.286] [board_logger] [trace] set port settings
+[2024-05-17 18:08:28.286] [board_logger] [debug] sending v to the board
+[2024-05-17 18:08:29.299] [board_logger] [debug] sending d to the board
+[2024-05-17 18:08:30.506] [board_logger] [debug] sending b to the board
+[2024-05-17 18:09:33.268] [board_logger] [debug] sending s to the board
+[2024-05-17 18:09:46.067] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:09:46.074] [board_logger] [trace] Board object created 0
+[2024-05-17 18:09:46.074] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:09:46.076] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:09:46.078] [board_logger] [trace] set port settings
+[2024-05-17 18:09:46.079] [board_logger] [debug] sending v to the board
+[2024-05-17 18:09:47.125] [board_logger] [debug] sending d to the board
+[2024-05-17 18:09:48.328] [board_logger] [debug] sending b to the board
+[2024-05-17 18:12:07.785] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:12:07.792] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-17 18:12:11.951] [board_logger] [debug] sending s to the board
+[2024-05-17 18:12:14.636] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:12:14.640] [board_logger] [trace] Board object created 0
+[2024-05-17 18:12:14.641] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:12:14.643] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:12:14.644] [board_logger] [trace] set port settings
+[2024-05-17 18:12:14.644] [board_logger] [debug] sending v to the board
+[2024-05-17 18:12:15.659] [board_logger] [debug] sending d to the board
+[2024-05-17 18:12:16.863] [board_logger] [debug] sending b to the board
+[2024-05-17 18:15:09.366] [board_logger] [debug] sending s to the board
+[2024-05-17 18:15:26.831] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:15:26.835] [board_logger] [trace] Board object created 0
+[2024-05-17 18:15:26.836] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:15:26.839] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:15:26.840] [board_logger] [trace] set port settings
+[2024-05-17 18:15:26.840] [board_logger] [debug] sending v to the board
+[2024-05-17 18:15:27.859] [board_logger] [debug] sending d to the board
+[2024-05-17 18:15:29.075] [board_logger] [debug] sending b to the board
+[2024-05-17 18:17:10.309] [board_logger] [debug] sending s to the board
+[2024-05-17 18:17:36.953] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:17:36.956] [board_logger] [trace] Board object created 0
+[2024-05-17 18:17:36.956] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:17:36.959] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:17:36.960] [board_logger] [trace] set port settings
+[2024-05-17 18:17:36.960] [board_logger] [debug] sending v to the board
+[2024-05-17 18:17:37.977] [board_logger] [debug] sending d to the board
+[2024-05-17 18:17:39.192] [board_logger] [debug] sending b to the board
+[2024-05-17 18:20:20.885] [board_logger] [debug] sending s to the board
+[2024-05-17 18:20:23.512] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:20:23.515] [board_logger] [trace] Board object created 0
+[2024-05-17 18:20:23.515] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:20:23.517] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:20:23.518] [board_logger] [trace] set port settings
+[2024-05-17 18:20:23.518] [board_logger] [debug] sending v to the board
+[2024-05-17 18:20:24.545] [board_logger] [debug] sending d to the board
+[2024-05-17 18:20:25.760] [board_logger] [debug] sending b to the board
+[2024-05-17 18:22:08.443] [board_logger] [debug] sending s to the board
+[2024-05-17 18:22:11.483] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:22:11.492] [board_logger] [trace] Board object created 0
+[2024-05-17 18:22:11.492] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:22:11.495] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:22:11.496] [board_logger] [trace] set port settings
+[2024-05-17 18:22:11.496] [board_logger] [debug] sending v to the board
+[2024-05-17 18:22:12.500] [board_logger] [debug] sending d to the board
+[2024-05-17 18:22:13.703] [board_logger] [debug] sending b to the board
+[2024-05-17 18:22:30.650] [board_logger] [debug] sending s to the board
+[2024-05-17 18:22:34.962] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:22:34.966] [board_logger] [trace] Board object created 0
+[2024-05-17 18:22:34.966] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:22:34.968] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:22:34.970] [board_logger] [trace] set port settings
+[2024-05-17 18:22:34.970] [board_logger] [debug] sending v to the board
+[2024-05-17 18:22:36.015] [board_logger] [debug] sending d to the board
+[2024-05-17 18:22:37.227] [board_logger] [debug] sending b to the board
+[2024-05-17 18:31:51.409] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:31:51.412] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-17 18:31:54.506] [board_logger] [debug] sending s to the board
+[2024-05-17 18:31:56.703] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:31:56.708] [board_logger] [trace] Board object created 0
+[2024-05-17 18:31:56.709] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:31:56.710] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:31:56.711] [board_logger] [trace] set port settings
+[2024-05-17 18:31:56.711] [board_logger] [debug] sending v to the board
+[2024-05-17 18:31:57.725] [board_logger] [debug] sending d to the board
+[2024-05-17 18:31:58.939] [board_logger] [debug] sending b to the board
+[2024-05-17 18:34:38.637] [board_logger] [warning] Wrong end byte 251
+[2024-05-17 18:37:03.199] [board_logger] [debug] sending s to the board
+[2024-05-17 18:37:07.451] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:37:07.457] [board_logger] [trace] Board object created 0
+[2024-05-17 18:37:07.459] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:37:07.461] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:37:07.463] [board_logger] [trace] set port settings
+[2024-05-17 18:37:07.463] [board_logger] [debug] sending v to the board
+[2024-05-17 18:37:08.518] [board_logger] [debug] sending d to the board
+[2024-05-17 18:37:09.735] [board_logger] [debug] sending b to the board
+[2024-05-17 18:39:06.896] [board_logger] [debug] sending s to the board
+[2024-05-17 18:39:46.158] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:39:46.165] [board_logger] [trace] Board object created 0
+[2024-05-17 18:39:46.165] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:39:46.168] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:39:46.170] [board_logger] [trace] set port settings
+[2024-05-17 18:39:46.170] [board_logger] [debug] sending v to the board
+[2024-05-17 18:39:47.161] [board_logger] [debug] sending d to the board
+[2024-05-17 18:39:48.368] [board_logger] [debug] sending b to the board
+[2024-05-17 18:44:52.673] [board_logger] [debug] sending s to the board
+[2024-05-17 18:45:00.093] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:45:00.097] [board_logger] [trace] Board object created 0
+[2024-05-17 18:45:00.098] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:45:00.101] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:45:00.102] [board_logger] [trace] set port settings
+[2024-05-17 18:45:00.102] [board_logger] [debug] sending v to the board
+[2024-05-17 18:45:01.112] [board_logger] [debug] sending d to the board
+[2024-05-17 18:45:02.329] [board_logger] [debug] sending b to the board
+[2024-05-17 18:46:04.464] [board_logger] [debug] sending s to the board
+[2024-05-17 18:46:10.303] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:46:10.308] [board_logger] [trace] Board object created 0
+[2024-05-17 18:46:10.308] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:46:10.311] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:46:10.312] [board_logger] [trace] set port settings
+[2024-05-17 18:46:10.313] [board_logger] [debug] sending v to the board
+[2024-05-17 18:46:11.342] [board_logger] [debug] sending d to the board
+[2024-05-17 18:46:12.556] [board_logger] [debug] sending b to the board
+[2024-05-17 18:50:09.117] [board_logger] [debug] sending s to the board
+[2024-05-17 18:50:13.350] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-17 18:50:13.354] [board_logger] [trace] Board object created 0
+[2024-05-17 18:50:13.354] [board_logger] [info] opening port \\.\COM5
+[2024-05-17 18:50:13.356] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-17 18:50:13.357] [board_logger] [trace] set port settings
+[2024-05-17 18:50:13.357] [board_logger] [debug] sending v to the board
+[2024-05-17 18:50:14.391] [board_logger] [debug] sending d to the board
+[2024-05-17 18:50:15.589] [board_logger] [debug] sending b to the board
+[2024-05-19 03:31:19.364] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-19 03:31:19.368] [board_logger] [trace] Board object created 0
+[2024-05-19 03:31:19.368] [board_logger] [info] opening port \\.\COM5
+[2024-05-19 03:31:19.369] [board_logger] [error] Make sure you provided correct port name and have permissions to open it(run with sudo/admin). Also, close all other apps using this port.
+[2024-05-20 15:10:28.090] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:10:28.096] [board_logger] [trace] Board object created 0
+[2024-05-20 15:10:28.097] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:10:28.099] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:10:28.100] [board_logger] [trace] set port settings
+[2024-05-20 15:10:28.100] [board_logger] [debug] sending v to the board
+[2024-05-20 15:10:29.145] [board_logger] [debug] sending d to the board
+[2024-05-20 15:10:30.354] [board_logger] [debug] sending b to the board
+[2024-05-20 15:13:12.283] [board_logger] [debug] sending s to the board
+[2024-05-20 15:13:15.739] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:13:15.754] [board_logger] [trace] Board object created 0
+[2024-05-20 15:13:15.754] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:13:15.756] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:13:15.758] [board_logger] [trace] set port settings
+[2024-05-20 15:13:15.758] [board_logger] [debug] sending v to the board
+[2024-05-20 15:13:16.778] [board_logger] [debug] sending d to the board
+[2024-05-20 15:13:17.981] [board_logger] [debug] sending b to the board
+[2024-05-20 15:16:22.422] [board_logger] [debug] sending s to the board
+[2024-05-20 15:16:28.121] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:16:28.126] [board_logger] [trace] Board object created 0
+[2024-05-20 15:16:28.128] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:16:28.130] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:16:28.131] [board_logger] [trace] set port settings
+[2024-05-20 15:16:28.131] [board_logger] [debug] sending v to the board
+[2024-05-20 15:16:29.150] [board_logger] [debug] sending d to the board
+[2024-05-20 15:16:30.366] [board_logger] [debug] sending b to the board
+[2024-05-20 15:18:20.460] [board_logger] [debug] sending s to the board
+[2024-05-20 15:18:23.543] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:18:23.550] [board_logger] [trace] Board object created 0
+[2024-05-20 15:18:23.552] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:18:23.555] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:18:23.556] [board_logger] [trace] set port settings
+[2024-05-20 15:18:23.557] [board_logger] [debug] sending v to the board
+[2024-05-20 15:18:24.610] [board_logger] [debug] sending d to the board
+[2024-05-20 15:18:25.816] [board_logger] [debug] sending b to the board
+[2024-05-20 15:18:50.659] [board_logger] [debug] sending s to the board
+[2024-05-20 15:18:53.670] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:18:53.678] [board_logger] [trace] Board object created 0
+[2024-05-20 15:18:53.679] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:18:53.682] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:18:53.682] [board_logger] [trace] set port settings
+[2024-05-20 15:18:53.683] [board_logger] [debug] sending v to the board
+[2024-05-20 15:18:54.708] [board_logger] [debug] sending d to the board
+[2024-05-20 15:18:55.917] [board_logger] [debug] sending b to the board
+[2024-05-20 15:19:34.703] [board_logger] [debug] sending s to the board
+[2024-05-20 15:19:37.946] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:19:37.951] [board_logger] [trace] Board object created 0
+[2024-05-20 15:19:37.952] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:19:37.954] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:19:37.956] [board_logger] [trace] set port settings
+[2024-05-20 15:19:37.956] [board_logger] [debug] sending v to the board
+[2024-05-20 15:19:38.994] [board_logger] [debug] sending d to the board
+[2024-05-20 15:19:40.197] [board_logger] [debug] sending b to the board
+[2024-05-20 15:20:54.504] [board_logger] [debug] sending s to the board
+[2024-05-20 15:20:58.978] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:20:58.984] [board_logger] [trace] Board object created 0
+[2024-05-20 15:20:58.986] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:20:58.988] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:20:58.989] [board_logger] [trace] set port settings
+[2024-05-20 15:20:58.990] [board_logger] [debug] sending v to the board
+[2024-05-20 15:21:00.015] [board_logger] [debug] sending d to the board
+[2024-05-20 15:21:01.220] [board_logger] [debug] sending b to the board
+[2024-05-20 15:21:42.660] [board_logger] [debug] sending s to the board
+[2024-05-20 15:21:46.334] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:21:46.342] [board_logger] [trace] Board object created 0
+[2024-05-20 15:21:46.342] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:21:46.346] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:21:46.347] [board_logger] [trace] set port settings
+[2024-05-20 15:21:46.348] [board_logger] [debug] sending v to the board
+[2024-05-20 15:21:47.451] [board_logger] [debug] sending d to the board
+[2024-05-20 15:21:48.656] [board_logger] [debug] sending b to the board
+[2024-05-20 15:22:58.322] [board_logger] [debug] sending s to the board
+[2024-05-20 15:23:02.484] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:23:02.513] [board_logger] [trace] Board object created 0
+[2024-05-20 15:23:02.514] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:23:02.518] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:23:02.519] [board_logger] [trace] set port settings
+[2024-05-20 15:23:02.520] [board_logger] [debug] sending v to the board
+[2024-05-20 15:23:03.541] [board_logger] [debug] sending d to the board
+[2024-05-20 15:23:04.749] [board_logger] [debug] sending b to the board
+[2024-05-20 15:24:10.725] [board_logger] [debug] sending s to the board
+[2024-05-20 15:24:13.560] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:24:13.565] [board_logger] [trace] Board object created 0
+[2024-05-20 15:24:13.565] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:24:13.568] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:24:13.570] [board_logger] [trace] set port settings
+[2024-05-20 15:24:13.570] [board_logger] [debug] sending v to the board
+[2024-05-20 15:24:14.626] [board_logger] [debug] sending d to the board
+[2024-05-20 15:24:15.834] [board_logger] [debug] sending b to the board
+[2024-05-20 15:25:21.629] [board_logger] [debug] sending s to the board
+[2024-05-20 15:25:30.670] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:25:30.675] [board_logger] [trace] Board object created 0
+[2024-05-20 15:25:30.675] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:25:30.677] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:25:30.678] [board_logger] [trace] set port settings
+[2024-05-20 15:25:30.678] [board_logger] [debug] sending v to the board
+[2024-05-20 15:25:31.730] [board_logger] [debug] sending d to the board
+[2024-05-20 15:25:32.931] [board_logger] [debug] sending b to the board
+[2024-05-20 15:26:18.222] [board_logger] [debug] sending s to the board
+[2024-05-20 15:27:27.711] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:27:27.718] [board_logger] [trace] Board object created 0
+[2024-05-20 15:27:27.719] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:27:27.722] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:27:27.723] [board_logger] [trace] set port settings
+[2024-05-20 15:27:27.724] [board_logger] [debug] sending v to the board
+[2024-05-20 15:27:28.747] [board_logger] [debug] sending d to the board
+[2024-05-20 15:27:29.960] [board_logger] [debug] sending b to the board
+[2024-05-20 15:29:37.227] [board_logger] [debug] sending s to the board
+[2024-05-20 15:29:47.874] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:29:47.879] [board_logger] [trace] Board object created 0
+[2024-05-20 15:29:47.880] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:29:47.882] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:29:47.883] [board_logger] [trace] set port settings
+[2024-05-20 15:29:47.884] [board_logger] [debug] sending v to the board
+[2024-05-20 15:29:48.937] [board_logger] [debug] sending d to the board
+[2024-05-20 15:29:50.139] [board_logger] [debug] sending b to the board
+[2024-05-20 15:34:32.261] [board_logger] [debug] sending s to the board
+[2024-05-20 15:34:42.600] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:34:42.603] [board_logger] [trace] Board object created 0
+[2024-05-20 15:34:42.603] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:34:42.605] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:34:42.607] [board_logger] [trace] set port settings
+[2024-05-20 15:34:42.608] [board_logger] [debug] sending v to the board
+[2024-05-20 15:34:43.634] [board_logger] [debug] sending d to the board
+[2024-05-20 15:34:44.841] [board_logger] [debug] sending b to the board
+[2024-05-20 15:36:12.191] [board_logger] [debug] sending s to the board
+[2024-05-20 15:36:16.516] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:36:16.519] [board_logger] [trace] Board object created 0
+[2024-05-20 15:36:16.520] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:36:16.522] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:36:16.523] [board_logger] [trace] set port settings
+[2024-05-20 15:36:16.524] [board_logger] [debug] sending v to the board
+[2024-05-20 15:36:17.556] [board_logger] [debug] sending d to the board
+[2024-05-20 15:36:18.764] [board_logger] [debug] sending b to the board
+[2024-05-20 15:38:02.700] [board_logger] [debug] sending s to the board
+[2024-05-20 15:38:12.057] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:38:12.062] [board_logger] [trace] Board object created 0
+[2024-05-20 15:38:12.063] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:38:12.066] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:38:12.068] [board_logger] [trace] set port settings
+[2024-05-20 15:38:12.068] [board_logger] [debug] sending v to the board
+[2024-05-20 15:38:13.098] [board_logger] [debug] sending d to the board
+[2024-05-20 15:38:14.308] [board_logger] [debug] sending b to the board
+[2024-05-20 15:38:53.677] [board_logger] [debug] sending s to the board
+[2024-05-20 15:39:01.884] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:39:01.889] [board_logger] [trace] Board object created 0
+[2024-05-20 15:39:01.889] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:39:01.892] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:39:01.893] [board_logger] [trace] set port settings
+[2024-05-20 15:39:01.893] [board_logger] [debug] sending v to the board
+[2024-05-20 15:39:02.951] [board_logger] [debug] sending d to the board
+[2024-05-20 15:39:04.157] [board_logger] [debug] sending b to the board
+[2024-05-20 15:42:23.434] [board_logger] [debug] sending s to the board
+[2024-05-20 15:42:30.086] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:42:30.089] [board_logger] [trace] Board object created 0
+[2024-05-20 15:42:30.090] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:42:30.092] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:42:30.093] [board_logger] [trace] set port settings
+[2024-05-20 15:42:30.093] [board_logger] [debug] sending v to the board
+[2024-05-20 15:42:31.139] [board_logger] [debug] sending d to the board
+[2024-05-20 15:42:32.353] [board_logger] [debug] sending b to the board
+[2024-05-20 15:42:45.972] [board_logger] [debug] sending s to the board
+[2024-05-20 15:43:16.131] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:43:16.138] [board_logger] [trace] Board object created 0
+[2024-05-20 15:43:16.138] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:43:16.140] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:43:16.142] [board_logger] [trace] set port settings
+[2024-05-20 15:43:16.142] [board_logger] [debug] sending v to the board
+[2024-05-20 15:43:17.163] [board_logger] [debug] sending d to the board
+[2024-05-20 15:43:18.370] [board_logger] [debug] sending b to the board
+[2024-05-20 15:44:23.356] [board_logger] [debug] sending s to the board
+[2024-05-20 15:44:27.899] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 15:44:27.908] [board_logger] [trace] Board object created 0
+[2024-05-20 15:44:27.909] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 15:44:27.912] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 15:44:27.913] [board_logger] [trace] set port settings
+[2024-05-20 15:44:27.913] [board_logger] [debug] sending v to the board
+[2024-05-20 15:44:28.964] [board_logger] [debug] sending d to the board
+[2024-05-20 15:44:30.170] [board_logger] [debug] sending b to the board
+[2024-05-20 16:02:04.582] [board_logger] [debug] sending s to the board
+[2024-05-20 16:02:30.361] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:02:30.367] [board_logger] [trace] Board object created 0
+[2024-05-20 16:02:30.367] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:02:30.370] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:02:30.371] [board_logger] [trace] set port settings
+[2024-05-20 16:02:30.372] [board_logger] [debug] sending v to the board
+[2024-05-20 16:02:31.423] [board_logger] [debug] sending d to the board
+[2024-05-20 16:02:32.637] [board_logger] [debug] sending b to the board
+[2024-05-20 16:11:07.496] [board_logger] [debug] sending s to the board
+[2024-05-20 16:11:29.984] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:11:29.989] [board_logger] [trace] Board object created 0
+[2024-05-20 16:11:29.989] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:11:29.992] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:11:29.993] [board_logger] [trace] set port settings
+[2024-05-20 16:11:29.993] [board_logger] [debug] sending v to the board
+[2024-05-20 16:11:31.018] [board_logger] [debug] sending d to the board
+[2024-05-20 16:11:32.231] [board_logger] [debug] sending b to the board
+[2024-05-20 16:14:06.429] [board_logger] [debug] sending s to the board
+[2024-05-20 16:17:16.971] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:17:16.977] [board_logger] [trace] Board object created 0
+[2024-05-20 16:17:16.977] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:17:16.980] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:17:16.981] [board_logger] [trace] set port settings
+[2024-05-20 16:17:16.982] [board_logger] [debug] sending v to the board
+[2024-05-20 16:17:18.017] [board_logger] [debug] sending d to the board
+[2024-05-20 16:17:19.220] [board_logger] [debug] sending b to the board
+[2024-05-20 16:26:17.750] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:26:17.758] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-20 16:26:27.681] [board_logger] [debug] sending s to the board
+[2024-05-20 16:26:37.366] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:26:37.371] [board_logger] [trace] Board object created 0
+[2024-05-20 16:26:37.372] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:26:37.374] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:26:37.376] [board_logger] [trace] set port settings
+[2024-05-20 16:26:37.376] [board_logger] [debug] sending v to the board
+[2024-05-20 16:26:38.422] [board_logger] [debug] sending d to the board
+[2024-05-20 16:26:39.629] [board_logger] [debug] sending b to the board
+[2024-05-20 16:32:26.547] [board_logger] [debug] sending s to the board
+[2024-05-20 16:33:11.560] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:33:11.565] [board_logger] [trace] Board object created 0
+[2024-05-20 16:33:11.566] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:33:11.568] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:33:11.568] [board_logger] [trace] set port settings
+[2024-05-20 16:33:11.569] [board_logger] [debug] sending v to the board
+[2024-05-20 16:33:12.623] [board_logger] [debug] sending d to the board
+[2024-05-20 16:34:42.080] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:34:42.087] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-20 16:35:14.838] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:35:14.844] [board_logger] [trace] Board object created 0
+[2024-05-20 16:35:14.845] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:35:14.848] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:35:14.849] [board_logger] [trace] set port settings
+[2024-05-20 16:35:14.850] [board_logger] [debug] sending v to the board
+[2024-05-20 16:35:15.896] [board_logger] [debug] sending d to the board
+[2024-05-20 16:35:17.112] [board_logger] [debug] sending b to the board
+[2024-05-20 16:36:11.408] [board_logger] [debug] sending s to the board
+[2024-05-20 16:36:16.480] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:36:16.486] [board_logger] [trace] Board object created 0
+[2024-05-20 16:36:16.487] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:36:16.489] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:36:16.491] [board_logger] [trace] set port settings
+[2024-05-20 16:36:16.491] [board_logger] [debug] sending v to the board
+[2024-05-20 16:36:17.509] [board_logger] [debug] sending d to the board
+[2024-05-20 16:36:18.718] [board_logger] [debug] sending b to the board
+[2024-05-20 16:38:21.171] [board_logger] [debug] sending s to the board
+[2024-05-20 16:38:27.881] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:38:27.886] [board_logger] [trace] Board object created 0
+[2024-05-20 16:38:27.887] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:38:27.889] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:38:27.890] [board_logger] [trace] set port settings
+[2024-05-20 16:38:27.891] [board_logger] [debug] sending v to the board
+[2024-05-20 16:38:28.930] [board_logger] [debug] sending d to the board
+[2024-05-20 16:38:30.136] [board_logger] [debug] sending b to the board
+[2024-05-20 16:41:44.736] [board_logger] [debug] sending s to the board
+[2024-05-20 16:42:07.276] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:42:07.281] [board_logger] [trace] Board object created 0
+[2024-05-20 16:42:07.281] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:42:07.283] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:42:07.285] [board_logger] [trace] set port settings
+[2024-05-20 16:42:07.286] [board_logger] [debug] sending v to the board
+[2024-05-20 16:42:08.303] [board_logger] [debug] sending d to the board
+[2024-05-20 16:42:09.506] [board_logger] [debug] sending b to the board
+[2024-05-20 16:45:18.983] [board_logger] [debug] sending s to the board
+[2024-05-20 16:45:39.888] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:45:39.894] [board_logger] [trace] Board object created 0
+[2024-05-20 16:45:39.895] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:45:39.898] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:45:39.899] [board_logger] [trace] set port settings
+[2024-05-20 16:45:39.900] [board_logger] [debug] sending v to the board
+[2024-05-20 16:45:40.949] [board_logger] [debug] sending d to the board
+[2024-05-20 16:45:42.156] [board_logger] [debug] sending b to the board
+[2024-05-20 16:57:44.820] [board_logger] [debug] sending s to the board
+[2024-05-20 16:59:40.866] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 16:59:40.871] [board_logger] [trace] Board object created 0
+[2024-05-20 16:59:40.872] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 16:59:40.874] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 16:59:40.876] [board_logger] [trace] set port settings
+[2024-05-20 16:59:40.877] [board_logger] [debug] sending v to the board
+[2024-05-20 16:59:41.911] [board_logger] [debug] sending d to the board
+[2024-05-20 16:59:43.122] [board_logger] [debug] sending b to the board
+[2024-05-20 17:02:26.996] [board_logger] [debug] sending s to the board
+[2024-05-20 17:04:01.424] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:04:01.430] [board_logger] [trace] Board object created 0
+[2024-05-20 17:04:01.431] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:04:01.433] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:04:01.434] [board_logger] [trace] set port settings
+[2024-05-20 17:04:01.434] [board_logger] [debug] sending v to the board
+[2024-05-20 17:04:02.475] [board_logger] [debug] sending d to the board
+[2024-05-20 17:04:03.685] [board_logger] [debug] sending b to the board
+[2024-05-20 17:04:58.584] [board_logger] [debug] sending s to the board
+[2024-05-20 17:05:31.139] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:05:31.145] [board_logger] [trace] Board object created 0
+[2024-05-20 17:05:31.145] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:05:31.148] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:05:31.150] [board_logger] [trace] set port settings
+[2024-05-20 17:05:31.151] [board_logger] [debug] sending v to the board
+[2024-05-20 17:05:32.161] [board_logger] [debug] sending d to the board
+[2024-05-20 17:05:33.365] [board_logger] [debug] sending b to the board
+[2024-05-20 17:11:53.068] [board_logger] [debug] sending s to the board
+[2024-05-20 17:12:09.340] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:12:09.349] [board_logger] [trace] Board object created 0
+[2024-05-20 17:12:09.349] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:12:09.352] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:12:09.354] [board_logger] [trace] set port settings
+[2024-05-20 17:12:09.354] [board_logger] [debug] sending v to the board
+[2024-05-20 17:12:10.387] [board_logger] [debug] sending d to the board
+[2024-05-20 17:12:11.601] [board_logger] [debug] sending b to the board
+[2024-05-20 17:14:09.902] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:14:09.908] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-20 17:14:13.586] [board_logger] [debug] sending s to the board
+[2024-05-20 17:14:15.439] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:14:15.442] [board_logger] [trace] Board object created 0
+[2024-05-20 17:14:15.442] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:14:15.444] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:14:15.445] [board_logger] [trace] set port settings
+[2024-05-20 17:14:15.445] [board_logger] [debug] sending v to the board
+[2024-05-20 17:14:16.462] [board_logger] [debug] sending d to the board
+[2024-05-20 17:14:17.672] [board_logger] [debug] sending b to the board
+[2024-05-20 17:15:16.820] [board_logger] [debug] sending s to the board
+[2024-05-20 17:15:19.304] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:15:19.307] [board_logger] [trace] Board object created 0
+[2024-05-20 17:15:19.308] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:15:19.310] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:15:19.311] [board_logger] [trace] set port settings
+[2024-05-20 17:15:19.311] [board_logger] [debug] sending v to the board
+[2024-05-20 17:15:20.333] [board_logger] [debug] sending d to the board
+[2024-05-20 17:15:21.537] [board_logger] [debug] sending b to the board
+[2024-05-20 17:20:54.296] [board_logger] [debug] sending s to the board
+[2024-05-20 17:21:22.261] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:21:22.266] [board_logger] [trace] Board object created 0
+[2024-05-20 17:21:22.267] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:21:22.269] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:21:22.271] [board_logger] [trace] set port settings
+[2024-05-20 17:21:22.271] [board_logger] [debug] sending v to the board
+[2024-05-20 17:21:23.291] [board_logger] [debug] sending d to the board
+[2024-05-20 17:21:24.499] [board_logger] [debug] sending b to the board
+[2024-05-20 17:22:52.024] [board_logger] [debug] sending s to the board
+[2024-05-20 17:23:15.939] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:23:15.943] [board_logger] [trace] Board object created 0
+[2024-05-20 17:23:15.944] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:23:15.946] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:23:15.947] [board_logger] [trace] set port settings
+[2024-05-20 17:23:15.948] [board_logger] [debug] sending v to the board
+[2024-05-20 17:23:16.923] [board_logger] [debug] sending d to the board
+[2024-05-20 17:23:18.133] [board_logger] [debug] sending b to the board
+[2024-05-20 17:30:31.504] [board_logger] [debug] sending s to the board
+[2024-05-20 17:30:43.839] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:30:43.842] [board_logger] [trace] Board object created 0
+[2024-05-20 17:30:43.843] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:30:43.846] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:30:43.847] [board_logger] [trace] set port settings
+[2024-05-20 17:30:43.848] [board_logger] [debug] sending v to the board
+[2024-05-20 17:30:44.876] [board_logger] [debug] sending d to the board
+[2024-05-20 17:30:46.085] [board_logger] [debug] sending b to the board
+[2024-05-20 17:34:23.254] [board_logger] [debug] sending s to the board
+[2024-05-20 17:34:56.856] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:34:56.868] [board_logger] [trace] Board object created 0
+[2024-05-20 17:34:56.869] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:34:56.873] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:34:56.876] [board_logger] [trace] set port settings
+[2024-05-20 17:34:56.878] [board_logger] [debug] sending v to the board
+[2024-05-20 17:34:57.906] [board_logger] [debug] sending d to the board
+[2024-05-20 17:34:59.108] [board_logger] [debug] sending b to the board
+[2024-05-20 17:49:09.379] [board_logger] [debug] sending s to the board
+[2024-05-20 17:49:25.169] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:49:25.175] [board_logger] [trace] Board object created 0
+[2024-05-20 17:49:25.176] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:49:25.178] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:49:25.180] [board_logger] [trace] set port settings
+[2024-05-20 17:49:25.181] [board_logger] [debug] sending v to the board
+[2024-05-20 17:49:26.214] [board_logger] [debug] sending d to the board
+[2024-05-20 17:49:27.417] [board_logger] [debug] sending b to the board
+[2024-05-20 17:49:49.745] [board_logger] [debug] sending s to the board
+[2024-05-20 17:50:08.461] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:50:08.466] [board_logger] [trace] Board object created 0
+[2024-05-20 17:50:08.467] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:50:08.470] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:50:08.471] [board_logger] [trace] set port settings
+[2024-05-20 17:50:08.472] [board_logger] [debug] sending v to the board
+[2024-05-20 17:50:09.509] [board_logger] [debug] sending d to the board
+[2024-05-20 17:50:10.711] [board_logger] [debug] sending b to the board
+[2024-05-20 17:51:22.154] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:51:22.163] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-20 17:51:26.296] [board_logger] [debug] sending s to the board
+[2024-05-20 17:51:33.340] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:51:33.361] [board_logger] [trace] Board object created 0
+[2024-05-20 17:51:33.362] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:51:33.365] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:51:33.367] [board_logger] [trace] set port settings
+[2024-05-20 17:51:33.368] [board_logger] [debug] sending v to the board
+[2024-05-20 17:51:34.811] [board_logger] [debug] sending d to the board
+[2024-05-20 17:51:36.017] [board_logger] [debug] sending b to the board
+[2024-05-20 17:52:50.160] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:52:50.167] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-20 17:52:54.234] [board_logger] [debug] sending s to the board
+[2024-05-20 17:52:58.172] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:52:58.178] [board_logger] [trace] Board object created 0
+[2024-05-20 17:52:58.179] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:52:58.181] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:52:58.182] [board_logger] [trace] set port settings
+[2024-05-20 17:52:58.183] [board_logger] [debug] sending v to the board
+[2024-05-20 17:52:59.207] [board_logger] [debug] sending d to the board
+[2024-05-20 17:53:00.410] [board_logger] [debug] sending b to the board
+[2024-05-20 17:53:22.230] [board_logger] [debug] sending s to the board
+[2024-05-20 17:53:56.725] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:53:56.730] [board_logger] [trace] Board object created 0
+[2024-05-20 17:53:56.733] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:53:56.735] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:53:56.737] [board_logger] [trace] set port settings
+[2024-05-20 17:53:56.738] [board_logger] [debug] sending v to the board
+[2024-05-20 17:53:57.759] [board_logger] [debug] sending d to the board
+[2024-05-20 17:53:58.961] [board_logger] [debug] sending b to the board
+[2024-05-20 17:56:38.691] [board_logger] [debug] sending s to the board
+[2024-05-20 17:57:04.984] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 17:57:04.990] [board_logger] [trace] Board object created 0
+[2024-05-20 17:57:04.991] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 17:57:04.992] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 17:57:04.993] [board_logger] [trace] set port settings
+[2024-05-20 17:57:04.994] [board_logger] [debug] sending v to the board
+[2024-05-20 17:57:06.022] [board_logger] [debug] sending d to the board
+[2024-05-20 17:57:07.226] [board_logger] [debug] sending b to the board
+[2024-05-20 18:05:20.153] [board_logger] [debug] sending s to the board
+[2024-05-20 18:05:41.704] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:05:41.710] [board_logger] [trace] Board object created 0
+[2024-05-20 18:05:41.710] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 18:05:41.712] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 18:05:41.713] [board_logger] [trace] set port settings
+[2024-05-20 18:05:41.714] [board_logger] [debug] sending v to the board
+[2024-05-20 18:05:42.745] [board_logger] [debug] sending d to the board
+[2024-05-20 18:05:43.944] [board_logger] [debug] sending b to the board
+[2024-05-20 18:09:09.818] [board_logger] [debug] sending s to the board
+[2024-05-20 18:09:13.946] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:09:13.952] [board_logger] [trace] Board object created 0
+[2024-05-20 18:09:13.953] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 18:09:13.955] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 18:09:13.956] [board_logger] [trace] set port settings
+[2024-05-20 18:09:13.957] [board_logger] [debug] sending v to the board
+[2024-05-20 18:09:14.994] [board_logger] [debug] sending d to the board
+[2024-05-20 18:09:16.197] [board_logger] [debug] sending b to the board
+[2024-05-20 18:10:29.012] [board_logger] [debug] sending s to the board
+[2024-05-20 18:10:32.391] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:10:32.398] [board_logger] [trace] Board object created 0
+[2024-05-20 18:10:32.399] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 18:10:32.402] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 18:10:32.404] [board_logger] [trace] set port settings
+[2024-05-20 18:10:32.405] [board_logger] [debug] sending v to the board
+[2024-05-20 18:10:33.451] [board_logger] [debug] sending d to the board
+[2024-05-20 18:10:34.659] [board_logger] [debug] sending b to the board
+[2024-05-20 18:12:33.851] [board_logger] [debug] sending s to the board
+[2024-05-20 18:12:38.001] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:12:38.012] [board_logger] [trace] Board object created 0
+[2024-05-20 18:12:38.014] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 18:12:38.016] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 18:12:38.017] [board_logger] [trace] set port settings
+[2024-05-20 18:12:38.018] [board_logger] [debug] sending v to the board
+[2024-05-20 18:12:39.073] [board_logger] [debug] sending d to the board
+[2024-05-20 18:12:40.277] [board_logger] [debug] sending b to the board
+[2024-05-20 18:15:16.294] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:15:16.301] [board_logger] [error] Board with id 0 and the same config already exists
+[2024-05-20 18:15:19.724] [board_logger] [debug] sending s to the board
+[2024-05-20 18:15:48.136] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:15:48.142] [board_logger] [trace] Board object created 0
+[2024-05-20 18:15:48.143] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 18:15:48.146] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 18:15:48.147] [board_logger] [trace] set port settings
+[2024-05-20 18:15:48.147] [board_logger] [debug] sending v to the board
+[2024-05-20 18:15:49.151] [board_logger] [debug] sending d to the board
+[2024-05-20 18:15:50.353] [board_logger] [debug] sending b to the board
+[2024-05-20 18:18:39.670] [board_logger] [debug] sending s to the board
+[2024-05-20 18:19:05.313] [board_logger] [info] incoming json: {"serial_port":"COM5","mac_address":"","ip_address":"","ip_address_aux":"","ip_address_anc":"","ip_port":0,"ip_port_aux":0,"ip_port_anc":0,"ip_protocol":0,"other_info":"","timeout":0,"serial_number":"","file":"","file_aux":"","file_anc":"","master_board":-100}
+[2024-05-20 18:19:05.319] [board_logger] [trace] Board object created 0
+[2024-05-20 18:19:05.319] [board_logger] [info] opening port \\.\COM5
+[2024-05-20 18:19:05.322] [board_logger] [trace] port \\.\COM5 is open
+[2024-05-20 18:19:05.323] [board_logger] [trace] set port settings
+[2024-05-20 18:19:05.325] [board_logger] [debug] sending v to the board
+[2024-05-20 18:19:06.364] [board_logger] [debug] sending d to the board
+[2024-05-20 18:19:07.569] [board_logger] [debug] sending b to the board

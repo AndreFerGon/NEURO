@@ -1,7 +1,7 @@
 %%  data import and visualization
 close all, clear, clc
 
-flick_f = 36;
+flick_f = 24;
 data = table2array(readtable(['Data/Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
 data = data(100:end, :);
 

@@ -1,0 +1,9 @@
+Stream start: 16:02:32.642
+
+cagar na primeira  e segunda estimulação
+
+rest 5s stim 5s
+
+7.2 8 9 12
+
+threshold = 0.24

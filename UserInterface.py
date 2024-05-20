@@ -115,11 +115,14 @@ def main():
     time.sleep(1)
 
     # Set up the screen
+
     screen_width = 1200
     screen_height = 800
+
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     current_time = pygame.time.get_ticks()
+
 
     default_colored_square_color = BLACK
     color_squares = []
@@ -137,16 +140,19 @@ def main():
         color_squares.append({"square": color_square, "id": info["id"]})
 
     # Frequency of square show/hide (seconds)
-    frequency = [1, 2, 4, 8, 16]
+
+    # Frequency of square show/hide (seconds)
+    frequency = [7.2,8,9,9.6,12]
+
     delays = [500 / f for f in frequency]
 
     # Positions and sizes for each square
     square_params = [
         {"position": (screen_width / 32.4, screen_height / 20), "delay": delays[1]},
-        {"position": (screen_width / 32.4, screen_height / 1.5384), "delay": delays[3]},
-        {"position": (screen_width / 1.3, screen_height / 20), "delay": delays[4]},
-        {"position": (screen_width / 1.3, screen_height / 1.5384), "delay": delays[2]},
-        {"position": (screen_width / 2.49, screen_height / 2.857), "delay": delays[0]}
+        #{"position": (screen_width / 32.4, screen_height / 1.5384), "delay": delays[3]},
+        #{"position": (screen_width / 1.3, screen_height / 20), "delay": delays[4]},
+        #{"position": (screen_width / 1.3, screen_height / 1.5384), "delay": delays[2]},
+        #{"position": (screen_width / 2.49, screen_height / 2.857), "delay": delays[0]}
     ]
 
     squares = []
@@ -494,6 +500,7 @@ def main():
         # Draw on the screen
         fenetre.fill(BLACK)
 
+
         # Draw the icons onto the window surface if the input is 0
         if display_icons_flag:
             display_icons(fenetre, screen_width, screen_height)
@@ -503,6 +510,7 @@ def main():
 
         if playing and sample != -1:
             display_play_icon(fenetre, screen_width, screen_height,sample)
+
 
         for cs in color_squares:
             cs["square"].draw(fenetre)
