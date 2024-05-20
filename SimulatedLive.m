@@ -76,6 +76,17 @@ order = 2;
 
 %% Simulate Data Acquisition and Real-time Plotting
 
+
+host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
+port = 12345;         % Port number on which Python server is listening
+% 
+try
+    tto = tcpclient(host, port);
+catch ME
+    error('Failed to create TCP connection: %s', ME.message);
+end
+
+
 % Initialize figure for real-time plotting
 figure;
 subplot(1,2,1)
@@ -173,6 +184,7 @@ while true
     try
         if (counter == 3)                 
             % Send random integer numbers every second
+
             if refFreq(ind) == 7.2
                 message = sprintf('%i', 0);                    
             elseif refFreq(ind) == 8
@@ -202,6 +214,7 @@ while true
         % if exist('tto', 'var') && isvalid(tto)
         %     delete(tto);  % Close and delete the tcpclient object on error
         % end
+
     end
 
 end
