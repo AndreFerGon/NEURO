@@ -15,7 +15,9 @@ fs = 250;
 data_save = [];
 window_size = 5.5; % in seconds
 step_size = 1; % in seconds
-threshold = 0.24;
+%threshold = 0.24;
+thresholds = [0.24, 0.18, 0.10, 0.24]; % Define specific thresholds for each frequency
+
 
 filter_crop = 1.5;
 
@@ -28,7 +30,7 @@ board_shim = BoardShim(0, params); % BoardIds.SYNTHETIC_BOARD (-1)  |  BoardIds.
 preset = int32(BrainFlowPresets.DEFAULT_PRESET);
 
 %% Initializing variables for using CCA;
-refFreq = [7.2 8 9 9.6 12];
+refFreq = [7.2 8 9 12];
 time = window_size-filter_crop; % Seconds;
 classNum = length(refFreq); 
 %trialNum = 1;
@@ -68,8 +70,14 @@ disp(['Stream start: ', char(currentTime)]);
 
 host = 'localhost';  % Use 'localhost' or '127.0.0.1' if running on the same machine
 port = 12345;         % Port number on which Python server is listening
-% 
-tto = tcpclient(host, port);
+
+% Initialize tcpclient and handle potential connection errors
+try
+    tto = tcpclient(host, port);
+catch ME
+    disp(['Error initializing TCP client: ', ME.message]);
+    return;
+end
 
 % Initialize figure for real-time plotting
 figure;
@@ -99,7 +107,7 @@ ylabel('Power');
 xlim([0 50]) % Set initial x-axis limits
 legend('show');
 
-window_data = zeros(1, window_size*fs); % Initialize window data
+window_data = zeros(3, window_size*fs); % Initialize window data
 filtered_window = zeros(1, (window_size-filter_crop)*fs);
 
 i_segment = 0;
@@ -107,6 +115,8 @@ prev_ind = 0;
 ind = 0;
 
 cca_vector = [];
+cca_vector_time = [];
+counter = zeros(1,5);
 
 stopLoop = true;
 while stopLoop
@@ -123,26 +133,27 @@ while stopLoop
 
     t = 0:1/fs:(size(data,2)-1)/fs;
 
-    channel = 3;
-    window_data = [window_data(length(data)+1:end), data(channel,:)];
+    %channel = 3;
+    window_data = [window_data(:,length(data)+1:end), data(3:5,:)];
 
-    filtered_window = filter(low_b, low_a, window_data);
-    filtered_window = filter(high_b, high_a, filtered_window);
-    filtered_window = filter(notch_b, notch_a, filtered_window);
+    filtered_window = filter(low_b, low_a, window_data, [], 2);
+    filtered_window = filter(high_b, high_a, filtered_window, [], 2);
+    filtered_window = filter(notch_b, notch_a, filtered_window, [], 2);
 
-    filtered_window = filtered_window(250*filter_crop+1:end);
+    filtered_window = filtered_window(:, 250*filter_crop+1:end);
+    t_segment = -(window_size-filter_crop):1/fs:0-1/fs;
 
 
     % Update plot with offsets
-    set(h1, 'XData', t_segment, 'YData', filtered_window(:, 1));
-    set(h2, 'XData', t_segment, 'YData', filtered_window(:, 2) - 200);
-    set(h3, 'XData', t_segment, 'YData', filtered_window(:, 3) + 200);
-    xlim([t_segment(1) t_segment(end)]);
+    set(h1, 'XData', t_segment, 'YData', filtered_window(1, :));
+    set(h2, 'XData', t_segment, 'YData', filtered_window(2, :) - 200);
+    set(h3, 'XData', t_segment, 'YData', filtered_window(3, :) + 200);
+    xlim([t_segment(1) 0]);
     
     % Calculate PSD
-    [p1, ~] = periodogram(filtered_window(:, 1), [], [], fs);
-    [p2, ~] = periodogram(filtered_window(:, 2), [], [], fs);
-    [p3, f] = periodogram(filtered_window(:, 3), [], [], fs);
+    [p1, ~] = periodogram(filtered_window(1, :), [], [], fs);
+    [p2, ~] = periodogram(filtered_window(2, :), [], [], fs);
+    [p3, f] = periodogram(filtered_window(3, :), [], [], fs);
 
     % Update PSD plot
     set(h4, 'XData', f, 'YData', p1);
@@ -159,40 +170,57 @@ while stopLoop
     end
     [m, ind] = max(r);
 
-    cca_vector = [cca_vector; [t_segment(1) r]];
+    currentTime = datetime('now', 'Format', 'HH:mm:ss.SSS');
+    cca_vector_time = [cca_vector_time; [char(datetime('now', 'Format', 'HH:mm:ss.SSS'))]];
+    cca_vector = [cca_vector; r];
 
-    if(m>threshold && prev_ind==ind)
-        counter = counter+1;
+    % Use the specific threshold for the detected frequency
+    if(m > thresholds(ind))
+        counter = [counter(2:5), refFreq(ind)];
     else
-        counter = 0;
+        counter = [counter(2:5), 0];
     end
 
-    if(m>threshold)
-     fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
-    end
+    % if(m>threshold)
+    %  fprintf('SSVEP Frequency: %d Hz (canoncorr = %f) \n', refFreq(ind), m);
+    % end
 
     try
-         if (counter == 4)                 
+        %message = -1;
+         % if (counter == 3)                 
         % Send random integer numbers every second
-            if refFreq(ind) == 7.2
-                message = sprintf('%d', 0);                    
-            elseif refFreq(ind) == 8
-                message = sprintf('%d', 1);
-            elseif refFreq(ind) == 9
-                message = sprintf('%d', 2);
-            elseif refFreq(ind) == 9.6
-                message = sprintf('%d', 3);
-            elseif refFreq(ind) == 12
-                message = sprintf('%d', 4);
-            end      
-            fprintf('CLASS DETECTED: %d Hz  \n', refFreq(ind));
+            if sum(counter == 7.2) == 3
+                message = sprintf('%d', 1); 
+                write(tto, message);
+                fprintf('CLASS DETECTED: %d Hz  \n', 7.2);
+                counter = zeros(1,5);
 
-            counter = 0;
-         end
+            elseif sum(counter == 8) == 3
+                message = sprintf('%d', 2);
+                write(tto, message);
+                fprintf('CLASS DETECTED: %d Hz  \n', 8);
+                counter = zeros(1,5);
+
+            elseif sum(counter == 9) == 3
+                message = sprintf('%d', 3);
+                write(tto, message);
+                fprintf('CLASS DETECTED: %d Hz  \n', 9);
+                counter = zeros(1,5);
+
+            elseif sum(counter == 12) == 3
+                message = sprintf('%d', 4);
+                write(tto, message);
+                fprintf('CLASS DETECTED: %d Hz  \n', 12);
+                counter = zeros(1,5);
+            end      
+            
+
+            
+         % end
 
 
             % Send the message over TCP/IP
-            write(tto, message);  % Send as characters
+            %write(tto, message);  % Send as characters
 
             % Display the sent message (optional)
             %disp(['Frequency: ', num2str(message)]);
@@ -200,7 +228,7 @@ while stopLoop
 
 
     catch ME
-        %disp(['Error occurred: ', ME.message]);
+        disp(['Error occurred: ', ME.message]);
         if exist('tto', 'var') && isvalid(tto)
             delete(tto);  % Close and delete the tcpclient object on error
         end
@@ -209,6 +237,5 @@ while stopLoop
 
 end
 
-board_shim.stop_stream();
-board_shim.release_session();
+board_shim.stop_stream(); board_shim.release_session();
 sound(sin(0:1000)); % play stop beep sound for 3s

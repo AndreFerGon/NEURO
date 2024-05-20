@@ -115,8 +115,8 @@ def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 800
-    screen_height = 600
+    screen_width = 1500
+    screen_height = 800
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     # Set up the font for the stopwatch
@@ -131,7 +131,7 @@ def main():
     frequency_change_time = current_time  # Track the time of the last frequency change
 
     # Frequency array (Hz)
-    frequencies = [1,2,4,8]
+    frequencies = [7.2 , 8, 9 , 12]
 
     # Initial frequency
     frequency = frequencies[frequency_index]
@@ -186,6 +186,9 @@ def main():
     server_thread = threading.Thread(target=setup_server)
     server_thread.start()
 
+    rest_time = 6000
+    rest_plus_stimuli_time = 12000
+
  
     with open("frequency_blink_times.json", "a") as file: 
         while True:
@@ -208,7 +211,7 @@ def main():
                     stopwatch_surface = font.render(stopwatch_text, True, WHITE)
 
                     # If 10 seconds have passed since last display time, switch to the next frequency
-                    if current_time - last_display_time >= 10000:
+                    if current_time - last_display_time >= rest_plus_stimuli_time:
                         # Move to the next frequency
                         frequency_index = (frequency_index + 1) % len(frequencies)
                         frequency = frequencies[frequency_index]
@@ -221,7 +224,7 @@ def main():
                         #print(f"Frequency changed to {frequency} Hz with delay {delay} ms")
 
                     # Update the square
-                    if current_time - frequency_change_time >= 5000 and not showing:
+                    if current_time - frequency_change_time >= rest_time and not showing:
                         showing = True
                         current_time = pygame.time.get_ticks()                        
                         show_icon = True
@@ -258,6 +261,22 @@ def main():
                                     correct_guess = False    
 
                                 change_colored_squares(color_squares, correct_guess)
+                            elif showing == False:
+                                if frequency_index == 0:	
+                                    guess_frequency = 3
+                                else:   
+                                    guess_frequency = frequency_index - 1                                
+                                if user_index - 1 == guess_frequency:
+                                    print("Correct frequency")
+                                    correct_guess = True
+                                    play_sound(user_index)
+                                else:
+                                    print("Wrong frequency")
+                                    correct_guess = False    
+
+                                change_colored_squares(color_squares, correct_guess)
+                        
+
                         except ValueError:
                             print("Invalid input. Please enter a number between 0 and 3.")
 
