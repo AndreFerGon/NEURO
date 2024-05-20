@@ -11,20 +11,20 @@ fs = 250;
 % load("Data/S202007965_21_Protocol#3_Trial3.csv");
 % eeg_data = S202007965_21_Protocol_3_Trial3(:, 2:4);
 
-% flick_f = 16;
-% data = table2array(readtable(['Data/Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
-% data16Hz = data(15*250:25*250, 2:4);
-% 
-% flick_f = 24;
-% data = table2array(readtable(['Data/Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
-% data24Hz = data(15*250:25*250, 2:4);
-% 
-% eeg_data = [data16Hz; data24Hz; data16Hz; data24Hz; data16Hz; data24Hz];
+flick_f = 16;
+data = table2array(readtable(['Data/Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
+data16Hz = data(15*250:25*250, 2:4);
 
-load("lastAcquisition.mat")
-% eeg_data = eeg_raw_arr(2:9, :);
-eeg_data = eeg_raw_arr(3:5, :)'; % 10s rest, 13s 7.2Hz, 28s rest, 
-% 20s 8Hz, 20s rest, 26s 9Hz, 24s rest, 20s 9.6Hz, 20s rest, 20s 12Hz, 9s rest
+flick_f = 24;
+data = table2array(readtable(['Data/Protocol#1_202007965_21_Male_', num2str(flick_f), 'Hz.csv']));
+data24Hz = data(15*250:25*250, 2:4);
+
+eeg_data = [data16Hz; data24Hz; data16Hz; data24Hz; data16Hz; data24Hz];
+
+% load("lastAcquisition.mat")
+% % eeg_data = eeg_raw_arr(2:9, :);
+% eeg_data = eeg_raw_arr(3:5, :)'; % 10s rest, 13s 7.2Hz, 28s rest, 
+% % 20s 8Hz, 20s rest, 26s 9Hz, 24s rest, 20s 9.6Hz, 20s rest, 20s 12Hz, 9s rest
 
 t = 0:1/fs:(size(eeg_data, 1)/250 - 1/fs);
 
@@ -111,7 +111,7 @@ counter = 0;
 ind=0;
 prev_ind=0;
 
-
+cca_vector = [];
 
 while true
     i_segment = i_segment + 1;
@@ -136,8 +136,8 @@ while true
     xlim([t_segment(1) t_segment(end)]);
     
     % Calculate PSD
-    [p1, f] = periodogram(filtered_window(:, 1), [], [], fs);
-    [p2, f] = periodogram(filtered_window(:, 2), [], [], fs);
+    [p1, ~] = periodogram(filtered_window(:, 1), [], [], fs);
+    [p2, ~] = periodogram(filtered_window(:, 2), [], [], fs);
     [p3, f] = periodogram(filtered_window(:, 3), [], [], fs);
 
     % Update PSD plot
@@ -153,6 +153,8 @@ while true
         [~, ~, corr] = canoncorr(filtered_window, Y{j}');
         r(j) = max(corr);
     end
+
+    c
 
     [m, ind] = max(r);
     

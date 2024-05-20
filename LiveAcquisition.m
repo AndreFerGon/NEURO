@@ -106,6 +106,8 @@ i_segment = 0;
 prev_ind = 0;
 ind = 0;
 
+cca_vector = [];
+
 stopLoop = true;
 while stopLoop
     i_segment = i_segment + 1;
@@ -157,7 +159,7 @@ while stopLoop
     end
     [m, ind] = max(r);
 
-   
+    cca_vector = [cca_vector; [t_segment(1) r]];
 
     if(m>threshold && prev_ind==ind)
         counter = counter+1;
