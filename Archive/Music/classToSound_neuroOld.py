@@ -98,29 +98,27 @@ def playSounds():
                 # If the sound for this class is already playing, stop it
                     if audioToPlay in playingSounds:
                         print("\nStopping sound", audioToPlay, '\n')
-                        # alignAction(timezero, magnet, tempoDelay)
+                        alignAction(timezero, magnet, tempoDelay)
                         playingSounds[audioToPlay].stop()
 
                         del playingSounds[audioToPlay]
-                    
                     # If a sound of this instrument is already playing, switch them
-                    # elif audioToPlay[0] in [i[0] for i in playingSounds]:
+                    elif audioToPlay[0] in [i[0] for i in playingSounds]:
                         
-                    #     playingSounds[audioToPlay] = soundchoice
-                    #     playInstrument_key = [key for key in playingSounds if key[0] == audioToPlay[0]][0]
-                    #     print(f"\nSwitching {playInstrument_key} for {audioToPlay}", '\n')
+                        playingSounds[audioToPlay] = soundchoice
+                        playInstrument_key = [key for key in playingSounds if key[0] == audioToPlay[0]][0]
+                        print(f"\nSwitching {playInstrument_key} for {audioToPlay}", '\n')
 
-                    #     # alignAction(timezero, magnet, tempoDelay)
-                    #     playingSounds[playInstrument_key].stop()
-                    #     playingSounds[audioToPlay].play(-1)
-                    #     del playingSounds[playInstrument_key]
-                    
+                        alignAction(timezero, magnet, tempoDelay)
+                        playingSounds[playInstrument_key].stop()
+                        playingSounds[audioToPlay].play(-1)
+                        del playingSounds[playInstrument_key]
                 # Otherwise, start playing the sound in a loop    
                     else:
                         print("\nPlaying sound", audioToPlay, '\n')
                         playingSounds[audioToPlay] = soundchoice
 
-                        # alignAction(timezero, magnet, tempoDelay)
+                        alignAction(timezero, magnet, tempoDelay)
                         playingSounds[audioToPlay].play(-1)  # -1 means loop indefinitely
                     
         # if the label is a mode class, switch between modes
