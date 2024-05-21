@@ -137,7 +137,7 @@ def main():
         color_squares.append({"square": color_square, "id": info["id"]})
 
     # Frequency of square show/hide (seconds)
-    frequency = [1, 2, 4, 8, 16]
+    frequency = [7.2,8,9,9.6,12]
     delays = [500 / f for f in frequency]
 
     # Positions and sizes for each square

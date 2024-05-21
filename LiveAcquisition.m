@@ -4,13 +4,6 @@
 clear, clc, close all
 
 openBCI_serial_port = 'COM5'; % For Windows Operating System | Change the serial port accordingly
-<<<<<<< HEAD
-file_name = 'data/raw_data.csv';
-fs = 250;
-data_save = [];
-window_size = 5.5; % in seconds
-step_size = 0.5; % in seconds
-=======
 
 % Variables used to store the data and pass them into csv files (Hasbulla)
 eeg_raw_arr = [];
@@ -25,7 +18,6 @@ step_size = 1; % in seconds
 %threshold = 0.24;
 thresholds = [0.24, 0.18, 0.10, 0.24]; % Define specific thresholds for each frequency
 
->>>>>>> cbcc04a0f60b4a6ae28dc0774c11d62abba3ae98
 
 filter_crop = 1.5;
 
@@ -38,11 +30,7 @@ board_shim = BoardShim(0, params); % BoardIds.SYNTHETIC_BOARD (-1)  |  BoardIds.
 preset = int32(BrainFlowPresets.DEFAULT_PRESET);
 
 %% Initializing variables for using CCA;
-<<<<<<< HEAD
-refFreq = [7.2 8 9 9.6 12];
-=======
 refFreq = [7.2 8 9 12];
->>>>>>> cbcc04a0f60b4a6ae28dc0774c11d62abba3ae98
 time = window_size-filter_crop; % Seconds;
 classNum = length(refFreq); 
 %trialNum = 1;
@@ -77,29 +65,6 @@ order = 2;
 
 board_shim.prepare_session();
 board_shim.start_stream(450000, '');
-<<<<<<< HEAD
-
-% Initialize figure for real-time plotting
-figure;
-subplot(2,1,1)
-h1 = plot(zeros(1,2*fs)); % Initialize plot
-title('Filtered EEG Data');
-xlabel('Time (s)');
-ylabel('Amplitude');
-ylim([-100 100]);
-
-subplot(2,1,2)
-h2 = plot(linspace(0,fs/2,fs/2+1), zeros(1,fs/2+1)); % Initialize plot
-title('Filtered EEG Data PSD');
-xlabel('Frequency (Hz)');
-ylabel('Power');
-
-window_data = zeros(1, window_size*fs); % Initialize window data
-filtered_window = zeros(1, (window_size-filter_crop)*fs);
-
-i_segment = 0;
-while true
-=======
 currentTime = datetime('now', 'Format', 'HH:mm:ss.SSS');
 disp(['Stream start: ', char(currentTime)]);
 
@@ -155,50 +120,10 @@ counter = zeros(1,5);
 
 stopLoop = true;
 while stopLoop
->>>>>>> cbcc04a0f60b4a6ae28dc0774c11d62abba3ae98
     i_segment = i_segment + 1;
     pause(step_size); % Wait for step_size seconds
     % 1: Signal Acquisition
     data = board_shim.get_board_data(board_shim.get_board_data_count(preset), preset);
-<<<<<<< HEAD
-
-    t = 0:1/fs:(size(data,2)-1)/fs;
-
-    channel = 3;
-    window_data = [window_data(length(data)+1:end), data(channel,:)];
-
-    filtered_window = filter(low_b, low_a, window_data);
-    filtered_window = filter(high_b, high_a, filtered_window);
-    filtered_window = filter(notch_b, notch_a, filtered_window);
-
-    filtered_window = filtered_window(250*filter_crop+1:end);
-
-    % % Update plot
-    % subplot(2,1,1);
-    % set(h1, 'XData', (0:1/fs:window_size-1/fs), 'YData', window_data);
-    % xlim([0 window_size]);
-    % 
-    % subplot(2,1,2);
-    % [f,p] = periodogram(window_data,[],[],fs);
-    % set(h2, 'XData', f, 'YData', 10*log10(p));
-    % xlim([0 fs/2]);
-
-
-    % Update plot
-    subplot(2,1,1);
-    set(h1, 'XData', (0:1/fs:(window_size-filter_crop-1/fs)), 'YData', filtered_window);
-    xlim([0 window_size]);
-
-    subplot(2,1,2);
-    [p, f] = periodogram(filtered_window,[],[],fs);
-    set(h2, 'XData', f, 'YData', 10*log10(p));
-    xlim([4 40]);
-
-    drawnow;
-
-    for j = 1:classNum
-
-=======
     %size(data)
 
     % Save incoming raw data to raw_eeg_arr (Hasbulla)
@@ -240,26 +165,11 @@ while stopLoop
 
     prev_ind = ind;
     for j = 1:classNum
->>>>>>> cbcc04a0f60b4a6ae28dc0774c11d62abba3ae98
         [~, ~, corr] = canoncorr(filtered_window', Y{j}');
         r(j) = max(corr);
     end
     [m, ind] = max(r);
 
-<<<<<<< HEAD
-    if(m>0.24)
-     fprintf('SSVEP Frequency: %f Hz (canoncorr = %f) \n', refFreq(ind), m);
-    end
-
-    % % Check if the escape key is pressed
-    % if waitforbuttonpress == 1
-    %     break;
-    % end
-end
-
-board_shim.stop_stream();
-board_shim.release_session();
-=======
     currentTime = datetime('now', 'Format', 'HH:mm:ss.SSS');
     cca_vector_time = [cca_vector_time; [char(datetime('now', 'Format', 'HH:mm:ss.SSS'))]];
     cca_vector = [cca_vector; r];
@@ -328,5 +238,4 @@ board_shim.release_session();
 end
 
 board_shim.stop_stream(); board_shim.release_session();
->>>>>>> cbcc04a0f60b4a6ae28dc0774c11d62abba3ae98
 sound(sin(0:1000)); % play stop beep sound for 3s
