@@ -101,8 +101,8 @@ def alignAction(timezero, magnet, tempoDelay):
     delayToPlay = tempoDelay * magnet - 1000 * (time.time() - timezero) % int(tempoDelay * magnet)
     print("\ndelayToPlay: ", delayToPlay, '\n')
     time.sleep(delayToPlay / 1000)
-    sound = pygame.mixer.Sound(r"sounds/heartOfGlass/1/11.wav")
-    sound.play(maxtime=300)
+    # sound = pygame.mixer.Sound(r"sounds/heartOfGlass/1/11.wav")
+    # sound.play(maxtime=300)
 
 def switchModes(mode):
     mode = 1 if mode == 0 else 0
