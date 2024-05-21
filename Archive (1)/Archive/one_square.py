@@ -31,16 +31,16 @@ def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 1200
-    screen_height = 800
+    screen_width = 1280
+    screen_height = 1024
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     current_time = pygame.time.get_ticks()
 
     # Frequency of square show/hide (seconds)
-    frequency1 =  36
+    frequency1 = 12
    
-    delay1 = 1000 // frequency1
+    delay1 = 500 // frequency1
     
     # Create squares for each corner
     rect_center = Square(WHITE, pygame.Rect(350, 100, 600, 600), current_time, delay1)

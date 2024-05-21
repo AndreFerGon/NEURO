@@ -1,0 +1,13 @@
+Stream start: 17:23:18.135
+
+cagar na primeira  estimulação
+
+rest 5s stim 8s
+
+7.2 8 9 12
+
+window_size = 5.5; % in seconds
+step_size = 1; % in seconds
+%threshold = 0.24;
+thresholds = [0.24, 0.18, 0.10, 0.24]; % Define specific thresholds for each frequency
+counter = 3
