@@ -115,8 +115,8 @@ def main():
     pygame.init()
 
     # Set up the screen
-    screen_width = 1500
-    screen_height = 800
+    screen_width = 800
+    screen_height = 600
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     # Set up the font for the stopwatch

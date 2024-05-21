@@ -18,15 +18,19 @@ class Square:
         self.rect = rect
         self.time = time
         self.delay = delay
+        self.show = True
         self.color = WHITE
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
 
-    def update(self, current_time):
+    def update(self, current_time,showing):
         if current_time >= self.time:
-            self.time = current_time + self.delay
-            self.color = BLACK if self.color == WHITE else WHITE
+            if showing == True:
+                self.time = current_time + self.delay
+                self.color = BLACK if self.color == WHITE else WHITE
+            else:
+                self.color = BLACK
 
 class ColorSwitchingSquare:
     def __init__(self, rect, default_color):
@@ -122,6 +126,7 @@ def main():
     fenetre = pygame.display.set_mode((screen_width, screen_height))
 
     current_time = pygame.time.get_ticks()
+    last_display_time = current_time
 
 
     default_colored_square_color = BLACK
@@ -149,10 +154,10 @@ def main():
     # Positions and sizes for each square
     square_params = [
         {"position": (screen_width / 32.4, screen_height / 20), "delay": delays[1]},
-        #{"position": (screen_width / 32.4, screen_height / 1.5384), "delay": delays[3]},
-        #{"position": (screen_width / 1.3, screen_height / 20), "delay": delays[4]},
-        #{"position": (screen_width / 1.3, screen_height / 1.5384), "delay": delays[2]},
-        #{"position": (screen_width / 2.49, screen_height / 2.857), "delay": delays[0]}
+        {"position": (screen_width / 32.4, screen_height / 1.5384), "delay": delays[3]},
+        {"position": (screen_width / 1.3, screen_height / 20), "delay": delays[4]},
+        {"position": (screen_width / 1.3, screen_height / 1.5384), "delay": delays[2]},
+        {"position": (screen_width / 2.49, screen_height / 2.857), "delay": delays[0]}
     ]
 
     squares = []
@@ -195,6 +200,11 @@ def main():
 
     instrument_menu = 0
 
+    showing = False
+
+    rest_time = 6000
+    rest_plus_stimuli_time = 12000
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -204,9 +214,17 @@ def main():
         # Update current time
         current_time = pygame.time.get_ticks()
 
+        if current_time - last_display_time >= rest_plus_stimuli_time:
+            showing = False
+            last_display_time = current_time
+        
+        if current_time - last_display_time >= rest_time:
+            showing = True
+
+
         # Update each square
         for square in squares:
-            square.update(current_time)
+            square.update(current_time,showing)
 
         for cs in color_squares:
             cs["square"].update()
